@@ -4,9 +4,13 @@
 
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
 
   background-color: $backgroundColor;
+}
+
+.wrapper-landing {
+  margin-top: 95px;
 }
 
 .wrapper-head {
