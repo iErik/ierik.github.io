@@ -2,17 +2,20 @@
 layout: default
 ---
 
-<div class="posts">
-  {% for post in site.posts %}
-    <article class="post">
-
-      <h1><a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a></h1>
-
-      <div class="entry">
-        {{ post.excerpt }}
+<div class="wrapper-landing">
+  <div class="wrapper-head">
+    <div class="container">
+      <header class="site-header">
+        <img class="site-avatar" src="{{ site.baseurl }}/assets/img/glyphs/avatar.png">
+        <h1 class="site-name"><a href="{{ site.baseurl }}/">{{ site.name }}</a></h1>
+      </header>
+    </div>
+  </div>
+  <div class="wrapper-links">
+    <div class="container">
+      <div class="links">
+        {% include svg-icons.html %}
       </div>
-
-      <a href="{{ site.baseurl }}{{ post.url }}" class="read-more">Read More</a>
-    </article>
-  {% endfor %}
+    </div>
+  </div>
 </div>
