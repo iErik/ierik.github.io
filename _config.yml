@@ -21,7 +21,7 @@ footer-links:
   gitlab: Isidore
   dribbble: Erik
   behance: Tupino
-  email: ericssonico@protonmail.com
+  email: ericssonico@protonmail.ch
   flickr:
   linkedin:
   pinterest:
@@ -46,7 +46,10 @@ url: iErik.github.io
 # (http://yourusername.github.io/repository-name)
 # and NOT your User repository (http://yourusername.github.io)
 # then add in the baseurl here, like this: "/repository-name"
-baseurl: ""
+baseurl: "/"
+assets: "/assets"
+images: "/assets/img"
+stylesheets: "/assets/css"
 
 #
 # !! You don't need to change any of the configuration flags below !!
@@ -69,7 +72,7 @@ kramdown:
 
 # Set the Sass partials directory, as we're using @imports
 sass:
-  style: :expanded # You might prefer to minify using :compressed
+  style: :expanded
 
 # Use the following plug-ins
 gems:
@@ -83,3 +86,5 @@ exclude:
   - LICENSE
   - README.md
   - CNAME
+include:
+  - _pages
