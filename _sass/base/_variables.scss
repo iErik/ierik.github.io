@@ -13,9 +13,11 @@ $basePurple: #4D0098;
 $baseGreen: #74EC89;
 $lightGreen: #A6F7B8;
 
-$backgroundColor: $basePurple;
+$primaryColor: $basePurple;
+$secondaryColor: $baseGreen;
+
+$backgroundColor: $primaryColor;
 
 // Font stacks
 
-$avenir: 'Avenir Next', Lato,  sans-serif;
-$roboto: Roboto, sans-serif;
+$font-sans: 'Avenir Next', Lato,  sans-serif;
