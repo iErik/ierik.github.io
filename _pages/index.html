@@ -7,8 +7,8 @@ layout: default
   <div class="wrapper-head">
     <div class="container">
       <header class="site-header">
-        <img class="site-avatar" src="{{ site.images }}/svg/site-avatar.svg">
-        <h1 class="site-name"><a href="{{ site.baseurl }}/">{{ site.name }}</a></h1>
+        {% include site-avatar.svg %}
+        <h1 class="site-name">{{ site.name }}</h1>
       </header>
     </div>
   </div>
