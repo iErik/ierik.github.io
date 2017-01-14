@@ -26,13 +26,16 @@ module.exports = {
     filename: '[name].js'
   },
   resolve: {
-    extensions: ['', '.js', '.vue', '.json', '.scss'],
+    extensions: ['', '.js', '.vue', '.scss', '.json', '.yml'],
     fallback: [path.join(__dirname, '../node_modules')],
     alias: {
       'vue$': 'vue/dist/vue.common.js',
       'src': path.resolve(__dirname, '..src'),
       'pages': path.resolve(__dirname, '../src/pages'),
-      'components': path.resolve(__dirname, '../src/components')
+      'styles': path.resolve(__dirname, '../src/styles'),
+      'layouts': path.resolve(__dirname, '../src/layouts'),
+      'images': path.resolve(__dirname, '../src/assets/img'),
+      'components': path.resolve(__dirname, '../src/components'),
     }
   },
   resolveLoader: {
@@ -53,12 +56,28 @@ module.exports = {
         exclude: /node_modules/
       },
       {
-        test: /\.scss$/,
-        loaders: ['vue-style-loader', 'css-loader', 'sass-loader']
-      },
-      {
         test: /\.json$/,
         loader: 'json'
+      },
+      {
+        test: /\.yml$/,
+        loaders: ['json-loader', 'yaml-loader']
+      },
+      {
+        test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
+        loader: 'url',
+        query: {
+          limit: 10000,
+          name: utils.assetsPath('img/[name].[hash:7].[ext]')
+        }
+      },
+      {
+        test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
+        loader: 'url',
+        query: {
+          limit: 10000,
+          name: utils.assetsPath('fonts/[name].[hash:7].[ext]')
+        }
       }
     ]
   },
@@ -66,7 +85,7 @@ module.exports = {
     loaders: utils.cssLoaders({ sourceMap: useCssSourceMap }),
     postcss: [
       autoprefixer({
-        broesers: ['last 5 versions']
+        browsers: ['last 2 versions']
       })
     ]
   }
