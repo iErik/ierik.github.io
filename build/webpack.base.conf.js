@@ -35,6 +35,7 @@ module.exports = {
       'styles': path.resolve(__dirname, '../src/styles'),
       'layouts': path.resolve(__dirname, '../src/layouts'),
       'images': path.resolve(__dirname, '../src/assets/img'),
+      'fonts': path.resolve(__dirname, '../src/assets/fonts'),
       'components': path.resolve(__dirname, '../src/components'),
     }
   },
