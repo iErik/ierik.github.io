@@ -1,16 +1,17 @@
-var path = require('path')
-var config = require('../config')
-var utils = require('./utils')
-var webpack = require('webpack')
-var merge = require('webpack-merge')
-var baseWebpackConfig = require('./webpack.base.conf')
-var ExtractTextPlugin = require('extract-text-webpack-plugin')
-var HtmlWebpackPlugin = require('html-webpack-plugin')
-var env = config.build.env
+var path = require('path');
+var config = require('../config');
+var utils = require('./utils');
+var webpack = require('webpack');
+var merge = require('webpack-merge');
+var baseWebpackConfig = require('./webpack.base.conf');
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
+var HtmlWebpackPlugin = require('html-webpack-plugin');
+var extendOwn = require('underscore').extendOwn;
+var env = config.build.env;
 
 module.exports = merge(baseWebpackConfig, {
   module: {
-    loaders: utils.styleLoeaders({
+    loaders: utils.styleLoaders({
       sourceMap: config.build.productionSourceMap,
       extract: true
     })
@@ -18,14 +19,18 @@ module.exports = merge(baseWebpackConfig, {
   devtool: config.build.productionSourceMap ? '#source-map' : false,
   output: {
     path: config.build.assetsRoot,
-    filename: utils.assetsPath('js/[name].[chunkhash]'),
+    filename: utils.assetsPath('js/[name].[chunkhash].js'),
     chunkFilename: utils.assetsPath('js/[id].[chunkhash].js')
   },
   vue: {
-    loaders: utils.cssLoaders({
-      sourceMap: config.build.productionSourceMap,
-      extract: true
-    })
+    loaders: extendOwn(
+      utils.cssLoaders({
+        sourceMap: config.build.productionSourceMap,
+        extract: true
+      }),
+      { coffee: 'babel-loader!coffee-loader'
+      }
+    )
   },
   plugins: [
     // The DefinePlugin allows you to create global constants which can be
@@ -74,11 +79,12 @@ module.exports = merge(baseWebpackConfig, {
     // javascript, but separate in a css bundle file (styles.css)
     new ExtractTextPlugin(utils.assetsPath('css/[name].[contenthash].css')),
 
+
     // Generates an HTML5 file for you that includes all your webpack
     // bundles in the body/head using script/link tags.
     new HtmlWebpackPlugin({
       filename: config.build.index,
-      template: 'index.html',
+      template: 'src/index.html',
       inject: true,
       minify: {
         removeComments: true,
