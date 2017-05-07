@@ -1,0 +1,47 @@
+//  Utility Mixins and Functions
+    ----------------------------
+
+@function colorscheme($theme-name: 'default')
+  @if map-has-key($themes, $theme-name)
+    @return map-get($themes, $theme-name)
+  @else
+    @return map-get($themes, 'default')
+
+@function primary-color($key: 'base')
+  @if map-has-key(map-get($theme, 'primary'), $key)
+    @return map-get(map-get($theme, 'primary'), $key)
+  @else
+    @return map-get(map-get($theme, 'primary'), 'base')
+
+@function secondary-color($key: 'base')
+  @if map-has-key(map-get($theme, 'secondary'), $key)
+    @return map-get(map-get($theme, 'secondary'), $key)
+  @else
+    @return map-get(map-get($theme, 'secondary'), 'base')
+
+@function accent-color($key: 'base')
+  @if map-has-key(map-get($theme, 'accent'), $key)
+    @return map-get(map-get($theme, 'accent'), $key)
+  @else
+    @return map-get(map-get($theme, 'accent'), 'base')
+
+@function background-color($key: 'base')
+  @if map-has-key(map-get($theme, 'background'), $key)
+    @return map-get(map-get($theme, 'background'), $key)
+  @else
+    @return map-get(map-get($theme, 'background'), 'base')
+
+@function foreground-color($key: 'base')
+  @if map-has-key(map-get($theme, 'foreground'), $key)
+    @return map-get(map-get($theme, 'foreground'), $key)
+  @else
+    @return map-get(map-get($theme, 'foreground'), 'base')
+
+@mixin icon
+  .fa, .icn, [data-icon], [class^="icn-"], [class*=" icn-"]
+    @content
+
+@mixin repeat-block($selectors)
+  @each $selector in $selectors
+    #{$selector}
+      @content
