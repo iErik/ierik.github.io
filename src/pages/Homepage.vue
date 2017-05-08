@@ -1,0 +1,82 @@
+<script lang="coffee">
+import siteConfig from 'config/config'
+import IconLink from 'components/IconLink'
+
+export default Homepage =
+  name: 'homepage'
+  data: ->
+    contactLinks: siteConfig.contactLinks
+  components:
+    IconLink: IconLink
+
+</script>
+
+<template lang="html">
+  <div class="row align-center" slot="content">
+    <div class="wrapper-hero column">
+      <div class="site-header column small-12">
+        <div class="row align-center align-top">
+          <i class="site-avatar icn-erik"></i>
+        </div>
+        <div class="row align-center">
+          <h1 class="site-caption">Erik Isidore</h1>
+        </div>
+      </div>
+      <div class="row column">
+        <ul class="contact-links row column align-center">
+          <li v-for="contactLink in contactLinks" class="contact-link">
+            <icon-link
+             :to="contactLink.url + contactLink.profile"
+             :icon="contactLink.icon"
+            />
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</template>
+
+<style lang="sass">
+@import ~styles/helpers/_module
+
+//  Wrappers
+//  --------
+
+.wrapper-hero
+  padding-top: 95px
+
+//  Header Section
+//  --------------
+
+.site-header
+  .site-avatar
+    font-size: 7em
+    color: accent-color()
+
+  .site-caption
+    font-family: $font-sans
+    font-weight: 100
+    font-size:   5rem
+    text-align:  center
+    color: accent-color()
+
+    margin: 0
+
+//  Links Section
+//  -------------
+
+.contact-links
+  margin: 20px 0 0
+
+.contact-link
+  list-style-type: none
+  margin: 0 1.375em
+
+  .icon-link
+    +icon
+      &.icn-github
+        font-size: 3.3em
+        align-self: flex-end
+        margin-bottom: -5px
+
+</style>
