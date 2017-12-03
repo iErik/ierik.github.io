@@ -4,7 +4,7 @@
   "description": "My personal blog.",
   "version": "0.9.0",
   "license": "MIT",
-  "homepage": "https://github.com/iErik/iErik.github.io#readme",
+  "homepage": "https://github.com/iErik/iErik.github.io",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/iErik/iErik.github.io.git"
