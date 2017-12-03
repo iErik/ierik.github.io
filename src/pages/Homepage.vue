@@ -13,7 +13,7 @@ export default Homepage =
 
 <template lang="html">
   <div class="full-width row align-center">
-    <div class="wrapper-hero column">
+    <div class="wrapper-hero colors-accent column">
       <div class="site-header column small-12">
         <div class="row align-center align-top">
           <i class="site-avatar icn-erik"></i>
