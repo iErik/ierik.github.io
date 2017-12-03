@@ -31,6 +31,3 @@ export default DefaultLayout =
 
   </default-layout-transition>
 </template>
-
-<style lang="sass">
-</style>
