@@ -13,7 +13,8 @@ export default MenuOverlay =
       required: false
       'default': false
   methods:
-    toggleNav: -> @$router.app.$emit 'toggleNav'
+    # NOTE: This is the bad code i was talking about
+    toggleNav: -> setTimeout(() => @$router.app.$emit 'toggleNav', 0);
 
 </script>
 

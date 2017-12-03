@@ -109,7 +109,7 @@ $button-transistion-duration: 0.3s
     &::after
       transition-property: bottom, transform
     &::before
-      transition-property: top, transform;
+      transition-property: top, transform
 
   &.is-active
     .c-hamburger-bars

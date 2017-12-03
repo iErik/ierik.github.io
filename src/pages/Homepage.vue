@@ -12,7 +12,7 @@ export default Homepage =
 </script>
 
 <template lang="html">
-  <div class="row align-center" slot="content">
+  <div class="full-width row align-center">
     <div class="wrapper-hero column">
       <div class="site-header column small-12">
         <div class="row align-center align-top">
@@ -23,7 +23,7 @@ export default Homepage =
         </div>
       </div>
       <div class="row column">
-        <ul class="contact-links row column align-center">
+        <ul class="contact-links row align-center">
           <li v-for="contactLink in contactLinks" class="contact-link">
             <icon-link
              :to="contactLink.url + contactLink.profile"
@@ -43,7 +43,9 @@ export default Homepage =
 //  --------
 
 .wrapper-hero
-  padding-top: 95px
+  //padding-top: 95px
+  position: absolute
+  top: 15%
 
 //  Header Section
 //  --------------
