@@ -1,17 +1,27 @@
 <script lang="coffee">
-import { routes } from 'config/router'
+import { pageRoutes } from 'config/router'
 
 export default MenuOverlay =
   name: 'menu-overlay'
+  data: ->
+    pageRoutes: pageRoutes
+    currentRoute: this.$route.name
   props:
     isActive:
       type: Boolean
       required: true
-
     isAbsolute:
       type: Boolean
       required: false
       'default': false
+  watch:
+    '$route': (to, from) ->
+      updateCurrentRoute = (ev) =>
+        if ev.propertyName == 'opacity'
+          @currentRoute = to.name
+          @$el.removeEventListener 'transitionend', updateCurrentRoute
+
+      @$el.addEventListener 'transitionend', updateCurrentRoute
   methods:
     # NOTE: This is the bad code i was talking about
     toggleNav: -> setTimeout(() => @$router.app.$emit 'toggleNav', 0);
@@ -25,21 +35,14 @@ export default MenuOverlay =
   }, 'menu-overlay']">
 
     <ul class="menu-overlay-entries">
-      <li class="menu-overlay-entry" v-if="$route.name !== 'homepage' "
-        @click="toggleNav()">
-        <router-link class="entry-link" to='/'>Homepage</router-link>
-      </li>
-      <li class="menu-overlay-entry" v-if="$route.name !== 'about'"
-        @click="toggleNav()">
-        <router-link class="entry-link" to='/about'>About</router-link>
-      </li>
-      <li class="menu-overlay-entry" v-if="$route.name !== 'projects' "
-        @click="toggleNav()">
-        <router-link class="entry-link" to='/projects'>Projects</router-link>
-      </li>
-      <li class="menu-overlay-entry" v-if="$route.name !== 'contact'"
-        @click="toggleNav()">
-        <router-link class="entry-link" to='/contact'>Contact</router-link>
+      <li class="menu-overlay-entry" @click="toggleNav()"
+        v-for="route in pageRoutes"
+        v-if="route.name !== currentRoute">
+
+        <router-link class="entry-link" :to="{ name: route.name }">
+          {{ route.name | capitalize }}
+        </router-link>
+
       </li>
     </ul>
 
@@ -74,9 +77,9 @@ $nav-hover-entry-font-color: accent-color(light)
   background-color: background-color()
 
   opacity: 0 !important
-  transition-property: opacity, z-index
-  transition-duration: $nav-overlay-opacity-out-speed, 0s
-  transition-delay:    0s, $nav-overlay-opacity-out-speed
+  transition-property: opacity, z-index, color
+  transition-duration: $nav-overlay-opacity-out-speed, 0s, 0s
+  transition-delay:    0s, $nav-overlay-opacity-out-speed, $nav-overlay-opacity-out-speed
   transition-timing-function: ease-out
 
   *
@@ -125,6 +128,7 @@ $nav-hover-entry-font-color: accent-color(light)
 
       -webkit-font-smoothing: antialiased !important
       -webkit-transform: translateZ(0px) !important
+      -moz-osx-font-smoothing: grayscale !important
 
       transition: color 200ms
 
