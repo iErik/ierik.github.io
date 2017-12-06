@@ -66,15 +66,12 @@ $icon-color: accent-color()
   &:hover
     background-color: $link-background-color
 
-    // Ideally, the icon would be transparent and would show
-       whatever color happens to be behind the link, but that`s
-       not possible unless we're working with SVGs.
-
     +icon
       color: background-color() !important
 
   @each $palette, $colors in $theme
-    +repeat-block(('.colors-#{$palette} &', '&.colors-#{$palette}'))
+    .colors-#{$palette} &,
+    &.colors-#{$palette}
       border-color: call(#{$palette}-color)
 
       +icon
