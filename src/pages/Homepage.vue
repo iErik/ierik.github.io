@@ -6,6 +6,10 @@ export default Homepage =
   name: 'homepage'
   data: ->
     contactLinks: siteConfig.contactLinks
+
+  mounted: ->
+    @$router.app.$emit 'changeLayoutColors', 'accent'
+
   components:
     IconLink: IconLink
 
@@ -39,20 +43,22 @@ export default Homepage =
 <style lang="sass">
 @import ~styles/helpers/_module
 
-//  Wrappers
-//  --------
+//  Wrapper
+//  -------
 
 .wrapper-hero
-  //padding-top: 95px
   position: absolute
   top: 15%
+
+  +media-breakpoint-up(xxlarge)
+    top: 24%
 
 //  Header Section
 //  --------------
 
 .site-header
   .site-avatar
-    font-size: 7em
+    font-size: 7rem
     color: accent-color()
 
   .site-caption
@@ -72,12 +78,12 @@ export default Homepage =
 
 .contact-link
   list-style-type: none
-  margin: 0 1.375em
+  margin: 0 1.375rem
 
   .icon-link
     +icon
       &.icn-github
-        font-size: 3.3em
+        font-size: 3.3rem
         align-self: flex-end
         margin-bottom: -5px
 
