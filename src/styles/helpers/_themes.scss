@@ -20,6 +20,43 @@ $default: (
   )
 );
 
+$pastel: (
+  background: (
+    base: #626682,
+  ),
+  foreground: (
+    base: #D7D8C5,
+  ),
+  accent: (
+    base: #79FFDA
+    //base: #7BBCB5,
+  ),
+  secondary: (
+    base: #C6CA56,
+  ),
+  primary: (
+    base: #626682,
+  )
+);
+
+$tensei: (
+  background: (
+    base: #394B57
+  ),
+  foreground: (
+    base: #FBF4DA
+  ),
+  accent: (
+    base: #E26E91
+  ),
+  secondary: (
+    base: #47B7A9
+  ),
+  primary: (
+    base: #394B57
+  )
+);
+
 $aurora: (
   background: (
     base: #0F2033,
@@ -107,5 +144,7 @@ $themes: (
   cupcake: $cupcake,
   aurora: $aurora,
   sunset: $sunset,
+  pastel: $pastel,
+  tensei: $tensei,
   surf: $surf,
 );
