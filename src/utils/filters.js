@@ -6,5 +6,12 @@ import Vue from 'vue'
 //  ---------
 
 Vue.filter('capitalize', function(value) {
-  return value[0].toUpperCase() + value.slice(1)
+  let words = value.trim().split(' ');
+  words = words.map((word) => word[0].toUpperCase() + word.slice(1));
+
+  return words.join(' ');
 })
+
+Vue.filter('dashToSpace', function(value) {
+  return value.trim().replace(/-/g, ' ');
+});
