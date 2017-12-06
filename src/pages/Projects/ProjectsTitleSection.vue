@@ -5,15 +5,24 @@ export default ProjectsTitleSection =
   name: 'projects-title-section'
   data: ->
     projects: Object.keys(projects)
-  watch:
-    '$route': (to, from) ->
-      nextProject = @projects.indexOf to.params.projectName
-      lastProject = @projects.indexOf from.params.projectName
+    projectTransition: 'transition'
 
-      if nextProject > lastProject
-        @$router.app.$emit('changeTransition', 'slide-left')
-      else
-        @$router.app.$emit('changeTransition', 'slide-right')
+  beforeRouteUpdate: (to, from, next) ->
+    nextProject = @projects.indexOf to.params.projectName
+    lastProject = @projects.indexOf from.params.projectName
+
+    if nextProject > lastProject
+      @$router.app.$emit('changeTransition', 'slide-left')
+    else
+      @$router.app.$emit('changeTransition', 'slide-right')
+
+    next()
+
+  beforeRouteEnter: (to, from, next) ->
+    if !to.params.projectName
+      next({ path: "/projects/#{Object.keys(projects)[0]}" })
+    else
+      next()
 
 </script>
 
@@ -25,7 +34,7 @@ export default ProjectsTitleSection =
       <ul class="project-links">
         <li class="project-link" v-for="project in projects">
           <router-link :to="`/projects/${project}`">
-            {{ project | capitalize }}
+            {{ project | dashToSpace | capitalize }}
           </router-link>
         </li>
       </ul>
@@ -51,6 +60,9 @@ $section-foreground-color: foreground-color()
 .wrapper-title
   margin-top: 25%
   transform: scale(1.0) !important
+
+  +media-breakpoint-up(xxlarge)
+    margin-top: 33% !important
 
   .title
     font-family: $font-decorative
