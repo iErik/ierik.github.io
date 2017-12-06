@@ -10,7 +10,11 @@ export default DefaultLayout =
     isNavActive:
       type: Boolean
       required: yes
-  mounted: ->
+
+    layoutColors:
+      type: String
+      required: yes
+  beforeMount: ->
     @$router.app.$emit 'changeLayoutColors', 'accent'
   components:
     MenuOverlay: MenuOverlay
@@ -20,7 +24,7 @@ export default DefaultLayout =
 <template lang="html">
   <default-layout-transition>
 
-    <div class="container">
+    <div :class="['container', layoutColors]">
       <menu-overlay :is-active="isNavActive"/>
       <jump-transition>
         <div class="site-main collapse expanded row" v-show="!isNavActive">
