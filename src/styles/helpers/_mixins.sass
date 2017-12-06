@@ -1,5 +1,5 @@
 //  Utility Mixins and Functions
-    ----------------------------
+//  ----------------------------
 
 @function colorscheme($theme-name: 'default')
   @if map-has-key($themes, $theme-name)
@@ -37,11 +37,84 @@
   @else
     @return map-get(map-get($theme, 'foreground'), 'base')
 
-@mixin icon
+//  Grid Utilities
+//  --------------
+
+@function breakpoint-next($name, $breakpoints: $grid-breakpoints)
+  $breakpoint-names: map-keys($breakpoints)
+  $n: index($breakpoint-names, $name)
+
+  @if $n < length(breakpoint-names)
+    @return nth(breakpoint-names, $n + 1)
+  @else
+    @return null
+
+/**
+ * Returns minimum breakpoint width. Null for the smallest (first) breakpoint.
+ */
+@function breakpoint-min($name, $breakpoints: $grid-breakpoints)
+  $min: map-get($breakpoints, $name)
+
+  @if $min != 0
+    @return $min
+  @else
+    @return null
+
+/**
+ * Returns maximum breakpoint width. Null for the largest (last) breakpoint.
+ * The maximum value is calculated as the minimum of the next one less 0.01px
+ * to work around the limitations of 'min-' and 'max-' prefixes and viewports
+ * with fractional widths.
+ */
+@function breakpoint-max($name, $breakpoints: $grid-breakpoints)
+  $next: breakpoint-next($name, $breakpoints)
+
+  @if $next
+    @return breakpoint-min($next, $breakpoints) - .01px
+  @else
+    @return null
+
+/**
+ * Media of at least the minimun breakpoint width. No query for the smallest
+ * breakpoint. Makes the @content apply to the given breakpoint and wider.
+ */
+=media-breakpoint-up($name, $breakpoints: $grid-breakpoints)
+  $min: breakpoint-min($name, $breakpoints)
+
+  @if $min
+    @media (min-width: $min)
+      @content
+
+  @else
+    @content
+
+/**
+ * Media of at most the maximum breakpoint width. No query for the largest
+ * breakpoint. Makes the @content apply to the given breakpoint and narrower.
+=media-breakpoint-down($name, $breakpoints: $grid-breakpoints)
+  $max: breakpoint-max($name, $breakpoints)
+
+  @if $max
+    @media (max-width: $max)
+      @content
+
+  @else
+    @content
+
+//  General Utilities
+//  ----------------
+
+/**
+ * Selects icon elements.
+ */
+=icon
   .fa, .icn, [data-icon], [class^="icn-"], [class*=" icn-"]
     @content
 
-@mixin repeat-block($selectors)
+/**
+ * Repeats a block of rules for each given selector (deprecated)
+ */
+=repeat-block($selectors)
   @each $selector in $selectors
     #{$selector}
       @content
