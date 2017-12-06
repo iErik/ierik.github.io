@@ -5,7 +5,7 @@ import router from 'config/router'
 
 import RootLayout from 'layouts/RootLayout'
 
-import './utils/filters.js'
+import 'utils/filters'
 import 'styles/main'
 
 new Vue({
