@@ -9,9 +9,12 @@ import projects from 'markdown/projects'
 export default ProjectsContentSection =
   name: 'projects-content-section'
   data: ->
-    projectName = @$route.params.projectName || ''
+    projectNames = Object.keys(projects)
+    projectName = @$route.params.projectName
 
-    currentProject: projects[projectName] || _.values(projects)[0]
+    currentProject: projects[projectName]
+    nextProject: projectNames[projectNames.indexOf(projectName) + 1] || ''
+    previousProject: projectNames[projectNames.indexOf(projectName) - 1] || ''
     scrollShadowState: ''
 
   mounted: ->
@@ -56,7 +59,17 @@ export default ProjectsContentSection =
 
       <header class="project-header">
         <div class="project-avatar">
+          <router-link class="project-nav previous" v-if="previousProject"
+            :to="`/projects/${previousProject}`">
+            <i class="icn-arrow-left"></i>
+          </router-link>
+
           <i :class="['avatar', currentProject.avatar]"></i>
+
+          <router-link class="project-nav next" v-if="nextProject"
+            :to="`/projects/${nextProject}`" >
+            <i class="icn-arrow-right"></i>
+          </router-link>
         </div>
 
         <div class="project-label">
@@ -85,9 +98,6 @@ export default ProjectsContentSection =
       </div>
 
       <div class="project-controls colors-accent">
-        <div class="project-control hide">
-          <floating-button>More</floating-button>
-        </div>
         <div class="project-control">
           <floating-button>
             <a :href="currentProject.repo" target="_blank">View on Github</a>
@@ -104,11 +114,12 @@ export default ProjectsContentSection =
 
 $section-foreground-color: foreground-color()
 
-$project-avatar-size: 8.642em
+$project-nav-icn-size: 2rem
+$project-avatar-size: 8.642rem
 
-$project-label-font-size: 4.9em
+$project-label-font-size: 4.9rem
 
-$project-platform-icon-scale: .625em
+$project-platform-icon-scale: .625rem
 
 $project-description-padding: 5px 10px
 $project-description-font-size: .92em
@@ -130,23 +141,48 @@ $project-description-text-align: center
     justify-content: center
 
     height: 100%
-    margin: 45px 0 30px 0
+    padding: 45px 0 30px 0
+
+    +media-breakpoint-down(small)
+      padding: 20px 0 12px 0
 
   .project-header
     display: flex
-    flex-direction:  column
+    align-items: center
+    flex-direction: column
     justify-content: center
-    align-items:     center
 
     flex-shrink: 0
 
-    .project-avatar .avatar
-      font-size: $project-avatar-size
-      color:     $section-foreground-color
+    .project-avatar
+      position: relative
 
-      &::before
-        display: block
-        line-height: 0.95
+      display: flex
+      align-items: center
+
+      .avatar
+        font-size: $project-avatar-size
+        color:     $section-foreground-color
+
+        &::before
+          display: block
+          line-height: 0.95
+
+      .project-nav
+        position: absolute
+
+        +media-breakpoint-up(xmedium)
+          display: none
+
+        &.previous
+          left: -77%
+
+        &.next
+          right: -77%
+
+        +icon
+          display: flex
+          font-size: $project-nav-icn-size
 
     .project-label .label
       font-weight: 100
@@ -171,6 +207,10 @@ $project-description-text-align: center
     +media-breakpoint-up(xxlarge)
       margin: 10px 95px
 
+    +media-breakpoint-down(small)
+      margin: 10px 30px
+      font-size: 13.5px
+
     .shadow-top, .shadow-bottom
       position: absolute
       z-index: 50
@@ -191,11 +231,13 @@ $project-description-text-align: center
 
     &.show-shadow-top
       border-top: 1px solid rgba($section-foreground-color, 0.04)
+
       .shadow-top
         box-shadow: 0px 4px 17px 0px rgba(0, 0, 0, 0.37)
 
     &.show-shadow-bottom
       border-bottom: 1px solid rgba($section-foreground-color, 0.04)
+
       .shadow-bottom
         box-shadow: 0px -4px 17px 0px rgba(0, 0, 0, 0.3)
 
@@ -207,7 +249,6 @@ $project-description-text-align: center
     overflow: scroll
 
     padding: $project-description-padding
-    //margin:  $project-description-margin
 
     &.shadow-top
       box-shadow: 0px 19px 23px -25px rgba(0, 0, 0, 0.35) inset
@@ -229,11 +270,8 @@ $project-description-text-align: center
 
   .project-controls
     display: flex
-    //flex-grow: 1
     flex-shrink: 0
     justify-content: center
-
-    //padding: 15px 0 25px
 
     .project-control
       margin: 0 15px

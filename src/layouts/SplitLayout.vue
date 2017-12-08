@@ -39,15 +39,27 @@ export default SplitLayout =
 <template lang="html">
   <split-layout-transition>
 
-    <main class="collapsed container colors-foreground">
-      <section :class="['left-column small-6 columns', { 'fade-out': isNavActive }]">
+    <main class="collapsed container colors-foreground site-main">
+      <header class="mobile-header">
+        <div class="contents">
+          <span class="page-title type-decorative">
+            {{ $route.name | dashToSpace | capitalize }}
+          </span>
+        </div>
+
+        <menu-overlay :isActive="isNavActive" :isAbsolute="false" />
+      </header>
+
+      <section :class="['left-column xmedium-6 columns', { 'fade-out': isNavActive }]">
+
         <menu-overlay :isActive="isNavActive" :isAbsolute="true" />
         <div class="contents small-12 columns">
           <router-view name="leftColumn" />
         </div>
+
       </section>
 
-      <section class="right-column small-6 columns">
+      <section :class="['right-column small-12 xmedium-6 columns', { 'fade-out': isNavActive }]">
         <component :is="transitionName">
           <router-view :key="$route.fullPath" name="rightColumn" />
         </component>
@@ -58,7 +70,14 @@ export default SplitLayout =
 </template>
 
 <style lang="sass">
-@import ~styles/helpers/_module
+@import ~styles/helpers/module
+
+//  Variables
+//  ---------
+
+$mobile-header-height: 70px
+$mobile-header-background-color: primary-color()
+$mobile-header-border-color: rgba(foreground-color(), 0.12)
 
 $left-column-background-color: primary-color()
 $right-column-background-color: primary-color()
@@ -67,6 +86,45 @@ $show-column-separator: true
 $column-separator-width: 1px
 $column-separator-gap: 50px
 $column-separator-color: rgba(foreground-color(), 0.3)
+
+//  Rules
+//  -----
+
+.site-main
+  +media-breakpoint-down(medium)
+    padding-top: $mobile-header-height
+
+.mobile-header
+  +media-breakpoint-up(xmedium)
+    display: none
+
+  .contents
+    position: fixed
+    z-index:  150
+    top:  0px
+    left: 0px
+
+    width:  100%
+    height: $mobile-header-height
+
+    display: flex
+    align-items: center
+    justify-content: center
+
+    background-color: $mobile-header-background-color
+    box-shadow: 0px 3px 17px -6px rgba(0, 0, 0, 0.26)
+
+    border-bottom: 1px solid
+    border-color: $mobile-header-border-color
+
+    .page-title
+      font-size: 2.076923077rem
+
+      letter-spacing: 4px
+      text-transform: uppercase
+
+      -webkit-font-smoothing: antialiased
+      -moz-osx-font-smoothing: grayscale
 
 .left-column
   position: relative
@@ -77,6 +135,11 @@ $column-separator-color: rgba(foreground-color(), 0.3)
   max-height: 100vh
 
   background-color: $left-column-background-color
+
+  +media-breakpoint-down(medium)
+    display: none
+
+  // TODO: Lower the scale of the page in between xmedium and large widths
 
   @if $show-column-separator
     &::before
@@ -119,5 +182,23 @@ $column-separator-color: rgba(foreground-color(), 0.3)
   z-index: 5
 
   background-color: $right-column-background-color
+
+  // TODO: That is not really ideal
+
+  +media-breakpoint-down(medium)
+    &.fade-out
+      .wrapper-content *
+        transform: scale(0.5)
+        opacity: 0.3
+
+      +icon
+        transform: scale(1.0) !important
+
+    .wrapper-content
+      z-index: 10
+
+      *
+        transition: transform 500ms, opacity 400ms
+
 
 </style>

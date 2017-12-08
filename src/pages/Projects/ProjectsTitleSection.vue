@@ -21,6 +21,8 @@ export default ProjectsTitleSection =
   beforeRouteEnter: (to, from, next) ->
     if !to.params.projectName
       next({ path: "/projects/#{Object.keys(projects)[0]}" })
+    else if Object.keys(projects).indexOf(to.params.projectName) == -1
+      next('/404')
     else
       next()
 
