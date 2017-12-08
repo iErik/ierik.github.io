@@ -25,12 +25,12 @@ export default HamButton =
 <style lang="sass">
 @import ~styles/helpers/_module
 
-$button-width: 34px
-$button-height: 34px
-$bar-thickness: 4px
-$button-pad: 4px
+$button-width: 2.125em
+$button-height: 2.125em
+$bar-thickness: 0.25em
+$button-pad: 0.25em
 
-$button-bar-space: 5px
+$button-bar-space: 0.3125em
 $button-bar-color: accent-color()
 
 $button-transistion-duration: 0.3s
@@ -44,7 +44,7 @@ $button-transistion-duration: 0.3s
   width:  $button-width
   height: $button-height
 
-  font-size: 0
+  font-size: 1em
 
   text-indent: -9999px
 
@@ -67,7 +67,8 @@ $button-transistion-duration: 0.3s
     left: $button-pad
     right: $button-pad
 
-    height: $bar-thickness
+    //height: $bar-thickness
+    height: Em2Px($bar-thickness)
     background-color: $button-bar-color
 
     &::after,
@@ -79,7 +80,8 @@ $button-transistion-duration: 0.3s
       left: 0
 
       width: 100%
-      height: $bar-thickness
+      //height: $bar-thickness
+      height: Em2Px($bar-thickness)
       background-color: $button-bar-color
 
     &::after

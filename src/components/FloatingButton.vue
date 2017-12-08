@@ -31,7 +31,7 @@ $button-box-shadow: 0px 6px 11px -1px
   appearance: none
   cursor: pointer
 
-  width: 11.875em
+  width: 11.875rem
 
   background-color: transparent
   border: 1px solid $button-border-color
@@ -67,7 +67,7 @@ $button-box-shadow: 0px 6px 11px -1px
 
     font-family: $font-sans
     font-weight: 300
-    font-size:   1.0em
+    font-size:   1rem
     line-height: 1
     color: $button-label-color
 
