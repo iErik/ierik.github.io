@@ -37,6 +37,9 @@ Vue.component 'slide-down-transition',
   animation-name: slideInDown
   animation-duration: 500ms
   animation-fill-mode: both
+  
+  *
+    transform: scale(1) !important
 
 //  Transition Leave Stage
 //  ----------------------
@@ -56,5 +59,8 @@ Vue.component 'slide-down-transition',
   animation-name: slideOutDown
   animation-duration: 500ms
   animation-fill-mode: both
+
+  *
+    transform: scale(1) !important
 
 </style>
