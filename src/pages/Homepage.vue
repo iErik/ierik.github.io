@@ -53,18 +53,22 @@ export default Homepage =
   +media-breakpoint-up(xxlarge)
     top: 24%
 
+  +media-breakpoint-down(small)
+    font-size: 12px
+    top: 24%
+
 //  Header Section
 //  --------------
 
 .site-header
+
   .site-avatar
-    font-size: 7rem
+    font-size: 7em
     color: accent-color()
 
   .site-caption
-    font-family: $font-sans
     font-weight: 100
-    font-size:   5rem
+    font-size:   5em
     text-align:  center
     color: accent-color()
 
@@ -78,12 +82,15 @@ export default Homepage =
 
 .contact-link
   list-style-type: none
-  margin: 0 1.375rem
+  margin: 0 1.375em
+
+  +media-breakpoint-down(small)
+    margin: 0 0.833333333em
 
   .icon-link
     +icon
       &.icn-github
-        font-size: 3.3rem
+        font-size: 3.3em
         align-self: flex-end
         margin-bottom: -5px
 

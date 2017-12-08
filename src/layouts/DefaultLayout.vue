@@ -27,7 +27,7 @@ export default DefaultLayout =
     <div :class="['container', layoutColors]">
       <menu-overlay :is-active="isNavActive"/>
       <jump-transition>
-        <div class="site-main collapse expanded row" v-show="!isNavActive">
+        <div class="collapse expanded row" v-show="!isNavActive">
           <router-view></router-view>
         </div>
       </jump-transition>
