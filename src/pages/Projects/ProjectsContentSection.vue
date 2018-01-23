@@ -246,7 +246,7 @@ $project-description-text-align: center
 
     flex-grow: 1
     align-self: flex-end
-    overflow: scroll
+    overflow-y: auto
 
     padding: $project-description-padding
 
