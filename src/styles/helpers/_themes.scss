@@ -28,8 +28,8 @@ $pastel: (
     base: #D7D8C5,
   ),
   accent: (
-    base: #79FFDA
-    //base: #7BBCB5,
+    base: #79FFDA,
+    dark: #7BBCB5,
   ),
   secondary: (
     base: #C6CA56,
@@ -146,5 +146,5 @@ $themes: (
   sunset: $sunset,
   pastel: $pastel,
   tensei: $tensei,
-  surf: $surf,
+  surf: $surf
 );
