@@ -1,16 +1,33 @@
 ---
 name: grimoire
-repo: "https://gitlab.com/Isidore/Grimoire"
-avatar: 'icn-oleander'
+repo: "https://github.com/iErik/grimoire"
+avatar: 'icn-grimoire'
 platforms:
-  - windows
-  - apple
-  - linux
+  windows: "https://github.com/iErik/grimoire/releases/download/v1.0.0-beta.1/Grimoire-Beta-win.exe"
+  apple: "https://github.com/iErik/grimoire/releases/download/v1.0.0-beta.1/Grimoire-Beta-mac.zip"
+  linux: "https://github.com/iErik/grimoire/releases/download/v1.0.0-beta.1/Grimoire-Beta-linux.AppImage"
 ---
-Maecenas sed diam eget risus varius blandit sit amet non magna. Nullam id dolor id nibh ultricies vehicula ut id elit. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Maecenas faucibus mollis interdum. Donec id elit non mi porta gravida at eget metus. Aenean lacinia bibendum nulla sed consectetur.
+Grimoire é um editor Markdown de código aberto desenvolvido com os frameworks
+Electron.js e React.js, o aplicativo atualmente se encontra em fase beta de
+desenvolvimento e está disponível para download para as plataformas Windows,
+macOS e Linux.
 
-Etiam porta sem malesuada magna mollis euismod. Donec ullamcorper nulla non metus auctor fringilla. Donec ullamcorper nulla non metus auctor fringilla. Sed posuere consectetur est at lobortis. Vestibulum id ligula porta felis euismod semper. Etiam porta sem malesuada magna mollis euismod. Cras justo odio, dapibus ac facilisis in, egestas eget quam.
+O projeto Grimoire foi criado com o objetivo de oferecer ao usuário uma forma
+limpa, simples e elegante de organizar notas e documentos escritos em Markdown.
+O aplicativo, assim como o projeto Tidder, é desenvolvido totalmente com
+tecnologias Web, o uso da biblioteca React.js possibilita criar interfaces
+funcionais, eficientes e elegantes de forma fácil e rápida usando apenas
+JavaScript.
 
-Nulla vitae elit libero, a pharetra augue. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nullam id dolor id nibh ultricies vehicula ut id elit. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.
+O aplicativo também faz uso da arquitetura Redux para organizar e gerenciar o
+estado da interface do aplicativo de forma extremamente leve e eficiente, o
+aplicativo também combina a arquitetura e filosofia Redux com as ferramentas
+oferecidas pelo framework Electron.js para gerenciar e manipular o estado de
+múltiplas janelas abertas simultaneamente e mantê-las em sincronia.
 
-Vestibulum id ligula porta felis euismod semper. Curabitur blandit tempus porttitor. Vestibulum id ligula porta felis euismod semper. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.
+O processo completo de design do aplicativo está disponível para download no
+[repositório Gitlab](https://gitlab.com/Isidore/grimoire-mockup) criado
+especificamente para manter um histórico de mudanças durante o processo
+criativo do projeto. Lá estarão disponíveis o arquivo Photoshop do projeto,
+ícones, fontes e tudo o que foi utilizado durante o processo de design do
+aplicativo.
