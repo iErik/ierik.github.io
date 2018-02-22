@@ -66,12 +66,19 @@ $button-box-shadow: 0px 6px 11px -1px
     align-items: center
 
     font-family: $font-sans
-    font-weight: 300
+    font-weight: 400
     font-size:   1rem
     line-height: 1
+    letter-spacing: 0.4px
     color: $button-label-color
 
+    -webkit-font-smoothing: antialiased
+    -moz-osx-font-smoothing: grayscale
+
     transition: color 400ms
+
+    a
+      color: inherit
 
   &:hover
     background-color: $button-background-color
