@@ -1,11 +1,11 @@
 contactLinks:
   - name: Behance
     url: "https://behance.net/"
-    profile: Tupino
+    profile: iErik
     icon: behance
   - name: Dribbble
     url: "https://dribbble.com/"
-    profile: vanErik
+    profile: itsErik
     icon: dribbble
   - name: GitHub
     url: "https://github.com/"
@@ -15,7 +15,7 @@ contactLinks:
     url: "https://gitlab.com/u/"
     profile: Isidore
     icon: gitlab
-  - name: E-mail
+  - name: email
     url: "mailto:"
     profile: ericssonico@protonmail.ch
     icon: email
