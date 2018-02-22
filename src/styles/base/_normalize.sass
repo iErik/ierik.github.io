@@ -36,6 +36,7 @@ body
   background-color: #FFF
   padding: 0
   margin: 0
+  overflow: hidden
 
 
 //*
@@ -121,12 +122,6 @@ ul, li
     -webkit-backface-visibility: hidden !important
     transform: scale(1.0, 1.0) translateZ(0px) !important
 
-
-
-h1, h2, h3, h4, h5, h6, p, span, a, button
-  -webkit-font-smoothing: subpixel-antialiased
-
-
 //*
    1. Remove the gray background on active links in IE 10.
    2. Remove gaps in links underline in iOS 8+ and Safari 8+.
@@ -135,11 +130,10 @@ h1, h2, h3, h4, h5, h6, p, span, a, button
 a
   background-color: transparent
   -webkit-text-decoration-skip: objects
-  color: inherit
 
+  color: accent-color()
   text-decoration: none
   outline: none
-
 
 //*
    Remove the outline on focused links when they are also active or hovered
