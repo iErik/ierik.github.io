@@ -23,8 +23,8 @@ export default MenuOverlay =
 
       @$el.addEventListener 'transitionend', updateCurrentRoute
   methods:
-    # NOTE: This is the bad code i was talking about
-    toggleNav: -> setTimeout(() => @$router.app.$emit 'toggleNav', 0);
+    toggleNav: ->
+      setTimeout((() => @$router.app.$emit('toggleNav')), 30);
 
 </script>
 
@@ -82,7 +82,7 @@ $nav-hover-entry-font-color: accent-color(light)
   transition-delay:    0s, $nav-overlay-opacity-out-speed, $nav-overlay-opacity-out-speed
   transition-timing-function: ease-out
 
-  *
+  .menu-overlay-entries, .menu-overlay-entry, .menu-overlay-entry a
     transform: scale(2)
     transition: transform $nav-overlay-transform-out-speed ease-out
 
@@ -91,7 +91,7 @@ $nav-hover-entry-font-color: accent-color(light)
     z-index: 20
     transition: opacity $nav-overlay-opacity-in-speed ease-in
 
-    *
+    .menu-overlay-entries, .menu-overlay-entry, .menu-overlay-entry a
       transform: scale(1)
       transition-property: transform
       transition-duration: $nav-overlay-transform-in-speed
