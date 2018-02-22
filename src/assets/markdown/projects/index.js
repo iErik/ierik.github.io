@@ -1,9 +1,7 @@
-import unscripted from './Unscripted';
-import oleander from './Oleander';
+import tidder from './Tidder';
 import grimoire from './Grimoire';
 
 export default {
-  unscripted,
-  oleander,
+  tidder,
   grimoire
 }
