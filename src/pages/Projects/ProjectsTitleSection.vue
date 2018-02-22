@@ -20,7 +20,7 @@ export default ProjectsTitleSection =
 
   beforeRouteEnter: (to, from, next) ->
     if !to.params.projectName
-      next({ path: "/projects/#{Object.keys(projects)[0]}" })
+      next({ path: "/projetos/#{Object.keys(projects)[0]}" })
     else if Object.keys(projects).indexOf(to.params.projectName) == -1
       next('/404')
     else
@@ -35,8 +35,8 @@ export default ProjectsTitleSection =
 
       <ul class="project-links">
         <li class="project-link" v-for="project in projects">
-          <router-link :to="`/projects/${project}`">
-            {{ project | dashToSpace | capitalize }}
+          <router-link :to="`/projetos/${project}`">
+            {{ project | camelToSpace | capitalize }}
           </router-link>
         </li>
       </ul>
@@ -45,7 +45,7 @@ export default ProjectsTitleSection =
   </div>
 </template>
 
-<style lang="sass">
+<style lang="sass" scoped>
 @import ~styles/helpers/_module
 
 $section-foreground-color: foreground-color()
@@ -54,37 +54,56 @@ $section-foreground-color: foreground-color()
   display: flex
   justify-content: center
 
+  position: relative
+
   width:  100%
   height: 100%
 
   transform: scale(1.0) !important
+  transition: opacity 400ms
 
 .wrapper-title
-  margin-top: 25%
-  transform: scale(1.0) !important
+  position: absolute
+  top: 30%
 
-  +media-breakpoint-up(xxlarge)
-    margin-top: 33% !important
+  transform: scale(1.0) !important
+  transition: inherit
 
   .title
     font-family: $font-decorative
     font-size:   4em
     color:       $section-foreground-color
 
+    -webkit-font-smoothing: antialiased
+    -moz-osx-font-smoothing: grayscale
+
     margin: 0.67em 0 20px
+    transition: transform 500ms, opacity 400ms
 
   .project-links
     display: flex
     justify-content: center
 
+    transition: transform 500ms, opacity 400ms
+
     .project-link
       display: flex
 
-      font-weight: 400
-      font-size:   0.7em
+      font-weight: 600
+      font-size:   0.65em
       color:       $section-foreground-color
 
       text-transform: uppercase
+      letter-spacing: 0.3px
+
+      -webkit-font-smoothing: antialiased
+      -moz-osx-font-smoothing: grayscale
+
+      transition: transform 500ms, opacity 400ms
+
+      a
+        color: inherit
+        transition: inherit
 
       &::after
         content: ""
@@ -95,7 +114,7 @@ $section-foreground-color: foreground-color()
         height: 4px
 
         border-radius: 100%
-        margin: 3px 15px 0 15px
+        margin: 2px 12px 0 12px
 
         background-color: accent-color(light)
 

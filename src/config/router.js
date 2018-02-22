@@ -43,8 +43,8 @@ export const routes = [
   , type: 'layout'
   , children:
   [
-    { path: '/about'
-    , name: 'about'
+    { path: '/sobre'
+    , name: 'sobre'
     , type: 'page'
     , components:
       { leftColumn: About.TitleSection
@@ -52,8 +52,8 @@ export const routes = [
       }
     },
 
-    { path: '/projects/:projectName?'
-    , name: 'projects'
+    { path: '/projetos/:projectName?'
+    , name: 'projetos'
     , type: 'page'
     , components:
       { leftColumn:  Projects.TitleSection
@@ -61,8 +61,8 @@ export const routes = [
       }
     },
 
-    { path: '/contact'
-    , name: 'contact'
+    { path: '/contato'
+    , name: 'contato'
     , type: 'page'
     , components:
       { leftColumn: Contact.TitleSection
