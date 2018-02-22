@@ -54,7 +54,7 @@ export default ProjectsContentSection =
 </script>
 
 <template lang="html">
-  <div class="wrapper-content bg-standard">
+  <div class="section-content bg-standard">
     <div class="content">
 
       <header class="project-header">
@@ -76,11 +76,11 @@ export default ProjectsContentSection =
           <h1 class="label">{{ currentProject.name | capitalize }}</h1>
         </div>
 
-        <div class="project-platforms">
+        <div class="project-platforms" v-if="currentProject.platforms">
           <ul class="project-platforms-icons l-flex">
             <li class="project-platform-icon"
-              v-for="platform in currentProject.platforms">
-              <icon-link class="colors-foreground" :icon="platform" to="/"/>
+              v-for="(value, key) in currentProject.platforms">
+              <icon-link class="colors-foreground" :icon="key" :to="value"/>
             </li>
           </ul>
         </div>
@@ -100,7 +100,7 @@ export default ProjectsContentSection =
       <div class="project-controls colors-accent">
         <div class="project-control">
           <floating-button>
-            <a :href="currentProject.repo" target="_blank">View on Github</a>
+            <a :href="currentProject.repo" target="_blank">Ver no Github</a>
           </floating-button>
         </div>
       </div>
@@ -122,10 +122,10 @@ $project-label-font-size: 4.9rem
 $project-platform-icon-scale: .625rem
 
 $project-description-padding: 5px 10px
-$project-description-font-size: .92em
+$project-description-font-size: .85em
 $project-description-text-align: center
 
-.wrapper-content
+.section-content
   display: flex
   flex-direction:  column
   justify-content: center
@@ -204,6 +204,9 @@ $project-description-text-align: center
 
     margin: 10px 50px
 
+    border-top: 1px solid rgba(0, 0, 0, 0.0)
+    border-bottom: 1px solid rgba(0, 0, 0, 0.0)
+
     +media-breakpoint-up(xxlarge)
       margin: 10px 95px
 
@@ -248,22 +251,18 @@ $project-description-text-align: center
     align-self: flex-end
     overflow-y: auto
 
+    max-height: 350px
     padding: $project-description-padding
-
-    &.shadow-top
-      box-shadow: 0px 19px 23px -25px rgba(0, 0, 0, 0.35) inset
-      border-top: 1px solid #fafafa08
-
-    &.shadow-bottom
-      box-shadow: 0px -19px 23px -25px rgba(0, 0, 0, 0.35) inset
-      border-bottom: 1px solid #fafafa08
 
     p
       font-size:   $project-description-font-size
-      font-weight: 300
-      line-height: 1.4
+      font-weight: 400
+      line-height: 1.5
       text-align:  $project-description-text-align
       color:       $section-foreground-color
+
+      -webkit-font-smoothing: antialiased
+      -moz-osx-font-smoothing: grayscale
 
       &:first-child
         margin-top: 0
