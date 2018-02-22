@@ -163,16 +163,13 @@ $column-separator-color: rgba(foreground-color(), 0.3)
   &.fade-out
     .contents *
       transform: scale(0.5)
-      opacity: 0.3
+      opacity: 0.25
 
     +icon
       transform: scale(1.0) !important
 
   .contents
     z-index: 10
-
-    *
-      transition: transform 500ms, opacity 400ms
 
 .right-column
   position: relative
@@ -187,14 +184,14 @@ $column-separator-color: rgba(foreground-color(), 0.3)
 
   +media-breakpoint-down(medium)
     &.fade-out
-      .wrapper-content *
+      .section-content *
         transform: scale(0.5)
         opacity: 0.3
 
       +icon
         transform: scale(1.0) !important
 
-    .wrapper-content
+    .section-content
       z-index: 10
 
       *
