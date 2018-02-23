@@ -19,7 +19,7 @@ export default ContactContentSection =
 
       <div class="contact-info l-flex-column align-center">
         <span>Ericsson Isidoro</span>
-        <span>São Paulo, Capital</span>
+        <span>São Paulo, SP</span>
         <span>
           E-mail:
           <a class="email-link" :href="'mailto:' + emailAddress">
