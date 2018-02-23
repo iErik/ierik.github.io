@@ -31,7 +31,7 @@ export default ProjectsTitleSection =
 <template lang="html">
   <div class="section-title bg-primary">
     <header class="wrapper-title">
-      <h1 class="title">Projects</h1>
+      <h1 class="title">Projetos</h1>
 
       <ul class="project-links">
         <li class="project-link" v-for="project in projects">
