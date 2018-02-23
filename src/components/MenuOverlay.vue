@@ -16,15 +16,19 @@ export default MenuOverlay =
       'default': false
   watch:
     '$route': (to, from) ->
-      updateCurrentRoute = (ev) =>
-        if ev.propertyName == 'opacity'
-          @currentRoute = to.name
-          @$el.removeEventListener 'transitionend', updateCurrentRoute
+      # This value must match the duration of the opacity css transition
+      # so that the value of @currentRoute only changes once the MenuOverlay
+      # component finishes transitioning out of the screen.
 
-      @$el.addEventListener 'transitionend', updateCurrentRoute
+      # It's not ideal to hard-code this value here but we'll use that
+      # approach until we find a better way to deal this with this problem.
+      transitionDuration = 500
+
+      setTimeout (=> @currentRoute = to.name), transitionDuration
+
   methods:
     toggleNav: ->
-      setTimeout((() => @$router.app.$emit('toggleNav')), 30);
+      setTimeout (=> @$router.app.$emit('toggleNav')), 30
 
 </script>
 
