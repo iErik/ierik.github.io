@@ -30,6 +30,9 @@ export default PageNotFound =
   flex-direction: column
   align-items: center
 
+  +media-breakpoint-down(small)
+    padding: 0 50px !important
+
   .err-code
     font-size: 4.0625rem
     margin: 0 0 .8125rem 0
@@ -38,7 +41,10 @@ export default PageNotFound =
     -moz-osx-font-smoothing: antialiased
 
   .err-msg
+    text-align: center
     letter-spacing: 1px
+    line-height: 1.45
+
     margin: 0
 
 </style>
