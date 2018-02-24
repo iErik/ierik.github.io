@@ -174,13 +174,11 @@ $column-separator-color: rgba(foreground-color(), 0.3)
 .right-column
   position: relative
   max-height: 100vh
-  overflow-x: hidden
+  overflow-y: hidden
 
   z-index: 5
 
   background-color: $right-column-background-color
-
-  // TODO: That is not really ideal
 
   +media-breakpoint-down(medium)
     &.fade-out
