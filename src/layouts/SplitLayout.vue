@@ -174,7 +174,7 @@ $column-separator-color: rgba(foreground-color(), 0.3)
 .right-column
   position: relative
   max-height: 100vh
-  overflow-y: hidden
+  overflow: hidden
 
   z-index: 5
 
