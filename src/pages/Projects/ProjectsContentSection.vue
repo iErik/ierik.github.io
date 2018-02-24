@@ -60,14 +60,14 @@ export default ProjectsContentSection =
       <header class="project-header">
         <div class="project-avatar">
           <router-link class="project-nav previous" v-if="previousProject"
-            :to="`/projects/${previousProject}`">
+            :to="`/projetos/${previousProject}`">
             <i class="icn-arrow-left"></i>
           </router-link>
 
           <i :class="['avatar', currentProject.avatar]"></i>
 
           <router-link class="project-nav next" v-if="nextProject"
-            :to="`/projects/${nextProject}`" >
+            :to="`/projetos/${nextProject}`" >
             <i class="icn-arrow-right"></i>
           </router-link>
         </div>
@@ -251,7 +251,7 @@ $project-description-text-align: center
     align-self: flex-end
     overflow-y: auto
 
-    max-height: 350px
+    max-height: 400px
     padding: $project-description-padding
 
     p
