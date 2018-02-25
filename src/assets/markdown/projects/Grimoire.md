@@ -3,9 +3,9 @@ name: grimoire
 repo: "https://github.com/iErik/grimoire"
 avatar: 'icn-grimoire'
 platforms:
-  windows: "https://github.com/iErik/grimoire/releases/download/v1.0.0-beta.1/Grimoire-Beta-win.exe"
-  apple: "https://github.com/iErik/grimoire/releases/download/v1.0.0-beta.1/Grimoire-Beta-mac.zip"
-  linux: "https://github.com/iErik/grimoire/releases/download/v1.0.0-beta.1/Grimoire-Beta-linux.AppImage"
+  windows: "https://github.com/iErik/grimoire/releases/download/v1.0.0-beta.2/Grimoire-Beta-win.exe"
+  apple: "https://github.com/iErik/grimoire/releases/download/v1.0.0-beta.2/Grimoire-Beta-mac.zip"
+  linux: "https://github.com/iErik/grimoire/releases/download/v1.0.0-beta.2/Grimoire-Beta-linux.AppImage"
 ---
 Grimoire é um editor Markdown de código aberto desenvolvido com os frameworks
 Electron.js e React.js, o aplicativo atualmente se encontra em fase beta de

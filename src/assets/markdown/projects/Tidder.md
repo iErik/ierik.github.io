@@ -3,9 +3,9 @@ name: tidder
 repo: "https://github.com/iErik/tidder"
 avatar: 'icn-tidder'
 platforms:
-  windows: "https://github.com/iErik/tidder/releases/download/v1.0.0-beta.2/Tidder-Beta-win.exe"
-  apple: "https://github.com/iErik/tidder/releases/download/v1.0.0-beta.2/Tidder-Beta-mac.zip"
-  linux: "https://github.com/iErik/tidder/releases/download/v1.0.0-beta.2/Tidder-Beta-linux.AppImage"
+  windows: "https://github.com/iErik/tidder/releases/download/v1.0.0-beta.3/Tidder-Beta-win.exe"
+  apple: "https://github.com/iErik/tidder/releases/download/v1.0.0-beta.3/Tidder-Beta-mac.zip"
+  linux: "https://github.com/iErik/tidder/releases/download/v1.0.0-beta.3/Tidder-Beta-linux.AppImage"
 ---
 Tidder é um cliente Reddit de código aberto desenvolvido com os frameworks
 Electron.js e Angular 5, o aplicativo atualmente se encontra em fase beta de
