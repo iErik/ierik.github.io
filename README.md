@@ -39,7 +39,7 @@ whenever any change is made to app's code. This is called
 [Hot Module Replacement](https://webpack.js.org/concepts/hot-module-replacement/),
 any changes made to the application's code should reflect in your web browser.
 
-### Buidling for production
+### Building for production
 
 You can generate the compiled application asset files by running the following
 npm command in a terminal:
@@ -49,8 +49,3 @@ npm run build
 ```
 
 Once finished, you can find all the compiled assets under the `assets` directory
-
-## License
-
-The code in this repository is licensed under the GNU GPL license 2.0
-http://www.gnu.org/licenses/gpl-2.0.html
