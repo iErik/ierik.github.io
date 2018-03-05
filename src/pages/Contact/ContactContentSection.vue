@@ -26,7 +26,7 @@ export default ContactContentSection =
             {{ emailAddress }}
           </a>
         </span>
-        <span>Cel: +55 (11) 95129-4766</span>
+        <span>Cel: +55 (11) 98012-3799</span>
         <span>Tel: +55 (11) 2961-4664</span>
       </div>
 
