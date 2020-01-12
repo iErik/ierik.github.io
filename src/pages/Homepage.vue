@@ -94,4 +94,7 @@ export default Homepage =
         align-self: flex-end
         margin-bottom: -5px
 
+      &.icn-gitlab
+        font-size: 2.5em
+
 </style>
