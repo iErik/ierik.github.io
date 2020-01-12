@@ -1,10 +1,11 @@
 @font-face {
   font-family: "iErik.github.io Glyphs";
-  src:url("https://file.myfontastic.com/iCHsXivKxQrreyoJUX3tMj/fonts/1518718343.eot");
-  src:url("https://file.myfontastic.com/iCHsXivKxQrreyoJUX3tMj/fonts/1518718343.eot?#iefix") format("embedded-opentype"),
-    url("https://file.myfontastic.com/iCHsXivKxQrreyoJUX3tMj/fonts/1518718343.woff") format("woff"),
-    url("https://file.myfontastic.com/iCHsXivKxQrreyoJUX3tMj/fonts/1518718343.ttf") format("truetype"),
-    url("https://file.myfontastic.com/iCHsXivKxQrreyoJUX3tMj/fonts/1518718343.svg#1518718343") format("svg");
+  src: url("../assets/fonts/icons/iErik.github.io.eot");
+  src: url("../assets/fonts/icons/iErik.github.io.eot#iefix") format("embedded-opentype"),
+    url("../assets/fonts/icons/iErik.github.io.woff") format("woff"),
+    url("../assets/fonts/icons/iErik.github.io.ttf") format("truetype"),
+    url("../assets/fonts/icons/iErik.github.io.svg#erikgithubio-fonts") format("svg");
+
   font-weight: normal;
   font-style: normal;
 }
@@ -24,7 +25,7 @@
 
 [class^="icn-"]:before,
 [class*=" icn-"]:before {
-  font-family: "ierikgithubio-fonts" !important;
+  font-family: "iErik.github.io Glyphs";
   font-style: normal !important;
   font-weight: normal !important;
   font-variant: normal !important;
@@ -44,26 +45,14 @@
 .icn-github:before {
   content: "\f002";
 }
-.icn-gitlab:before {
-  content: "\f003";
-}
 .icn-twitter:before {
   content: "\f004";
-}
-.icn-tumblr:before {
-  content: "\f005";
 }
 .icn-facebook:before {
   content: "\f006";
 }
-.icn-gplus:before {
-  content: "\f007";
-}
 .icn-windows:before {
   content: "\f010";
-}
-.icn-docker:before {
-  content: "\f011";
 }
 .icn-apple:before {
   content: "\f012";
@@ -77,18 +66,24 @@
 .icn-arrow-right:before {
   content: "\f016";
 }
-.icn-linux:before {
+.icn-grimoire:before {
   content: "\f017";
 }
-.icn-erik:before {
+.icn-michael:before {
   content: "\f018";
 }
-.icn-grimoire:before {
-  content: "\61";
-}
 .icn-tidder:before {
-  content: "\62";
+  content: "\f019";
 }
-.icn-mihael-keehl:before {
-  content: "\63";
+.icn-linux:before {
+  content: "\f0120";
+}
+.icn-gplus:before {
+  content: "\f021";
+}
+.icn-erik:before {
+  content: "\f022";
+}
+.icn-gitlab:before {
+  content: "\f023";
 }
