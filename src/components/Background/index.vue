@@ -202,7 +202,7 @@ onMounted(() => {
   height: 100vh;
   z-index: 2;
 
-  background-image: url('grid-pattern.png');
+  background-image: url('/grid-pattern.png');
   //background-size: 267px 267px;
   background-size: 200px 200px;
   background-repeat: repeat;
@@ -221,7 +221,7 @@ onMounted(() => {
   height: 100vh;
   z-index: 3;
 
-  background-image: url('grainy-texture.png');
+  background-image: url('/grainy-texture.png');
   background-repeat: repeat;
   // TODO This gets glitchy if the browser has darkreader
   // extension, we need to find a way to fix it
