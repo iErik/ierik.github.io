@@ -61,9 +61,5 @@ export default defineConfig({
       host: HOST,
       port: WS || 3001,
     },
-
-    watch: {
-      ignored: ["**/src-tauri/**"],
-    },
   },
 })
