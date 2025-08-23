@@ -1,0 +1,86 @@
+/**
+* Correct the cursor style of increment and decrement
+* buttons in Safari.
+*/
+
+::-webkit-inner-spin-button,
+::-webkit-outer-spin-button {
+  height: auto;
+}
+
+/**
+* 1. Correct the odd appearance in Chrome, Edge, and Safari.
+* 2. Correct the outline style in Safari.
+*/
+
+:where(input[type="search" i]) {
+  -webkit-appearance: textfield; /* 1 */
+  outline-offset: -2px; /* 2 */
+}
+
+/**
+* Remove the inner padding in Chrome, Edge, and Safari
+* on macOS.
+*/
+
+::-webkit-search-decoration {
+  -webkit-appearance: none;
+}
+
+/**
+* 1. Correct the inability to style upload buttons in iOS
+* and Safari.
+* 2. Change font properties to `inherit` in Safari.
+*/
+
+::-webkit-file-upload-button {
+  -webkit-appearance: button; /* 1 */
+  font: inherit; /* 2 */
+}
+
+/* Interactive
+* ====================================================== */
+
+/*
+* Add the correct styles in Safari.
+*/
+
+:where(dialog) {
+  background-color: white;
+  border: solid;
+  color: black;
+  height: -moz-fit-content;
+  height: fit-content;
+  left: 0;
+  margin: auto;
+  padding: 1em;
+  position: absolute;
+  right: 0;
+  width: -moz-fit-content;
+  width: fit-content;
+}
+
+:where(dialog:not([open])) {
+  display: none;
+}
+
+/*
+* Add the correct display in all browsers.
+*/
+
+:where(summary) {
+  display: list-item;
+}
+
+// Fix an issue where using the 100vw unit for the width of
+// an element wouldn't take the scrollbar into
+// consideration, thus adding an extra vertical scrollbar to
+// the page whenever a horizontal scrollbar was present, due
+// to the fact that 100vw would be large than the size
+// available on the screen to render the webpage.
+// Note: this is not yet support in Safari
+/*
+html {
+  scrollbar-gutter: stable;
+}
+*/

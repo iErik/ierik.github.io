@@ -1,0 +1,22 @@
+// Montserrat Sans
+// -----------
+
+@font-face {
+  font-family: 'Montserrat';
+  font-weight: 100 800;
+  font-style: normal;
+  src: url('@assets/fonts/Montserrat-Variable.woff2')
+    format('woff2 supports variations'),
+    url('@assets/fonts/Montserrat-Variable.woff2')
+      format('woff2-variations');
+}
+
+@font-face {
+  font-family: 'Montserrat';
+  font-weight: 100 800;
+  font-style: italic;
+  src: url('@assets/fonts/Montserrat-Italic-Variable.woff2')
+    format('woff2 supports variations'),
+    url('@assets/fonts/Montserrat-Italic-Variable.woff2')
+      format('woff2-variations');
+}

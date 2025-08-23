@@ -1,0 +1,38 @@
+{
+  "compilerOptions": {
+    "noEmit": true,
+    "module": "ESNext",
+    // A few notes:
+    // - Vue 3 supports ES2016+
+    // - For Vite, the actual compilation target is determined by the
+    //   `build.target` option in the Vite config.
+    //   So don't change the `target` field here. It has to be
+    //   at least `ES2020` for dynamic `import()`s and `import.meta` to work correctly.
+    // - If you are not using Vite, feel free to overwrite the `target` field.
+    "target": "ESNext",
+    "moduleResolution": "Bundler",
+    "resolveJsonModule": true,
+    "allowImportingTsExtensions": true,
+    "moduleDetection": "force",
+
+    "lib": ["ES2020", "DOM", "DOM.Iterable"],
+
+    "jsx": "preserve",
+    "jsxImportSource": "vue",
+
+    "noImplicitThis": true,
+    "strict": true,
+
+    // <https://devblogs.microsoft.com/typescript/announcing-typescript-5-0/#verbatimmodulesyntax>
+    // Any imports or exports without a type modifier are left around. This is important for `<script setup>`.
+    // Anything that uses the type modifier is dropped entirely.
+    "verbatimModuleSyntax": true,
+    "useDefineForClassFields": true,
+
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true
+  },
+  "include": ["env.d.ts", "src/**/*", "src/**/*.vue"],
+  "extends": "./paths.json"
+}

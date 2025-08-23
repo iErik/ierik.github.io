@@ -1,0 +1,34 @@
+@mixin icon-color ($color) {
+  > svg.icon { fill: $color; }
+}
+
+@mixin icon-size ($size) {
+  > svg.icon {
+    width: $size;
+    height: $size;
+
+    min-width: $size;
+    max-width: $size;
+
+    min-height: $size;
+    max-height: $size;
+  }
+}
+
+@mixin icon {
+  > svg.icon {
+    @content;
+  }
+}
+
+@mixin min-width($width) {
+  @media screen and (min-width: $width) { @content; }
+}
+
+@mixin mobile-sm() { }
+
+@mixin mobile() { }
+
+@mixin tablet() {
+  @include min-width(881px) { @content; }
+}

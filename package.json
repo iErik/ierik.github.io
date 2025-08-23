@@ -1,64 +1,41 @@
 {
-  "name": "ierik.github.io",
-  "author": "Erik Isidore",
-  "description": "My personal blog.",
-  "version": "0.9.0",
-  "license": "MIT",
-  "homepage": "https://github.com/iErik/iErik.github.io",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/iErik/iErik.github.io.git"
-  },
-  "bugs": {
-    "url": "https://github.com/iErik/iErik.github.io/issues"
+  "name": "ierik-github-io",
+  "version": "2.0.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": "^20.19.0 || >=22.12.0"
   },
   "scripts": {
-    "dev": "node build/dev-server.js",
-    "build": "node build/build.js"
+    "dev": "vite",
+    "build": "run-p type-check \"build-only {@}\" --",
+    "preview": "vite preview",
+    "build-only": "vite build",
+    "type-check": "vue-tsc --build"
   },
   "dependencies": {
-    "foundation-sites": "^6.3.0",
-    "underscore": "^1.8.3",
-    "vue": "^2.1.8",
-    "vue-router": "^2.5.0"
+    "overlayscrollbars": "^2.11.5",
+    "overlayscrollbars-vue": "^0.5.9",
+    "vue": "^3.5.18",
+    "vue-i18n": "^11.1.11",
+    "vue-router": "^4.5.1"
+  },
+  "env": {
+    "PORT": 3000,
+    "WS": 3001,
+    "HOST": "0.0.0.0"
   },
   "devDependencies": {
-    "autoprefixer": "^6.6.1",
-    "babel-core": "^6.21.0",
-    "babel-loader": "^6.2.10",
-    "babel-plugin-transform-runtime": "^6.15.0",
-    "babel-preset-es2015": "^6.18.0",
-    "babel-preset-stage-2": "^6.18.0",
-    "chalk": "^1.1.3",
-    "coffee-loader": "^0.7.2",
-    "coffee-script": "^1.12.3",
-    "connect-history-api-fallback": "^1.3.0",
-    "css-loader": "^0.26.1",
-    "eventsource-polyfill": "^0.9.6",
-    "express": "^4.14.0",
-    "extract-text-webpack-plugin": "^1.0.1",
-    "file-loader": "^0.9.0",
-    "friendly-errors-webpack-plugin": "^1.1.2",
-    "html-webpack-plugin": "^2.26.0",
-    "json-loader": "^0.5.4",
-    "markdown-with-front-matter-loader": "^0.1.0",
-    "node-sass": "^4.2.0",
-    "ora": "^0.4.1",
-    "sass-loader": "^4.1.1",
-    "semver": "^5.3.0",
-    "shelljs": "^0.7.6",
-    "url-loader": "^0.5.7",
-    "vue-loader": "^10.0.2",
-    "vue-style-loader": "^1.0.0",
-    "vue-template-compiler": "2.5.9",
-    "webpack": "^1.14.0",
-    "webpack-dev-middleware": "^1.9.0",
-    "webpack-hot-middleware": "^2.15.0",
-    "webpack-merge": "^2.3.1",
-    "yaml-loader": "^0.4.0"
-  },
-  "engines": {
-    "node": ">= 4.0.0",
-    "npm": ">= 3.0.0"
+    "@types/node": "^22.16.5",
+    "@vitejs/plugin-vue": "^6.0.1",
+    "debug": "^4.4.1",
+    "npm-run-all2": "^8.0.4",
+    "sass-embedded": "^1.90.0",
+    "svgo": "^4.0.0",
+    "typescript": "~5.8.0",
+    "vite": "^7.0.6",
+    "vite-plugin-glsl": "^1.5.1",
+    "vite-plugin-vue-devtools": "^8.0.0",
+    "vue-tsc": "^3.0.4"
   }
 }

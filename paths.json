@@ -1,0 +1,26 @@
+{
+  "compilerOptions": {
+    "baseUrl": "./",
+    "paths": {
+      "@root/*": [ "./*" ],
+      "@/*": [ "./src/*" ],
+      "@components/*": [
+        "./src/components/*",
+        "./src/components/*/index.vue"
+      ],
+      "@composables/*": [ "./src/composables/*" ],
+      "@themes/*": [ "./src/themes/*" ],
+      "@layouts/*": [ "./src/layouts/*" ],
+      "@locale/*": [ "./src/locale/*" ],
+      "@pages/*": [ "./src/pages/*" ],
+      "@styles/*": [ "./src/styles/*" ],
+      "@shaders/*": [ "./src/shaders/*" ],
+      "@store/*": [ "./src/store/*" ],
+      "@utils/*": [ "./src/utils/*" ],
+      "@assets/*": [ "./src/assets/*" ],
+      "@icons/*": [ "./src/assets/icons/*" ],
+      "@hooks/*": [ "./src/hooks/*" ],
+      "@views/*": [ "./src/views/*" ]
+    }
+  }
+}

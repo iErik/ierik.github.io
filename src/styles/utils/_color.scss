@@ -1,0 +1,19 @@
+@function primary($shade: '50') {
+  @return var(--color-primary-#{$shade});
+}
+
+@function secondary($shade: '50') {
+  @return var(--color-secondary-#{$shade});
+}
+
+@function accent($shade: '50') {
+  @return var(--color-accent-#{$shade});
+}
+
+@function foreground($shade: '50') {
+  @return var(--color-foreground-#{$shade});
+}
+
+@function background($shade: '50') {
+  @return var(--color-background-#{$shade});
+}

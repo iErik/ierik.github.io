@@ -1,0 +1,9 @@
+// TODO: Parametrize all of these values
+@mixin frame {
+  border: 1px solid;
+  border-color: rgba(199, 198, 198, .38);
+  border-radius: 45px;
+
+  background-color: rgba(250, 250, 250, .13);
+  backdrop-filter: blur(90px);
+}

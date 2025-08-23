@@ -1,100 +1,127 @@
-<script lang="coffee">
-import siteConfig from 'config/config'
-import IconLink from 'components/IconLink'
+<template>
+  <section class="homepage">
+    <Logo class="logo" />
+    <h1 class="heading">Erik Isidore</h1>
 
-export default Homepage =
-  name: 'homepage'
-  data: ->
-    contactLinks: siteConfig.contactLinks
+    <div class="links">
+      <div
+        v-for="link in contactLinks"
+        :key="link.label"
+        class="link"
+      >
+        <Button v-bind="link" />
+      </div>
+    </div>
+  </section>
+</template>
 
-  mounted: ->
-    @$router.app.$emit 'changeLayoutColors', 'accent'
+<script lang="ts" setup>
+import { computed, type ComputedRef } from 'vue'
 
-  components:
-    IconLink: IconLink
+import Logo from '@components/Logo/index.vue'
+import Button, {
+  type ButtonLinkProps
+}  from '@components/Button/index.vue'
+
+
+import useMediaQuery from '@composables/useMediaQuery'
+
+const isMobile = useMediaQuery('(max-width: 635px)')
+const isTablet = useMediaQuery('(max-width: 880px)')
+
+type ContactLinks = ComputedRef<ButtonLinkProps[]>
+
+const contactLinks: ContactLinks = computed(() => [
+  {
+    icon: 'Behance',
+    label: 'Behance',
+    isLink: true,
+    iconOnly: isTablet.value,
+    large: isTablet.value && !isMobile.value,
+    to: 'https://www.behance.net/iErik'
+  },
+  {
+    icon: 'Dribbble',
+    label: 'Dribbble',
+    isLink: true,
+    iconOnly: isTablet.value,
+    large: isTablet.value && !isMobile.value,
+    to: 'https://dribbble.com/itsErik'
+  },
+  {
+    icon: 'Linkedin',
+    label: 'LinkedIn',
+    isLink: true,
+    iconOnly: isTablet.value,
+    large: isTablet.value && !isMobile.value,
+    to: 'https://www.linkedin.com/in/itserik'
+  },
+  {
+    icon: 'Github',
+    label: 'Github',
+    isLink: true,
+    iconOnly: isTablet.value,
+    large: isTablet.value && !isMobile.value,
+    to: 'https://github.com/iErik'
+  },
+  {
+    icon: 'Gitlab',
+    label: 'Gitlab',
+    isLink: true,
+    iconOnly: isTablet.value,
+    large: isTablet.value && !isMobile.value,
+    to: 'https://gitlab.com/Isidore'
+  }
+])
 
 </script>
 
-<template lang="html">
-  <div class="full-width row align-center">
-    <div class="wrapper-hero colors-accent column">
-      <div class="site-header column small-12">
-        <div class="row align-center align-top">
-          <i class="site-avatar icn-erik"></i>
-        </div>
-        <div class="row align-center">
-          <h1 class="site-caption">Erik Isidore</h1>
-        </div>
-      </div>
-      <div class="row column">
-        <ul class="contact-links row align-center">
-          <li v-for="contactLink in contactLinks" class="contact-link">
-            <icon-link
-             :to="contactLink.url + contactLink.profile"
-             :icon="contactLink.icon"
-            />
-          </li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</template>
+<style lang="scss" scoped>
+@use '@styles/utils/typography';
+@use '@styles/utils/mixins';
 
-<style lang="sass">
-@import ~styles/helpers/_module
+.homepage {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 
-//  Wrapper
-//  -------
+  padding-top: 190px;
+  width: 100%;
 
-.wrapper-hero
-  position: absolute
-  top: 15%
+  & > .logo { width: 106px; }
 
-  +media-breakpoint-up(xxlarge)
-    top: 24%
+  & > .heading {
+    @include typography.heading;
 
-  +media-breakpoint-down(small)
-    font-size: 12px
-    top: 24%
+    font-size: 60px;
+    white-space: nowrap;
+  }
 
-//  Header Section
-//  --------------
+  & > .links {
+    display: flex;
+    gap: 20px;
+  }
 
-.site-header
+  @include mixins.min-width(415px) {
+    padding-top: 225px;
 
-  .site-avatar
-    font-size: 7em
-    color: accent-color()
+    & > .heading { font-size: 72px; }
+    & > .logo { width: 136px; }
+  }
 
-  .site-caption
-    font-weight: 100
-    font-size:   5em
-    text-align:  center
-    color: accent-color()
+  @include mixins.min-width(635px) {
+    padding-top: 250px;
 
-    margin: 0
+    & > .logo { width: 181px; }
+    & > .heading { font-size: 96px; }
+    & > .links { gap: 50px; }
+  }
 
-//  Links Section
-//  -------------
-
-.contact-links
-  margin: 20px 0 0
-
-.contact-link
-  list-style-type: none
-  margin: 0 1.375em
-
-  +media-breakpoint-down(small)
-    margin: 0 0.833333333em
-
-  .icon-link
-    +icon
-      &.icn-github
-        font-size: 3.3em
-        align-self: flex-end
-        margin-bottom: -5px
-
-      &.icn-gitlab
-        font-size: 2.5em
-
+  @include mixins.min-width (881px) {
+    & > .logo { width: 181px; }
+    & > .heading { @include typography.heading; }
+    & > .links { gap: 20px; }
+  }
+}
 </style>

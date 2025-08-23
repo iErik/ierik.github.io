@@ -1,0 +1,26 @@
+@mixin base {
+  font-family: var(--base-font);
+  font-weight: var(--base-font-weight);
+  font-size: var(--base-font-size);
+  color: var(--color-fg);
+}
+
+@mixin body {
+  @include base;
+}
+
+@mixin button {
+  @include base;
+  text-transform: uppercase;
+}
+
+@mixin heading {
+  @include base;
+
+  font-size: var(--heading-1-font-size);
+  font-weight: var(--heading-1-font-weight);
+}
+
+@mixin typo {
+
+}
