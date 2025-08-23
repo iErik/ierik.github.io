@@ -33,6 +33,11 @@
     "forceConsistentCasingInFileNames": true,
     "skipLibCheck": true
   },
-  "include": ["env.d.ts", "src/**/*", "src/**/*.vue"],
+  "include": [
+    "env.d.ts",
+    "vite.-env.d.ts",
+    "src/**/*",
+    "src/**/*.vue"
+  ],
   "extends": "./paths.json"
 }
