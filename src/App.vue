@@ -37,9 +37,9 @@ import {
 } from 'overlayscrollbars-vue'
 
 
-import Background from '@components/Background'
-import NavMenu from '@components/NavMenu'
-import LocaleChooser from '@components/LocaleChooser'
+import Background from '@components/Background/index.vue'
+import NavMenu from '@components/NavMenu/index.vue'
+import LocaleChooser from '@components/LocaleChooser/index.vue'
 
 
 const SCROLL_THRESHOLD = 15
