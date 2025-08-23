@@ -19,5 +19,3 @@ declare module "*.svg" {
   const src: FunctionalComponent<SVGAttributes>
   export default src
 }
-
-/// <reference types="vite/client" />
