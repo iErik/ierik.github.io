@@ -125,7 +125,7 @@ function canvasSetup(gl: WebGLRenderingContext) {
 
     gl.uniform3fv(uMeatballsHandle, uMeatballs)
     gl.uniform2fv(uResolutionHandle, uResolution)
-    gl.drawArrays(gl.TRIANGLE_STRIP, 0, 6)
+    gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4)
 
     requestAnimationFrame(animate);
   }
@@ -152,6 +152,7 @@ onMounted(() => {
     return
   }
 
+  glContext.viewport(0, 0, canvasEl.width, canvasEl.height)
   canvasSetup(glContext)
 })
 </script>
