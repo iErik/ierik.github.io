@@ -1,5 +1,7 @@
 import type { ProjectType } from '@/types'
 
+import { mkLink } from './shared'
+
 const projects: ProjectType[] = [
     {
       name: "Grimoire",
@@ -7,27 +9,45 @@ const projects: ProjectType[] = [
       repoUrl: "https://github.com/iErik/grimoire",
       tags: ["React", "Redux", "Electron", "WIP"],
       description:
-        `<p>Grimoire is an open-source markdown
-        text editor built primarily with the Electron and
-        React.js frameworks, the app is currently going
-        through an entire rewrite and is planned to support
-        macOS, Windows and Linux platforms.</p><br />
+        `<p>Grimoire é um editor markdown de código aberto
+        desenvolvido primariamente com os frameworks
+        Electron.js e React.js, o aplicativo atualmente está
+        sendo completamente re-escrito.</p><br />
 
-        <p>The Grimoire app was entirelly designed and
-        implemented by me with the goal of providing a
-        clean, simple and elegant way of composing and
-        organizing markdown documents. The project is
-        powered by Electron.js, which allows us build
-        native desktop applications built entirelly with
-        Web techonologies such as React.js, which in this
-        case is also the framework of choice used to build
-        the entire user interface layer.</p><br />
+        <p>O projeto Grimoire foi completamente projetado e
+        desenvolvido por mim com o objetivo de criar uma
+        experiência simples e elegante de compor e organizar
+        documentos em markdown. O aplicativo é desenvolvido
+        completamente com tecnologias Web, fazendo uso da
+        biblioteca React.js para desenvolver elementos
+        de interface funcionais, eficientes e elegantes do
+        format fácil e rápida.</p><br />
 
         <p>
-        The application also makes use of the Redux
-        library to manage application and user interface
-        state in an efficient and straightforward manner
-        </p>`,
+        O aplication faz uso da arquitetura Redux para
+        organizar e gerenciar o estado global da aplicação
+        de forma extremamente leve e eficiente, combinando
+        a arquitetura e filosofia Redux com as ferramentas
+        oferecias pelo framework Electron.js para gerenciar
+        e manipular o estado de múltiplas janelas do
+        aplicativo abertas simultaneamente, mantêndo-as em
+        sincronia.
+        </p><br />
+
+        <p>
+        Os projeto de design original do aplicativo podem
+        ser encontrados neste ${mkLink(
+          'repositório do gitlab',
+          'https://gitlab.com/Isidore/grimoire-mockup'
+        )} criado especificamente para isso, onde estão
+        hospedados os arquivos PSD, fontes e outros
+        recursos utilizados durante o processo de design da
+        aplicação. Atualmente todas as especificações de
+        UI/UX da aplicação estão sendo refeitas, e as novas
+        telas de design Figma devem ser disponibilizadas
+        publicamente em breve.
+        </p>
+        `,
     },
     {
       name: "Medley",
@@ -35,27 +55,43 @@ const projects: ProjectType[] = [
       repoUrl: "https://github.com/iErik/Medley",
       tags: ["React", "Redux", "Electron", "WIP"],
       description:
-        `<p>Medley is my own open-source desktop client for
-        the Revolt messaging platform still in development
-        process. In case you're not familiar with it,
-        Revolt itself is a completely open source and
-        federated messaging platform very similar to
-        Discord, it's API is fully documented in it's
-        website, which you can check out
-        <a
-          class=\"link\"
-          target=\"_blank\"
-          href=\"https://revolt.chat\"
-        >
-          here
-        </a>. I'm enthusiastic about projects that put the
-        user first, so I decided to initiate this project
-        to make my own Revolt chat client.</p><br />
+        `<p>Medley é um cliente desktop de código aberto
+        para a plataforma Revolt ainda em processo de
+        desenvolvimento. A plataforma Revolt é uma
+        plataforma federizada e completamente de código
+        aberto de voz sobre IP e comunicação por mensagems
+        de texto em tempo real. A documentação completa
+        de suas APIs backend pode ser encontrada no
+        ${mkLink('site oficial', 'https://revolt.chat')}
+        da plataforma.</p><br />
 
-        <p>This project has been a challenge, but I'm
-        passionate about it. Currently it's being developed
-        with a stack composed of React 18, React Router 7
-        and Redux + Redux Saga for state management</p>`,
+        <p>Medley trata-se de um projeto ambicioso com o
+        objetivo de proporcionar uma experiência completa
+        de comunicação por voz e texto em tempo real para
+        o usuário comparavel a aplicações como Discord ou
+        Slack, o aplicativo está desenvolvido com uma stack
+        composta primariamente por React v18, React Router
+        7 e Redux + Redux Saga para gerenciamento de estado,
+        além de outras bibliotecas menores.
+        </p><br />
+
+        <p>Medley trata-se de um projeto ambicioso com o
+        objetivo de proporcionar uma experiência completa
+        de comunicação por voz e texto em tempo real para
+        o usuário comparavel a aplicações como Discord ou
+        Slack, o aplicativo está desenvolvido com uma stack
+        composta primariamente por React v18, React Router
+        7 e Redux + Redux Saga para gerenciamento de estado,
+        além de outras bibliotecas de suporte.
+        </p><br />
+
+        <p>Atualmente é possível visualizar mensagens,
+        servidores, canais de servidores e mensagems diretas
+        atráves da aplicação, mas há um esforço contínuo
+        para expandir as capacidades da aplicação com o
+        objetivo de proporcionar uma experiência completa.
+        </p>
+        `,
     }
 
 ]
@@ -65,7 +101,11 @@ export default {
   about: {
     presentation: {
       title: "Oie!",
-      text: "Desenvolvedor front-end com 5 anos de experiência especializado no desenvolvimento de aplicações Single-Page (SPA) e Server-Side Rendered (SSR) utilizando os frameworks Vue.js/Nuxt.js & React.js/Next.js"
+      text: `Desenvolvedor front-end com 5 anos de
+        experiência especializado no desenvolvimento de
+        aplicações Single-Page (SPA) e Server-Side Rendered
+        (SSR) utilizando os frameworks Vue.js/Nuxt.js &
+        React.js/Next.js`
     },
     experiences: {
       title: "Experiência",

@@ -1,5 +1,7 @@
 import type { ProjectType } from '@/types'
 
+import { mkLink } from './shared'
+
 const projects: ProjectType[] = [
     {
       name: "Grimoire",
@@ -10,8 +12,9 @@ const projects: ProjectType[] = [
         `<p>Grimoire is an open-source markdown
         text editor built primarily with the Electron and
         React.js frameworks, the app is currently going
-        through an entire rewrite and is planned to support
-        macOS, Windows and Linux platforms.</p><br />
+        through a complete rewrite and is planned to
+        support macOS, Windows and Linux platforms.</p>
+        <br />
 
         <p>The Grimoire app was entirelly designed and
         implemented by me with the goal of providing a
@@ -26,8 +29,24 @@ const projects: ProjectType[] = [
         <p>
         The application also makes use of the Redux
         library to manage application and user interface
-        state in an efficient and straightforward manner
-        </p>`,
+        state in an efficient and straightforward manner,
+        combining the Redux's state management philosophy
+        with the tools offered by the Electron.js framework
+        to keep multiple renderer processes in sync.
+        </p>
+
+        <p>
+        The original design project for the application
+        can be found on this ${mkLink(
+          'gitlab repository',
+          'https://gitlab.com/Isidore/grimoire-mockup')} I
+        created specifically for that, there you can find
+        the PSD file containing all the original design
+        process the application. As mentioned earlier, the
+        application is going through a complete redesign and
+        rewrite, the new Figma design screens should be
+        publicly avaialable soon.
+        </p> `,
     },
     {
       name: "Medley",
@@ -42,20 +61,20 @@ const projects: ProjectType[] = [
         federated messaging platform very similar to
         Discord, it's API is fully documented in it's
         website, which you can check out
-        <a
-          class=\"link\"
-          target=\"_blank\"
-          href=\"https://revolt.chat\"
-        >
-          here
-        </a>. I'm enthusiastic about projects that put the
+        ${mkLink('here', 'https://revolt.chat')}.
+        I'm enthusiastic about projects that put the
         user first, so I decided to initiate this project
         to make my own Revolt chat client.</p><br />
 
         <p>This project has been a challenge, but I'm
         passionate about it. Currently it's being developed
         with a stack composed of React 18, React Router 7
-        and Redux + Redux Saga for state management</p>`,
+        and Redux + Redux Saga for state management</p>
+
+        <p>Currently you can browser servers, channels and
+        direct messages directly in the app, but there is
+        ongoing effort to expand the app's capabilities to
+        offer a complete experience.`,
     }
 
 ]
