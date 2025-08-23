@@ -15,7 +15,6 @@ import { useI18n } from 'vue-i18n'
 
 const { locale } = useI18n()
 
-console.log({ locale })
 const chooseLocale = (localeType: 'en' | 'pt') => {
   locale.value = localeType
 }
