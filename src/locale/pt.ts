@@ -24,7 +24,7 @@ const projects: ProjectType[] = [
         format fácil e rápida.</p><br />
 
         <p>
-        O aplication faz uso da arquitetura Redux para
+        O aplicativo faz uso da arquitetura Redux para
         organizar e gerenciar o estado global da aplicação
         de forma extremamente leve e eficiente, combinando
         a arquitetura e filosofia Redux com as ferramentas
@@ -101,11 +101,11 @@ export default {
   about: {
     presentation: {
       title: "Oie!",
-      text: `Desenvolvedor front-end com 5 anos de
-        experiência especializado no desenvolvimento de
-        aplicações Single-Page (SPA) e Server-Side Rendered
-        (SSR) utilizando os frameworks Vue.js/Nuxt.js &
-        React.js/Next.js`
+      text: `Me chamo Erik, sou um desenvolvedor front-end
+        com 5 anos de experiência especializado no
+        desenvolvimento de aplicações Single-Page (SPA) e
+        Server-Side Rendered (SSR) utilizando os frameworks
+        Vue.js/Nuxt.js & React.js/Next.js`
     },
     experiences: {
       title: "Experiência",
