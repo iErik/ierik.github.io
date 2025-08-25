@@ -31,6 +31,7 @@ export type ProjectType = {
 
 declare module 'vue-i18n' {
   export interface DefineLocaleMessage {
+    navMenu: string[3]
     about: {
       presentation: {
         title: string

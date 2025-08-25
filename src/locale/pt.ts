@@ -98,6 +98,11 @@ const projects: ProjectType[] = [
 
 
 export default {
+  navMenu: [
+    'Homepage',
+    'Portfólio',
+    'Sobre mim'
+  ],
   about: {
     presentation: {
       title: "Oie!",

@@ -30,6 +30,7 @@
 
 <script setup lang="ts">
 import { ref, computed } from 'vue'
+import { useI18n } from 'vue-i18n'
 
 import type { OverlayScrollbars } from 'overlayscrollbars'
 import {
@@ -46,25 +47,33 @@ const SCROLL_THRESHOLD = 15
 const hideNav = ref(false)
 let scrollDelta = 0
 
+const { locale, messages } = useI18n()
 const navWrapClasses = computed(() => [
   'nav-wrap',
   hideNav.value ? '-hidden' : ''
 ])
 
-const navItems = [
-  {
-    label: 'Homepage',
-    route: 'Homepage'
-  },
-  {
-    label: 'Portfolio',
-    route: 'Portfolio'
-  },
-  {
-    label: 'About Me',
-    route: 'About'
-  }
-]
+const navItems = computed(() => {
+  const msgs = messages.value[locale.value]
+  if (!msgs) return []
+
+  const localeNav = msgs.navMenu || []
+
+  return [
+    {
+      label: localeNav[0] || 'Homepage',
+      route: 'Homepage'
+    },
+    {
+      label: localeNav[1] || 'Portfolio',
+      route: 'Portfolio'
+    },
+    {
+      label: localeNav[2] || 'About Me',
+      route: 'About'
+    }
+  ]
+})
 
 const onContentScroll = (os: OverlayScrollbars) => {
   const viewport = os.elements().viewport
