@@ -5,7 +5,6 @@ import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import vueDevTools from 'vite-plugin-vue-devtools'
 import svg from './vite/svg-plugin'
-import glsl from 'vite-plugin-glsl'
 
 import paths from './paths.json'
 import pkg from './package.json'
@@ -21,7 +20,6 @@ export default defineConfig({
   plugins: [
     vue(),
     vueDevTools(),
-    glsl(),
     svg({
       defaultImport: 'component',
       wrapped: false,
