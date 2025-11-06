@@ -40,7 +40,6 @@
 <script lang="ts" setup>
 import { computed } from 'vue'
 import { useI18n } from 'vue-i18n'
-import type { LocaleSchema } from '@/i18n'
 
 import ExperienceList from '@components/ExperienceList/index.vue'
 import SkillCard from '@components/SkillCard/index.vue'
@@ -55,8 +54,7 @@ const experiences = computed(() => {
 
   if (!msgs) return []
 
-  // TODO: Not ideal
-  return (msgs as LocaleSchema).about.experiences.items
+  return msgs.about.experiences.items
 })
 
 type Skill = {
