@@ -225,7 +225,7 @@ onMounted(() => {
   background-repeat: repeat;
   // TODO This gets glitchy if the browser has darkreader
   // extension, we need to find a way to fix it
-  opacity: .2;
+  opacity: .4;
   background-blend-mode: overlay;
 }
 </style>
