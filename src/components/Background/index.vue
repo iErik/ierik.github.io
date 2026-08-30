@@ -188,7 +188,7 @@ onMounted(() => {
   //backdrop-filter: blur(210px);
 
   background-color: rgb(22 85 172 / 9%);
-  backdrop-filter: blur(95px);
+  backdrop-filter: blur(150px);
 }
 
 .overlay-bg {
@@ -206,7 +206,7 @@ onMounted(() => {
   //background-size: 267px 267px;
   background-size: 200px 200px;
   background-repeat: repeat;
-  opacity: .1;
+  opacity: .08;
   //backdrop-filter: blur(70px);
 }
 
@@ -225,7 +225,8 @@ onMounted(() => {
   background-repeat: repeat;
   // TODO This gets glitchy if the browser has darkreader
   // extension, we need to find a way to fix it
-  opacity: .4;
+  opacity: .5;
+  filter: blur(0.06px);
   background-blend-mode: overlay;
 }
 </style>

@@ -89,7 +89,7 @@ const contactLinks: ContactLinks = computed(() => [
   padding-top: 190px;
   width: 100%;
 
-  & > .logo { width: 106px; }
+  & > .logo { width: 106px; filter: blur(0.8x); }
 
   & > .heading {
     @include typography.heading;
