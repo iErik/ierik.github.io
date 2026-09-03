@@ -117,6 +117,18 @@ export default {
       items: [
         {
           title: "Desenvolvedor Front-end Sênior",
+          company: "Thryv",
+          start: "11.2025",
+          end: "09.2026",
+          items: [
+            "Planejamento, implementação, manutenção e integração com front-end de APIs RESTful e GraphQL utilizando uma stack composta de Node.js + Fastify.js + MongoDB",
+            "Planejamento, implementação e manutenção de aplicações Single-Page (SPA) responsivas utilizando Vue.js e React.js",
+            "Planejamento, implementação e manutenção de ferramentas e bibliotecas internas escritas em JavaScript e TypeScript",
+            "Implementação de testes unitários em diversas codebases"
+          ]
+        },
+        {
+          title: "Desenvolvedor Front-end Sênior",
           company: "Convenia",
           start: "09.2020",
           end: "07.2023",
@@ -135,7 +147,7 @@ export default {
           end: "08.2020",
           items: [
             "Planejamento, implementação e manutenção de aplicações Single-Page (SPA) e Server-Side Rendered (SSR) utilizando os frameworks Vue.js e Nuxt.js",
-            "Planning, implementation and maintenance of internal tooling and libraries written in JavaScript and TypeScript",
+            "Planejamento, implementação e manutenção de ferramentas e bibliotecas internas escritas em JavaScript e TypeScript",
             "Implementação de testes unitários utilizando Jest"
           ]
         },
@@ -148,7 +160,7 @@ export default {
             "Planejamento, implementação e manutenção de aplicações Single-Page (SPA) e Server-Side Rendered (SSR) utilizando os frameworks Vue.js e Nuxt.js",
             "Integração de APIs GraphQL com aplicações Front-end",
             "Planejamento, implementação e manutenção de ferramentas e bibliotecas internas escritas em JavaScript e TypeScript",
-            "Implementação de testes unitários utilizando Jest, e testes de integração utlizando Cypress"
+            "Implementação de testes unitários utilizando Jest, e testes de integração utilizando Cypress"
           ]
         }
       ]

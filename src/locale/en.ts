@@ -100,13 +100,25 @@ export default {
       items: [
         {
           title: "Senior Front-end Engineer",
+          company: "Thryv",
+          start: "11.2025",
+          end: "09.2026",
+          items: [
+            "Planning, implementation, maintenance and front-end integration of RESTful and GraphQL APIs using a stack composed of Node.js + Fastify.js + MongoDB",
+            "Planning, implementation and maintenance of responsive, Single-Page applications using Vue.js and React.js",
+            "Planning, implementation and maintenance of internal tooling and libraries written in JavaScript and TypeScript",
+            "Implementation of unit tests across codebases"
+          ]
+        },
+        {
+          title: "Senior Front-end Engineer",
           company: "Convenia",
           start: "09.2020",
           end: "07.2023",
           items: [
             "Onboarding and training of new team members",
-            "Planning, implementation, maintenance and front-end integration of of RESTful and GraphQL APIs using a stack composed of Node.js + Fastify.js + MongoDB",
-            "Planning, implementation and maintenance of of responsive, Single-Page and Server-Side Rendered applications using the Vue.js and Nuxt.js frameworks",
+            "Planning, implementation, maintenance and front-end integration of RESTful and GraphQL APIs using a stack composed of Node.js + Fastify.js + MongoDB",
+            "Planning, implementation and maintenance of responsive, Single-Page and Server-Side Rendered applications using the Vue.js and Nuxt.js frameworks",
             "Planning, implementation and maintenance of internal tooling and libraries written in JavaScript and TypeScript",
             "Implementation of unit tests using the Jest library"
           ]
@@ -117,7 +129,7 @@ export default {
           start: "02.2020",
           end: "08.2020",
           items: [
-            "Planning, implementation and maintenance of of responsive, Single-Page and Server-Side Rendered applications using the Vue.js and Nuxt.js frameworks",
+            "Planning, implementation and maintenance of responsive, Single-Page and Server-Side Rendered applications using the Vue.js and Nuxt.js frameworks",
             "Planning, implementation and maintenance of internal tooling and libraries written in JavaScript and TypeScript",
             "Implementation of unit tests using the Jest library"
           ]
@@ -128,7 +140,7 @@ export default {
           start: "04.2018",
           end: "06.2019",
           items: [
-            "Planning, implementation and maintenance of of responsive, Single-Page and Server-Side Rendered applications using the Vue.js and Nuxt.js frameworks",
+            "Planning, implementation and maintenance of responsive, Single-Page and Server-Side Rendered applications using the Vue.js and Nuxt.js frameworks",
             "Front-end integration with GraphQL APIs",
             "Planning, implementation and maintenance of internal tooling and libraries written in JavaScript and TypeScript",
             "Implementation of unit tests using the Jest library, and integration tests using Cypress"
