@@ -94,6 +94,7 @@ const contactLinks: ContactLinks = computed(() => [
   & > .heading {
     @include typography.heading;
 
+    font-family: var(--brand-font);
     font-size: 60px;
     white-space: nowrap;
   }
@@ -120,7 +121,6 @@ const contactLinks: ContactLinks = computed(() => [
 
   @include mixins.min-width (881px) {
     & > .logo { width: 181px; }
-    & > .heading { @include typography.heading; }
     & > .links { gap: 20px; }
   }
 }

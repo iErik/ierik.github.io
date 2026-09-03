@@ -158,7 +158,7 @@ const skillList: Skill[] = [
       margin-bottom: 40px;
 
       @include mixins.min-width(635px) {
-        marginb-bottom: 0px;
+        margin-bottom: 0px;
       }
     }
 

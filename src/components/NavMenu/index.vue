@@ -49,10 +49,10 @@ const props = defineProps<{
 
   & > .item {
     & > .link > .label {
-      font-size: 12px;
+      font-size: 14px;
 
       @include mixins.min-width(635px) {
-        font-size: 16px;
+        font-size: 17px;
       }
     }
 

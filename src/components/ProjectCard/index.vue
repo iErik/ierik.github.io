@@ -47,7 +47,7 @@ import Link from '@components/Link/index.vue'
 import Icon from '@components/Icon/index.vue'
 import type { ProjectType, ProjectTag } from '@/types'
 
-const props = defineProps<{
+defineProps<{
   project: ProjectType
 }>()
 

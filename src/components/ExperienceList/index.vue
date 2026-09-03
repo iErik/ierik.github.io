@@ -28,16 +28,9 @@
 </template>
 
 <script lang="ts" setup>
+import type { ExperienceType } from '@/types'
 
-type ExperienceType = {
-  title: string
-  company: string
-  start: string
-  end: string
-  items: string[]
-}
-
-const props = defineProps<{
+defineProps<{
   experiences: ExperienceType[]
 }>()
 </script>
@@ -120,7 +113,7 @@ const props = defineProps<{
 
       & > .item > .text {
         font-weight: 500;
-        font-size: 14px;
+        font-size: 15px;
         color: rgba(var(--color-fg-rgb), .7);
       }
     }
