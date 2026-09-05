@@ -71,6 +71,15 @@ const contactLinks: ContactLinks = computed(() => [
     iconOnly: isTablet.value,
     large: isTablet.value && !isMobile.value,
     to: 'https://gitlab.com/Isidore'
+  },
+  {
+    icon: 'Mail',
+    label: 'Email',
+    isLink: true,
+    external: true,
+    iconOnly: isTablet.value,
+    large: isTablet.value && !isMobile.value,
+    to: 'mailto:ericssonico@proton.me'
   }
 ])
 

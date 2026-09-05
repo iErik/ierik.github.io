@@ -23,10 +23,19 @@ const isHref = computed(() => {
   return props.external || props.to.startsWith('https://')
 })
 
+const isMailto = computed(() =>
+  props.to.startsWith('mailto:'))
+
 const linkAttrs = computed(() => {
   if (isHref.value) return {
-    target: '_blank',
-    href: props.to
+    href: props.to,
+
+    // mailto: hands off to a mail client, opening it in
+    // a new tab just leaves a blank one behind
+    ...(isMailto.value ? null : {
+      target: '_blank',
+      rel: 'noopener noreferrer'
+    })
   }
 
   return {

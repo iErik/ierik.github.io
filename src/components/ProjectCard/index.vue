@@ -26,11 +26,9 @@
       </div>
     </div>
 
-    <OverlayScrollbarsComponent class="scroll-view">
-      <article class="description">
-        <p class="text" v-html="project.description" />
-      </article>
-    </OverlayScrollbarsComponent>
+    <article class="description">
+      <p class="text" v-html="project.description" />
+    </article>
 
     <div class="footer">
 
@@ -39,10 +37,6 @@
 </template>
 
 <script lang="ts" setup>
-import {
-  OverlayScrollbarsComponent
-} from 'overlayscrollbars-vue'
-
 import Link from '@components/Link/index.vue'
 import Icon from '@components/Icon/index.vue'
 import type { ProjectType, ProjectTag } from '@/types'
@@ -172,9 +166,7 @@ const getTagClass = (tag: ProjectTag) => {
     }
   }
 
-  & > .scroll-view {
-    height: 100%;
-    overflow: hidden;
+  & > .description {
     background: linear-gradient(95deg,
       rgba(250, 250, 250, .05) 9%,
       rgba(255, 255, 255, .01) 90%,
@@ -184,9 +176,7 @@ const getTagClass = (tag: ProjectTag) => {
 
     border-bottom-left-radius: 8px;
     border-bottom-right-radius: 8px;
-  }
 
-  & > .scroll-view .description {
     font-size: 15px;
     padding: 20px;
 

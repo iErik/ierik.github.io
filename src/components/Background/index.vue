@@ -28,7 +28,7 @@ type Meatball = {
 
 const mkMeatballs = (length: number): Meatball[] => Array
   .from({ length }, () => {
-    const radius = Math.random() * 60 + 10
+    const radius = Math.random() * 80 + 10
     const width = window.innerWidth
     const height = window.innerHeight
 

@@ -7,12 +7,15 @@
     >
       <div class="head">
         <div class="title-wrap">
-          <p class="title">{{ experience.title }}</p>
+          <h3 class="title">{{ experience.title }}</h3>
           <span class="start-end">
-            {{ experience.start }} → {{ experience.end}}
+            {{ experience.start }} → {{ experience.end }}
           </span>
         </div>
         <p class="company">{{ experience.company }}</p>
+        <p v-if="experience.context" class="context">
+          {{ experience.context }}
+        </p>
       </div>
       <ul class="items">
         <li
@@ -95,6 +98,17 @@ defineProps<{
         font-weight: 600;
         font-size: 12px;
         text-transform: uppercase;
+
+        @include mixins.min-width(635px) {
+          font-size: 14px;
+        }
+      }
+
+      & > .context {
+        margin-top: 4px;
+        font-weight: 400;
+        font-size: 13px;
+        color: rgba(var(--color-fg-rgb), .55);
 
         @include mixins.min-width(635px) {
           font-size: 14px;
