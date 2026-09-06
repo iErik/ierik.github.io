@@ -1,5 +1,10 @@
 import Lenis from 'lenis'
 
+import {
+  getSectionScrollOffset,
+  transitionsActive
+} from './useSectionTransitions'
+
 // Height of the fixed navbar, so section headings don't
 // land underneath it when we scroll to them
 const NAV_OFFSET = -110
@@ -32,6 +37,14 @@ export function scrollToSection(
 ) {
   const target = `#${sectionId}`
 
+  // With transitions on, the section is pinned in the
+  // viewport by the time it's fully opaque, so navbar
+  // clearance doesn't apply - the landing spot is fully
+  // determined by the transition geometry
+  const offset = transitionsActive()
+    ? getSectionScrollOffset()
+    : NAV_OFFSET
+
   if (lenis) {
     // Lenis clamps every target to the scroll limit it
     // last measured, and that measurement can predate the
@@ -39,22 +52,22 @@ export function scrollToSection(
     // or the jump silently lands at the top
     lenis.resize()
 
-    lenis.scrollTo(target, {
-      offset: NAV_OFFSET,
-      immediate
-    })
+    lenis.scrollTo(target, { offset, immediate })
 
     return
   }
 
   // Lenis hasn't initialized yet (or never will, under
   // reduced motion) - fall back to the platform
-  const el = document.querySelector(target)
+  const el = document.getElementById(sectionId)
   if (!el) return
 
-  el.scrollIntoView({
-    behavior: immediate ? 'auto' : 'smooth',
-    block: 'start'
+  const top = el.getBoundingClientRect().top
+    + window.scrollY + offset
+
+  window.scrollTo({
+    top,
+    behavior: immediate ? 'auto' : 'smooth'
   })
 }
 

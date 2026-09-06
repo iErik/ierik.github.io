@@ -46,42 +46,26 @@ defineProps<{
 }>()
 
 
-const BLUE_TAGS: ProjectTag[] = [
-  'React',
-  'Next',
-  'Zustand',
-  'Redux'
-]
-
-const PURPLE_TAGS: ProjectTag[] = [ ]
-
-const GREEN_TAGS: ProjectTag[] = [
-  'Vue',
-  'Nuxt'
-]
-
-const YELLOW_TAGS: ProjectTag[] = [
-  'WIP'
-]
-
+// Keys are the class modifiers in the stylesheet below -
+// a tag missing from here renders with no color
 const TAG_COLORS: Record<string, ProjectTag[]> = {
-  YELLOW: [ 'WIP' ],
-  PURPLE: [ 'React', 'Next', 'Zustand', 'Redux' ],
-  BLUE: [ 'Electron' ],
-  GREEN: [ 'Vue', 'Nuxt' ]
+  blue: [
+    'React',
+    'Next',
+    'Zustand',
+    'Redux',
+    'Electron'
+  ],
+  green: [ 'Vue', 'Nuxt' ],
+  yellow: [ 'WIP' ]
 }
 
 const getTagClass = (tag: ProjectTag) => {
-  const classNames = [ 'tag' ]
+  const match = Object
+    .entries(TAG_COLORS)
+    .find(([ , tags ]) => tags.includes(tag))
 
-  if (BLUE_TAGS.includes(tag))
-    classNames.push('-blue')
-  else if (YELLOW_TAGS.includes(tag))
-    classNames.push('-yellow')
-  else if (GREEN_TAGS.includes(tag))
-    classNames.push('-green')
-
-  return classNames.join(' ')
+  return match ? `tag -${match[0]}` : 'tag'
 }
 </script>
 
@@ -151,7 +135,7 @@ const getTagClass = (tag: ProjectTag) => {
         font-size: 10px;
         text-transform: uppercase;
         font-weight: 600;
-        color: rgba(var(--color-fg-rgb, .75));
+        color: rgba(var(--color-fg-rgb), .75);
 
         padding: 0 10px;
 
@@ -161,7 +145,6 @@ const getTagClass = (tag: ProjectTag) => {
 
         &.-green { }
         &.-yellow { }
-        &.-purple {}
       }
     }
   }

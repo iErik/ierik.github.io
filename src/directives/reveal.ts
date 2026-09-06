@@ -21,6 +21,19 @@ const observers = new WeakMap<
 export type RevealDirective =
   Directive<HTMLElement, number | undefined>
 
+// The section cross-fade already carries a stage's first
+// screenful, so revealing those items too would animate
+// them twice
+const isAboveTheFold = (el: HTMLElement) => {
+  const stage = el.closest('.stage')
+  if (!stage) return false
+
+  const offsetInStage = el.getBoundingClientRect().top
+    - stage.getBoundingClientRect().top
+
+  return offsetInStage < window.innerHeight
+}
+
 const reveal: RevealDirective = {
   mounted(el, binding) {
     const index = binding.value || 0
@@ -34,24 +47,37 @@ const reveal: RevealDirective = {
       return
     }
 
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (!entry.isIntersecting) return
+    // One frame so layout has settled before measuring
+    requestAnimationFrame(() => {
+      if (isAboveTheFold(el)) {
+        el.style.transitionDelay = ''
+        el.classList.add(REVEALED)
+        return
+      }
 
-        entry.target.classList.add(REVEALED)
-        // Reveals shouldn't replay on the way back up
-        observer.unobserve(entry.target)
-      })
-    }, { threshold: THRESHOLD })
-
-    observer.observe(el)
-    observers.set(el, observer)
+      observe(el)
+    })
   },
 
   unmounted(el) {
     observers.get(el)?.disconnect()
     observers.delete(el)
   }
+}
+
+function observe(el: HTMLElement) {
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return
+
+      entry.target.classList.add(REVEALED)
+      // Reveals shouldn't replay on the way back up
+      observer.unobserve(entry.target)
+    })
+  }, { threshold: THRESHOLD })
+
+  observer.observe(el)
+  observers.set(el, observer)
 }
 
 export default reveal

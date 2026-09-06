@@ -2,10 +2,13 @@
 // paths exist only to name a landing spot within it, so
 // route names and section ids map 1:1
 
+// Declaration order is the order the sections appear on
+// the page
 export const SECTIONS = {
   Homepage: 'homepage',
-  Portfolio: 'portfolio',
-  About: 'about'
+  About: 'about',
+  Experience: 'experience',
+  Portfolio: 'portfolio'
 } as const
 
 export type RouteName = keyof typeof SECTIONS

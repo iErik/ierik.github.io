@@ -71,8 +71,8 @@ export default ({
     // remove hardcoded fill and stroke colors to allow
     // us to better control coloring from within SCSS/CSS
     svg = svg
-      .replace(/fill="#\d{1,6}"/, '')
-      .replace(/stroke="#\d{1,6}"/, '')
+      .replace(/fill="#[0-9a-fA-F]{3,8}"/g, '')
+      .replace(/stroke="#[0-9a-fA-F]{3,8}"/g, '')
 
     let filename = path.split('/').pop()?.replace('.svg', '')
 

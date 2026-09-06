@@ -54,6 +54,9 @@ jobs:
           path: dist/
 
   deploy:
+    # Pull requests get the build as a check only - the
+    # live site is published from master
+    if: github.event_name != 'pull_request'
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}

@@ -26,38 +26,18 @@
         </div>
       </div>
     </div>
-
-    <div class="experience">
-      <h2 v-reveal class="heading reveal">
-        {{ t('about.experiences.title') }}
-      </h2>
-
-      <div class="experiences-wrap">
-        <ExperienceList :experiences="experiences" />
-      </div>
-    </div>
   </section>
 </template>
 
 <script lang="ts" setup>
-import { computed } from 'vue'
 import { useI18n } from 'vue-i18n'
 
-import ExperienceList from '@components/ExperienceList/index.vue'
 import SkillCard from '@components/SkillCard/index.vue'
 
 import type { IconName } from '@components/Icon/index.vue'
 
 
-const { t, locale, messages } = useI18n()
-
-const experiences = computed(() => {
-  const msgs = messages.value[locale.value]
-
-  if (!msgs) return []
-
-  return msgs.about.experiences.items
-})
+const { t } = useI18n()
 
 type Skill = {
   icon: IconName
@@ -194,23 +174,6 @@ const skillList: Skill[] = [
         padding: 0 80px;
         width: 100%;
       }
-    }
-  }
-
-  & > .experience {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    padding: 0 25px;
-
-    & > .heading {
-      font-size: 48px;
-      font-weight: 500;
-      text-transform: uppercase;
-    }
-
-    & > .experiences-wrap {
-      margin-top: 75px;
     }
   }
 }

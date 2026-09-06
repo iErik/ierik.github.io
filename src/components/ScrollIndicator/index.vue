@@ -163,6 +163,7 @@ onUnmounted(() => {
 
       white-space: nowrap;
       font-size: 11px;
+      font-weight: 600;
       letter-spacing: .08em;
       text-transform: uppercase;
       color: rgba(var(--color-fg-rgb), .75);

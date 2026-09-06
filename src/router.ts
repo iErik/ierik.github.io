@@ -22,6 +22,11 @@ const router = createRouter({
       path: '/about',
       name: 'About',
       component: Landing
+    },
+    {
+      path: '/experience',
+      name: 'Experience',
+      component: Landing
     }
   ]
 })

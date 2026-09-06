@@ -60,12 +60,16 @@ const navItems = computed(() => {
       section: SECTIONS.Homepage
     },
     {
-      label: localeNav[1] || 'Portfolio',
-      section: SECTIONS.Portfolio
+      label: localeNav[1] || 'About Me',
+      section: SECTIONS.About
     },
     {
-      label: localeNav[2] || 'About Me',
-      section: SECTIONS.About
+      label: localeNav[2] || 'Experience',
+      section: SECTIONS.Experience
+    },
+    {
+      label: localeNav[3] || 'Portfolio',
+      section: SECTIONS.Portfolio
     }
   ]
 })

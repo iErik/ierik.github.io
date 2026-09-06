@@ -33,20 +33,41 @@ on the deployed site, look there first.
   `src/pages/Landing.vue` via `src/router.ts`. The document itself scrolls — there is no scroll
   container.
 - **It is a single scrolling page, not three routes.** All three paths (`/`, `/portfolio`, `/about`)
-  render the same `Landing.vue`, which stacks `Homepage`, `Portfolio` and `About` as `<section>`s
-  whose ids come from `src/sections.ts` (the one place route names and section ids are mapped).
+  render the same `Landing.vue`, which stacks the page components as `.stage` wrappers whose ids
+  come from `src/sections.ts` (the one place route names, section ids and page order are defined).
   The paths exist only to name a landing spot: `Landing.vue` scrolls to the matching section on
   mount, and a scrollspy calls `router.replace` as you scroll. **Those two directions can feed each
   other** — the `syncingFromScroll` flag in `Landing.vue` is what stops the loop; don't remove it.
+- **Section cross-fade** (`src/composables/useSectionTransitions.ts`): each stage holds in place and
+  fades out while the next fades in, over `--fade` (60% of viewport) of scroll. Two non-obvious
+  things hold it together, both of which look like they should work otherwise:
+  - The hold uses a **negative sticky `top`** (`--pin-top` = viewport − section height), so a
+    section pins exactly when its bottom edge reaches the viewport bottom. `bottom: 0` does *not*
+    work — sticky only ever pulls an element toward the edge it names, so bottom-sticky reveals an
+    element early and releases it, rather than holding one you have scrolled past.
+  - The hold distance is a **real `.hold` spacer div**, not `padding-bottom` on the stage. A sticky
+    element is constrained to its containing block's *content* box, so padding gives it zero room
+    and it just scrolls away.
+  `activeSection` is derived from this same maths rather than an IntersectionObserver: stages
+  overlap by `--fade`, so an observer would see two of them mid-viewport and flip-flop, which the
+  URL sync turns into address-bar chatter.
 - Nav items in `App.vue` map positionally onto the `navMenu` array in the locale files, so
   reordering locale entries reorders the nav.
+- **Adding or reordering a section** touches five places and type-checking only catches some of
+  them: `src/sections.ts` (order + id), `src/router.ts` (its path), `componentFor` in
+  `Landing.vue`, the `navMenu` array in **both** locale files, and `navItems` in `App.vue` — the
+  last two are positional, so an entry added to one and not the other silently mislabels the nav.
 - **Scrolling and motion**: `src/composables/useLenis.ts` owns a single Lenis instance, created in
   `App.vue`'s `setup()` — *not* `onMounted`, because children mount first and `Landing` needs it.
   `scrollToSection` calls `lenis.resize()` before every jump: Lenis clamps targets to the scroll
   limit it last measured, and a stale measurement silently lands the jump at the top.
   `src/directives/reveal.ts` is the global `v-reveal` directive (IntersectionObserver → `-revealed`
   class, optional index for stagger); pair it with the `motion.reveal` mixin in
-  `src/styles/utils/_motion.scss`. Both it and Lenis honour `prefers-reduced-motion`.
+  `src/styles/utils/_motion.scss`. It skips anything inside its stage's first screenful — the
+  section cross-fade already carries that, and revealing it too animates it twice. Lenis, the
+  reveals and the cross-fade all honour `prefers-reduced-motion`; for the cross-fade that means
+  dropping the *layout* too (no overlap, no sticky), since keeping the negative margins while
+  forcing opacity to 1 would stack two sections on top of each other.
 - **Content lives in the locale files, not in components.** `src/locale/en.ts` and `pt.ts` carry the actual
   portfolio copy, project lists, and experience entries as structured data; pages read them via
   `useI18n().messages` and render. Adding a project or job = editing both locale files.

@@ -6,7 +6,11 @@
 </template>
 
 <script lang="ts" setup>
-import { useTemplateRef, onMounted } from 'vue'
+import {
+  useTemplateRef,
+  onMounted,
+  onUnmounted
+} from 'vue'
 
 import * as webgl from '@utils/webgl'
 import * as shaders from './shaders'
@@ -28,7 +32,7 @@ type Meatball = {
 
 const mkMeatballs = (length: number): Meatball[] => Array
   .from({ length }, () => {
-    const radius = Math.random() * 80 + 10
+    const radius = Math.random() * 60 + 10
     const width = window.innerWidth
     const height = window.innerHeight
 
@@ -133,6 +137,22 @@ function canvasSetup(gl: WebGLRenderingContext) {
   requestAnimationFrame(animate)
 }
 
+let glContext: WebGLRenderingContext | null = null
+
+// The canvas is sized in vw/vh but its drawing buffer is
+// a fixed pixel grid, so without this a resize stretches
+// a stale bitmap - and the meatballs bounce inside the
+// new viewport while being drawn from the old one
+const resizeCanvas = () => {
+  const canvasEl = canvasRef.value
+  if (!canvasEl || !glContext) return
+
+  canvasEl.width = window.innerWidth
+  canvasEl.height = window.innerHeight
+
+  glContext.viewport(0, 0, canvasEl.width, canvasEl.height)
+}
+
 onMounted(() => {
   const canvasEl = canvasRef.value
 
@@ -142,18 +162,24 @@ onMounted(() => {
     return
   }
 
-  canvasEl.width = window.innerWidth
-  canvasEl.height = window.innerHeight
-  const glContext  = canvasEl.getContext('webgl')
+  const gl = canvasEl.getContext('webgl')
 
-  if (!glContext) {
+  if (!gl) {
     console.error(
       'Error: failed to get Background WebGL Context!')
     return
   }
 
-  glContext.viewport(0, 0, canvasEl.width, canvasEl.height)
-  canvasSetup(glContext)
+  glContext = gl
+  resizeCanvas()
+  window.addEventListener('resize', resizeCanvas)
+
+  canvasSetup(gl)
+})
+
+onUnmounted(() => {
+  window.removeEventListener('resize', resizeCanvas)
+  glContext = null
 })
 </script>
 
