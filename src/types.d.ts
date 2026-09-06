@@ -1,5 +1,12 @@
 import { DefineLocaleMessage } from 'vue-i18n'
 import { IconName } from '@components/Icon/index.vue'
+import { RevealDirective } from '@/directives/reveal'
+
+declare module 'vue' {
+  export interface GlobalDirectives {
+    vReveal: RevealDirective
+  }
+}
 
 
 export type ExperienceType = {

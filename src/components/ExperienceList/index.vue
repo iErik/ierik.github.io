@@ -1,9 +1,10 @@
 <template>
   <section class="experiences">
     <article
-      v-for="experience in experiences"
+      v-for="(experience, index) in experiences"
+      v-reveal="index"
       :key="`${experience.start}-${experience.end}`"
-      class="experience"
+      class="experience reveal"
     >
       <div class="head">
         <div class="title-wrap">
@@ -41,6 +42,9 @@ defineProps<{
 <style lang="scss" scoped>
 @use '@styles/utils/theming';
 @use '@styles/utils/mixins';
+@use '@styles/utils/motion';
+
+.reveal { @include motion.reveal(16px); }
 
 .experiences {
   @include theming.frame;

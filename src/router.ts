@@ -1,22 +1,27 @@
 import { createRouter, createWebHistory } from 'vue-router'
 
+// Every path renders the same single-scroll page - the
+// route only decides which section we land on, see
+// Landing.vue
+const Landing = () => import('@pages/Landing.vue')
+
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
       path: '/',
       name: 'Homepage',
-      component: () => import('@pages/Homepage.vue')
+      component: Landing
     },
     {
       path: '/portfolio',
       name: 'Portfolio',
-      component: () => import('@pages/Portfolio.vue')
+      component: Landing
     },
     {
       path: '/about',
       name: 'About',
-      component: () => import('@pages/About.vue')
+      component: Landing
     }
   ]
 })

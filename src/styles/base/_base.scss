@@ -1,5 +1,8 @@
 html, body, #app {
-  height: 100vh;
+  // min-height, not height: the document scrolls now, so
+  // pinning these to the viewport leaves the content
+  // overflowing a fixed box
+  min-height: 100vh;
   width: 100%;
 
   font-family: var(--base-font);

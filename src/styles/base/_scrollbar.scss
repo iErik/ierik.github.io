@@ -1,12 +1,14 @@
-// overlayscrollbar specific styles
+// The native scrollbar is replaced by the ScrollIndicator
+// component, which also reports the current section.
+// Scrolling itself is untouched - only the bar is hidden.
 
-.os-scrollbar .os-scrollbar-handle {
-  //background: rgba(120, 106, 245, 0.2);
-  //background: rgba(106, 104, 179, 0.2);
-  //background: rgba(101, 179, 160, 0.2);
-  //background: rgba(91, 178, 144, 0.2);
-  //background: rgba(88, 163, 134, 0.2);
-  //background: rgba(227, 110, 145, 0.12);
-  //background: rgba(64, 21, 164, 0.2);
-  background: rgba(190, 190, 190, 0.3);
+html {
+  scrollbar-width: none;      // Firefox
+  -ms-overflow-style: none;   // legacy Edge
+}
+
+::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  display: none;
 }

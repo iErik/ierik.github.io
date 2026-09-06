@@ -2,9 +2,11 @@
   <section class="portfolio">
     <div class="projects">
       <ProjectCard
-        v-for="project in projects"
+        v-for="(project, index) in projects"
+        v-reveal="index"
         :key="project.name"
         :project="project"
+        class="reveal"
       />
     </div>
   </section>
@@ -29,12 +31,13 @@ const projects = computed(() => {
 
 <style lang="scss" scoped>
 @use '@styles/utils/mixins';
+@use '@styles/utils/motion';
+
+.reveal { @include motion.reveal; }
 
 .portfolio {
-  padding-top: 200px;
-  // Not really working:
-  min-height: 100%;
-  //height: 100%; TODO Center cards on the screen
+  padding-top: 120px;
+  padding-bottom: 120px;
 
   display: flex;
   align-items: center;
@@ -43,9 +46,7 @@ const projects = computed(() => {
   & > .projects {
     display: grid;
     padding: 0 30px;
-    height: 100%;
 
-    padding-bottom: 100px;
     width: 100%;
     gap: 30px;
 

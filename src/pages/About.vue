@@ -1,32 +1,34 @@
 <template>
   <section class="about">
     <div class="presentation">
-      <h3 class="heading">
+      <h3 v-reveal class="heading reveal">
         {{ t('about.presentation.title') }}
       </h3>
-      <p class="text">
+      <p v-reveal class="text reveal">
         {{ t('about.presentation.text') }}
       </p>
 
       <div class="skills-wrap">
-        <h3 class="heading">
+        <h3 v-reveal class="heading reveal">
           Skills
         </h3>
 
         <div class="skills">
           <SkillCard
-            v-for="skill in skillList"
+            v-for="(skill, index) in skillList"
+            v-reveal="index"
             :key="skill.label"
             :icon="skill.icon"
             :label="skill.label"
             :percentage="skill.percentage"
+            class="reveal"
           />
         </div>
       </div>
     </div>
 
     <div class="experience">
-      <h2 class="heading">
+      <h2 v-reveal class="heading reveal">
         {{ t('about.experiences.title') }}
       </h2>
 
@@ -110,18 +112,19 @@ const skillList: Skill[] = [
 
 <style lang="scss" scoped>
 @use '@styles/utils/mixins';
+@use '@styles/utils/motion';
+
+.reveal { @include motion.reveal; }
 
 .about {
-  padding-top: 200px;
-  padding-bottom: 100px;
+  padding-top: 120px;
+  padding-bottom: 120px;
 
   display: flex;
   align-items: center;
   flex-direction: column;
 
   & > .presentation {
-    min-height: calc(100vh - 200px);
-
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -154,7 +157,7 @@ const skillList: Skill[] = [
 
       width: 100%;
       max-width: 1180px;
-      margin-top: 150px;
+      margin-top: 110px;
       margin-bottom: 40px;
 
       @include mixins.min-width(635px) {

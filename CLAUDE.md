@@ -29,10 +29,24 @@ on the deployed site, look there first.
 
 ## Architecture
 
-- **Entry**: `src/main.ts` → `App.vue` (WebGL background + fixed nav + OverlayScrollbars scroll view
-  wrapping `<RouterView>` with named `route-*` transitions) → pages via `src/router.ts`.
-- **Routes** are three lazy-loaded pages (`Homepage`, `Portfolio`, `About`); nav items in `App.vue` map
-  positionally onto the `navMenu` array in the locale files, so reordering locale entries reorders the nav.
+- **Entry**: `src/main.ts` → `App.vue` (fixed WebGL background + fixed nav + `<RouterView>`) →
+  `src/pages/Landing.vue` via `src/router.ts`. The document itself scrolls — there is no scroll
+  container.
+- **It is a single scrolling page, not three routes.** All three paths (`/`, `/portfolio`, `/about`)
+  render the same `Landing.vue`, which stacks `Homepage`, `Portfolio` and `About` as `<section>`s
+  whose ids come from `src/sections.ts` (the one place route names and section ids are mapped).
+  The paths exist only to name a landing spot: `Landing.vue` scrolls to the matching section on
+  mount, and a scrollspy calls `router.replace` as you scroll. **Those two directions can feed each
+  other** — the `syncingFromScroll` flag in `Landing.vue` is what stops the loop; don't remove it.
+- Nav items in `App.vue` map positionally onto the `navMenu` array in the locale files, so
+  reordering locale entries reorders the nav.
+- **Scrolling and motion**: `src/composables/useLenis.ts` owns a single Lenis instance, created in
+  `App.vue`'s `setup()` — *not* `onMounted`, because children mount first and `Landing` needs it.
+  `scrollToSection` calls `lenis.resize()` before every jump: Lenis clamps targets to the scroll
+  limit it last measured, and a stale measurement silently lands the jump at the top.
+  `src/directives/reveal.ts` is the global `v-reveal` directive (IntersectionObserver → `-revealed`
+  class, optional index for stagger); pair it with the `motion.reveal` mixin in
+  `src/styles/utils/_motion.scss`. Both it and Lenis honour `prefers-reduced-motion`.
 - **Content lives in the locale files, not in components.** `src/locale/en.ts` and `pt.ts` carry the actual
   portfolio copy, project lists, and experience entries as structured data; pages read them via
   `useI18n().messages` and render. Adding a project or job = editing both locale files.

@@ -91,10 +91,15 @@ const contactLinks: ContactLinks = computed(() => [
 
 .homepage {
   display: flex;
-  justify-content: center;
+  // flex-start, not center: the section is 100vh tall so
+  // centering would drop the logo to mid-screen
+  justify-content: flex-start;
   align-items: center;
   flex-direction: column;
 
+  // Hero fills the first screen so Portfolio starts below
+  // the fold; content still sits at its original offset
+  min-height: 100vh;
   padding-top: 190px;
   width: 100%;
 

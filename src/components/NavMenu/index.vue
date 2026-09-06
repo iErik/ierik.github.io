@@ -2,27 +2,44 @@
   <nav class="nav-menu">
     <div
       v-for="item in props.items"
-      :key="item.route"
+      :key="item.section"
       class="item"
     >
-      <Link class="link" :to="item.route">
+      <button
+        type="button"
+        :class="linkClasses(item.section)"
+        :aria-current="isActive(item.section)
+          ? 'true' : undefined"
+        @click="() => scrollToSection(item.section)"
+      >
         <span class="label">{{ item.label }}</span>
-      </Link>
+      </button>
     </div>
   </nav>
 </template>
 
 <script lang="ts" setup>
-import Link from '@components/Link/index.vue'
+import { scrollToSection } from '@composables/useLenis'
+import {
+  activeSection
+} from '@composables/useActiveSection'
 
 type NavMenuItem = {
   label: string
-  route: string
+  section: string
 }
 
 const props = defineProps<{
   items: NavMenuItem[]
 }>()
+
+const isActive = (section: string) =>
+  activeSection.value === section
+
+const linkClasses = (section: string) => [
+  'link',
+  isActive(section) ? '-active' : ''
+]
 </script>
 
 <style lang="scss" scoped>
@@ -52,6 +69,27 @@ const props = defineProps<{
       display: flex;
       align-items: center;
       min-height: 44px;
+
+      border: none;
+      background: none;
+      padding: 0;
+      cursor: pointer;
+
+      // Matches what the Link component used to give
+      // these when they were router-links
+      font-family: var(--base-font);
+      font-weight: var(--base-font-weight);
+      text-transform: uppercase;
+
+      color: rgba(var(--color-fg-rgb), .6);
+      transition: color 300ms, text-shadow 300ms;
+
+      &:hover { color: rgba(var(--color-fg-rgb), .85); }
+
+      &.-active {
+        color: var(--color-fg);
+        text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+      }
     }
 
     & > .link > .label {
@@ -82,8 +120,6 @@ const props = defineProps<{
         &::after { margin-left: 24px; }
       }
     }
-
-    & > .link > .label { white-space: nowrap; }
   }
 }
 </style>
