@@ -1,31 +1,42 @@
 <template>
-  <div class="scroll-indicator" aria-hidden="true">
-    <div class="track">
-      <div class="thumb" :style="thumbStyle" />
-
-      <span class="label" :style="labelStyle">
-        {{ activeLabel }}
+  <nav
+    class="scroll-indicator"
+    :aria-label="t('nav.sections')"
+  >
+    <button
+      v-for="item in props.items"
+      :key="item.section"
+      type="button"
+      :class="['section', isActive(item.section) ? '-active' : '']"
+      :aria-current="isActive(item.section) ? 'true' : undefined"
+      :aria-label="item.label"
+      @click="() => scrollToSection(item.section)"
+    >
+      <!-- The name is on the button too, because the
+           visible label is hidden until hover and an
+           accessible name must not depend on that -->
+      <span class="label" aria-hidden="true">
+        {{ item.label }}
       </span>
-    </div>
-  </div>
+
+      <span class="bar">
+        <span
+          class="fill"
+          :style="fillStyle(item.section)"
+        />
+      </span>
+    </button>
+  </nav>
 </template>
 
 <script lang="ts" setup>
-import {
-  ref,
-  computed,
-  onMounted,
-  onUnmounted
-} from 'vue'
+import { useI18n } from 'vue-i18n'
 
+import { scrollToSection } from '@composables/useLenis'
 import {
-  activeSection
+  activeSection,
+  sectionProgress
 } from '@composables/useActiveSection'
-
-// Track length in px; the thumb is sized and positioned
-// inside it from the document's scroll ratio
-const TRACK = 190
-const MIN_THUMB = 34
 
 type IndicatorItem = {
   label: string
@@ -36,82 +47,28 @@ const props = defineProps<{
   items: IndicatorItem[]
 }>()
 
-const progress = ref(0)
-const viewRatio = ref(1)
+const { t } = useI18n()
 
-const activeLabel = computed(() =>
-  props.items.find(i => i.section === activeSection.value)
-    ?.label || '')
+const isActive = (section: string) =>
+  activeSection.value === section
 
-const thumbHeight = computed(() =>
-  Math.max(MIN_THUMB, viewRatio.value * TRACK))
-
-const thumbTop = computed(() =>
-  progress.value * (TRACK - thumbHeight.value))
-
-const thumbStyle = computed(() => ({
-  height: `${thumbHeight.value}px`,
-  transform: `translateY(${thumbTop.value}px)`
-}))
-
-const labelStyle = computed(() => ({
-  transform: `translateY(${
-    thumbTop.value + thumbHeight.value / 2}px)`
-}))
-
-let frame = 0
-
-const measure = () => {
-  const doc = document.documentElement
-  const scrollable = doc.scrollHeight - window.innerHeight
-
-  viewRatio.value = Math.min(1,
-    window.innerHeight / doc.scrollHeight)
-
-  progress.value = scrollable > 0
-    ? Math.min(1, Math.max(0, window.scrollY / scrollable))
-    : 0
-}
-
-const onScroll = () => {
-  if (frame) return
-
-  frame = requestAnimationFrame(() => {
-    measure()
-    frame = 0
-  })
-}
-
-let resizeObserver: ResizeObserver | null = null
-
-onMounted(() => {
-  measure()
-
-  window.addEventListener('scroll', onScroll,
-    { passive: true })
-  window.addEventListener('resize', onScroll)
-
-  // The page is still growing at mount - fonts land,
-  // sections reveal, switching locale changes the copy
-  // length - and a stale height sizes the thumb to the
-  // whole track
-  resizeObserver = new ResizeObserver(onScroll)
-  resizeObserver.observe(document.documentElement)
-})
-
-onUnmounted(() => {
-  if (frame) cancelAnimationFrame(frame)
-
-  resizeObserver?.disconnect()
-  resizeObserver = null
-
-  window.removeEventListener('scroll', onScroll)
-  window.removeEventListener('resize', onScroll)
+// Only the active segment fills; the rest stay at the
+// track colour. Progress comes from the transition driver
+// rather than being measured again here.
+const fillStyle = (section: string) => ({
+  transform: `scaleY(${
+    isActive(section) ? sectionProgress.value : 0})`
 })
 </script>
 
 <style lang="scss" scoped>
 @use '@styles/utils/mixins';
+
+$bar-width: 2px;
+$segment-height: 42px;
+// The only break between segments - they otherwise sit
+// flush, so the rail reads as one strip
+$separator: 2px;
 
 .scroll-indicator {
   position: fixed;
@@ -120,46 +77,85 @@ onUnmounted(() => {
   transform: translateY(-50%);
 
   z-index: 10;
-  pointer-events: none;
 
-  // Crowds the layout on narrow screens, where the
-  // locale chooser also sits inline
   display: none;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0;
 
+  // Below this the pill navbar takes over - the two must
+  // never be on screen together
   @include mixins.min-width(881px) {
-    display: block;
+    display: flex;
   }
 
-  & > .track {
+  & > .section {
     position: relative;
-    width: 1px;
-    height: 190px;
+    display: block;
 
-    background-color: rgba(var(--color-fg-rgb), .18);
+    // Horizontal padding only: the bar stays hairline and
+    // the button is what you actually hit, but vertical
+    // padding would reopen the gap between segments
+    padding: 0 6px;
+    border: none;
+    background: none;
+    cursor: pointer;
 
-    & > .thumb {
+    border-radius: 3px;
+
+    &:not(:last-child) { margin-bottom: $separator; }
+
+    &:focus-visible {
+      // At 2px wide there is otherwise nothing to see
+      // when tabbing here
+      outline: 2px solid var(--color-accent);
+      outline-offset: 3px;
+    }
+
+    & > .bar {
+      display: block;
+      position: relative;
+      overflow: hidden;
+
+      width: $bar-width;
+      height: $segment-height;
+
+      // Square where segments meet, rounded only at the
+      // two ends of the rail, so the run reads as one
+      // strip rather than four capsules
+      border-radius: 0;
+
+      background-color: rgba(var(--color-fg-rgb), .18);
+      transition: background-color 300ms;
+    }
+
+    &:first-child > .bar {
+      border-radius: $bar-width $bar-width 0 0;
+    }
+
+    &:last-child > .bar {
+      border-radius: 0 0 $bar-width $bar-width;
+    }
+
+    & > .bar > .fill {
       position: absolute;
-      top: 0;
-      left: -1px;
-
-      width: 3px;
-      border-radius: 3px;
+      inset: 0;
 
       background-color: var(--color-fg);
       box-shadow: 0 0 12px rgba(255, 255, 255, .35);
 
-      transition: height 300ms ease;
+      transform-origin: top;
+      // Scroll-driven, so it should track exactly rather
+      // than easing behind the page
       will-change: transform;
     }
 
     & > .label {
       position: absolute;
-      top: 0;
-      right: 16px;
-
-      // translateY is set inline to follow the thumb;
-      // this keeps the text centred on it
-      margin-top: -.5em;
+      top: 50%;
+      right: 100%;
+      margin-right: 8px;
+      transform: translateY(-50%);
 
       white-space: nowrap;
       font-size: 11px;
@@ -168,8 +164,41 @@ onUnmounted(() => {
       text-transform: uppercase;
       color: rgba(var(--color-fg-rgb), .75);
 
-      transition: color 300ms;
+      opacity: 0;
+      transition: opacity 250ms, color 250ms;
     }
+
+    &:hover > .bar,
+    &:focus-visible > .bar {
+      background-color: rgba(var(--color-fg-rgb), .4);
+    }
+
+    // Hover and focus surface the other three; the active
+    // one is always readable
+    &:hover > .label,
+    &:focus-visible > .label,
+    &.-active > .label {
+      opacity: 1;
+    }
+
+    &.-active > .label {
+      color: var(--color-fg);
+    }
+
+    // At the top of a section the fill is still zero, so
+    // without this the active segment looks identical to
+    // the rest and only the label gives it away
+    &.-active > .bar {
+      background-color: rgba(var(--color-fg-rgb), .6);
+      box-shadow: 0 0 10px rgba(255, 255, 255, .18);
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scroll-indicator > .section {
+    & > .bar,
+    & > .label { transition: none; }
   }
 }
 </style>

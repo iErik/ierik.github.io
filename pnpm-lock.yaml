@@ -11,6 +11,9 @@ importers:
       lenis:
         specifier: ^1.3.26
         version: 1.3.26(vue@3.5.18(typescript@5.8.3))
+      ogl:
+        specifier: ^1.0.11
+        version: 1.0.11
       vue:
         specifier: ^3.5.18
         version: 3.5.18(typescript@5.8.3)
@@ -989,6 +992,9 @@ packages:
 
   nth-check@2.1.1:
     resolution: {integrity: sha512-lqjrjmaOoAnWfMmBPL+XNnynZh2+swxiX3WUE0s4yEHI6m+AwrK2UZOimIRl3X/4QctVqS8AiZjFqyOGrMXb/w==}
+
+  ogl@1.0.11:
+    resolution: {integrity: sha512-kUpC154AFfxi16pmZUK4jk3J+8zxwTWGPo03EoYA8QPbzikHoaC82n6pNTbd+oEaJonaE8aPWBlX7ad9zrqLsA==}
 
   ohash@2.0.11:
     resolution: {integrity: sha512-RdR9FQrFwNBNXAr4GixM8YaRZRJ5PUWbKYbE5eOsrwAjJW0q2REGcf79oYPsLyskQCZG1PLN+S/K1V00joZAoQ==}
@@ -2230,6 +2236,8 @@ snapshots:
   nth-check@2.1.1:
     dependencies:
       boolbase: 1.0.0
+
+  ogl@1.0.11: {}
 
   ohash@2.0.11: {}
 

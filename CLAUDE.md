@@ -51,8 +51,17 @@ on the deployed site, look there first.
   `activeSection` is derived from this same maths rather than an IntersectionObserver: stages
   overlap by `--fade`, so an observer would see two of them mid-viewport and flip-flop, which the
   URL sync turns into address-bar chatter.
-- Nav items in `App.vue` map positionally onto the `navMenu` array in the locale files, so
-  reordering locale entries reorders the nav.
+- **Two navigations, split at 881px and never both on screen.** Below it the pill `NavMenu`;
+  above it `ScrollIndicator` — a segmented rail whose buttons call the same `scrollToSection`.
+  Both are fed the same `navItems` from `App.vue`, which maps positionally onto the `navMenu`
+  array in the locale files, so reordering locale entries reorders both. The handover is pure
+  CSS (`display: none` at each end); there is no JS breakpoint state and no enable flag.
+- `activeSection` **and** `sectionProgress` (progress through the current section, for the rail's
+  segment fill) both live in `useActiveSection.ts` and are written by the transition driver.
+  Under `prefers-reduced-motion` the driver still runs with `fade = 0` — only the *layout* is
+  disabled. Don't restore the early return: the rail is navigation, so `activeSection` has to be
+  right whether or not anything is animating, and the custom properties the driver writes are
+  inert without the `-animated` class anyway.
 - **Adding or reordering a section** touches five places and type-checking only catches some of
   them: `src/sections.ts` (order + id), `src/router.ts` (its path), `componentFor` in
   `Landing.vue`, the `navMenu` array in **both** locale files, and `navItems` in `App.vue` — the

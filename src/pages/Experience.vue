@@ -1,5 +1,12 @@
 <template>
   <section class="experience">
+    <SectionLabel
+      v-reveal
+      class="label reveal"
+      :section="SECTIONS.Experience"
+      :label="t('about.experiences.title')"
+    />
+
     <h2 v-reveal class="heading reveal">
       {{ t('about.experiences.title') }}
     </h2>
@@ -15,6 +22,9 @@ import { computed } from 'vue'
 import { useI18n } from 'vue-i18n'
 
 import ExperienceList from '@components/ExperienceList/index.vue'
+import SectionLabel from '@components/SectionLabel/index.vue'
+
+import { SECTIONS } from '@/sections'
 
 const { t, locale, messages } = useI18n()
 
@@ -43,9 +53,13 @@ const experiences = computed(() => {
   align-items: center;
   flex-direction: column;
 
+  & > .label { margin-bottom: 18px; }
+
   & > .heading {
-    font-size: 48px;
-    font-weight: 500;
+    font-family: var(--brand-font);
+    font-weight: 100;
+    font-size: clamp(38px, 5.2vw, 76px);
+    letter-spacing: .02em;
     text-transform: uppercase;
     padding: 0 25px;
   }

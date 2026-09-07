@@ -4,7 +4,7 @@
   </div>
 
   <main class="main">
-    <div v-if="SHOW_NAV" class="nav-wrap">
+    <div class="nav-wrap">
       <NavMenu :items="navItems" />
     </div>
 
@@ -37,17 +37,11 @@ import {
 } from '@composables/useLenis'
 
 
-// Temporarily disabled - flip back to true to restore the
-// navbar. NavMenu, navItems and the nav-wrap styles are
-// all left intact; only the rendering is switched off.
-// Note the section jumps still reserve NAV_OFFSET in
-// useLenis.ts for the navbar's height.
-const SHOW_NAV = false
-
 const { locale, messages } = useI18n()
 
-// Still used by ScrollIndicator for its section labels,
-// so this stays live while the navbar is off
+// Shared by both navigations - the pill menu below 881px
+// and the section rail above it - so their labels cannot
+// drift apart
 const navItems = computed(() => {
   const msgs = messages.value[locale.value]
   if (!msgs) return []
@@ -95,6 +89,12 @@ onUnmounted(destroyLenis)
     display: flex;
     justify-content: center;
     padding-top: 20px;
+
+    // The section rail takes over from here up; the two
+    // are never on screen at the same time
+    @include mixins.min-width(881px) {
+      display: none;
+    }
 
     top: 0px;
     left: 50%;

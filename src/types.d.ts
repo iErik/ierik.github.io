@@ -40,10 +40,28 @@ export type ProjectType = {
 declare module 'vue-i18n' {
   export interface DefineLocaleMessage {
     navMenu: string[]
+
+    // Accessible names for the two navigations - the pill
+    // menu and the section rail - so screen readers can
+    // tell them apart
+    nav: {
+      primary: string
+      sections: string
+    }
+
     about: {
       presentation: {
+        eyebrow: string
+        // Headline is split so the closing phrase can
+        // carry the accent colour
         title: string
+        titleAccent: string
         text: string
+        role: string
+      }
+
+      skills: {
+        title: string
       }
 
       experiences: {
@@ -53,6 +71,7 @@ declare module 'vue-i18n' {
     }
 
     portfolio: {
+      title: string
       projects: ProjectType[]
     }
   }

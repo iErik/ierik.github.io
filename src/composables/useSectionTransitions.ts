@@ -1,17 +1,20 @@
 import { onMounted, onUnmounted, ref } from 'vue'
 
 import { sectionIds, type SectionId } from '@/sections'
-import { activeSection } from './useActiveSection'
+import {
+  activeSection,
+  sectionProgress
+} from './useActiveSection'
 
 // Length of one cross-fade, as a share of the viewport.
 // Also the overlap between two stages - the CSS reads it
 // back from the --fade custom property so the layout and
 // this maths can't drift apart
-const FADE_RATIO = 0.6
+const FADE_RATIO = 0.7
 
 // How far the outgoing section drifts up, and the
 // incoming rises, over the course of a fade
-const DRIFT = 40
+const DRIFT = 200
 
 const clamp = (n: number) => Math.min(1, Math.max(0, n))
 
@@ -57,7 +60,15 @@ export function useSectionTransitions(
 
   const measure = () => {
     const viewport = window.innerHeight
-    fade = Math.round(viewport * FADE_RATIO)
+
+    // No overlap under reduced motion; the sections are
+    // plain stacked blocks. The rest of the maths still
+    // runs, because activeSection drives the scroll
+    // indicator's navigation and it has to be right
+    // whether or not anything is animating.
+    fade = animated.value
+      ? Math.round(viewport * FADE_RATIO)
+      : 0
 
     root()?.style.setProperty('--fade', `${fade}px`)
 
@@ -131,6 +142,26 @@ export function useSectionTransitions(
     })
 
     activeSection.value = stages[dominant].id
+
+    // Progress through the active section, for the scroll
+    // indicator's segment fill. It runs from where this
+    // section became fully opaque to its own holdStart -
+    // the point it starts fading out - so the bar reads
+    // full as the section begins to leave, rather than
+    // still filling while the next one arrives.
+    const last = stages.length - 1
+
+    const from = dominant === 0
+      ? 0
+      : stages[dominant - 1].holdStart + fade
+
+    const to = dominant === last
+      ? document.documentElement.scrollHeight
+        - window.innerHeight
+      : stages[dominant].holdStart
+
+    sectionProgress.value = clamp(
+      (y - from) / Math.max(1, to - from))
   }
 
   const update = () => {
@@ -148,13 +179,13 @@ export function useSectionTransitions(
   }
 
   onMounted(() => {
-    if (prefersReducedMotion()) {
-      // Layout and driver both off: keeping the overlap
-      // without the fades would stack two sections on
-      // top of each other
-      animated.value = false
-      return
-    }
+    // Layout off under reduced motion - keeping the
+    // overlap without the fades would stack two sections
+    // on top of each other. The driver itself keeps
+    // running: the opacity/pin custom properties it writes
+    // are inert without the `-animated` class, and
+    // activeSection is needed either way.
+    animated.value = !prefersReducedMotion()
 
     update()
 

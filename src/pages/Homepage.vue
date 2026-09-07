@@ -116,6 +116,13 @@ const contactLinks: ContactLinks = computed(() => [
   & > .links {
     display: flex;
     gap: 20px;
+
+    // Six icon-only pills at 50px plus their gaps come to
+    // 400px, which overflows a 375px screen - let them
+    // wrap rather than push the page sideways
+    flex-wrap: wrap;
+    justify-content: center;
+    max-width: 100%;
   }
 
   @include mixins.min-width(415px) {

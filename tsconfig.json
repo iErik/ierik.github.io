@@ -39,5 +39,11 @@
     "src/**/*",
     "src/**/*.vue"
   ],
+  // Vendored Originkit source, kept verbatim for diffing against
+  // upstream. It's React, and jsxImportSource here is "vue", so it
+  // can't compile - nothing imports it. See the folder's README.
+  "exclude": [
+    "src/components/originkit/**/*.tsx"
+  ],
   "extends": "./paths.json"
 }

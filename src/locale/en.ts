@@ -87,14 +87,24 @@ export default {
     'Experience',
     'Portfolio'
   ],
+  nav: {
+    primary: 'Main',
+    sections: 'Sections'
+  },
   about: {
     presentation: {
-      title: "Hello!",
-      text: `I'm Erik, I'm a front-end engineer with 8
-        years of experience specialized in building
-        Single-Page (SPAs) and Server-Side Rendered (SSR)
-        applications using the Vue.js/Nuxt.js and
-        React.js/Next.js frameworks.`
+      eyebrow: "About",
+      title: "Front-end engineer. Eight years building",
+      titleAccent: "web applications.",
+      role: "Senior Front-end Engineer",
+      text: `I specialise in Single-Page (SPA) and
+        Server-Side Rendered (SSR) applications built with
+        Vue.js/Nuxt.js and React.js/Next.js — across HR,
+        and CRM platforms.`
+    },
+
+    skills: {
+      title: "Skills"
     },
     experiences: {
       title: "Experience",
@@ -167,6 +177,7 @@ export default {
     }
   },
   portfolio: {
+    title: "Portfolio",
     projects
   }
 }

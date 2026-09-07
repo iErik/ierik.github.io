@@ -1,179 +1,226 @@
 <template>
   <section class="about">
-    <div class="presentation">
+    <div class="inner">
+      <div class="lead">
+        <SectionLabel
+          v-reveal
+          class="reveal"
+          :section="SECTIONS.About"
+          :label="t('about.presentation.eyebrow')"
+        />
+
+        <h2 v-reveal class="headline reveal">
+          {{ headline.lead }}
+          <span class="accent">{{ headline.accent }}</span>
+        </h2>
+
+        <p v-reveal class="text reveal">
+          {{ t('about.presentation.text') }}
+        </p>
+      </div>
+
+      <div v-reveal class="figure reveal">
+        <AsciiReveal
+          v-if="FIGURE === 'ascii'"
+          class="portrait-ascii"
+          :color-mode="'image'"
+          :src="portrait"
+          :alt="t('about.presentation.role')"
+          :columns="120"
+          :contrast="42"
+          :focus-y="14"
+          :reveal-options="{ size: 58, softness: 16 }"
+        />
+        <MonogramCube v-else-if="FIGURE === 'cube'" />
+        <AnimatedLogo v-else />
+      </div>
+    </div>
+
+    <div class="skills-wrap">
       <h3 v-reveal class="heading reveal">
-        {{ t('about.presentation.title') }}
+        {{ t('about.skills.title') }}
       </h3>
-      <p v-reveal class="text reveal">
-        {{ t('about.presentation.text') }}
-      </p>
 
-      <div class="skills-wrap">
-        <h3 v-reveal class="heading reveal">
-          Skills
-        </h3>
+      <div class="skills">
+        <SkillCard
+          v-for="(skill, index) in primarySkills"
+          v-reveal="index"
+          :key="skill.label"
+          :icon="skill.icon"
+          :label="skill.label"
+          class="reveal"
+        />
+      </div>
 
-        <div class="skills">
-          <SkillCard
-            v-for="(skill, index) in skillList"
-            v-reveal="index"
-            :key="skill.label"
-            :icon="skill.icon"
-            :label="skill.label"
-            :percentage="skill.percentage"
-            class="reveal"
-          />
-        </div>
+      <div class="chips">
+        <SkillCard
+          v-for="(skill, index) in chipSkills"
+          v-reveal="index"
+          :key="skill"
+          :label="skill"
+          chip
+          class="reveal"
+        />
       </div>
     </div>
   </section>
 </template>
 
 <script lang="ts" setup>
+import { computed, defineAsyncComponent } from 'vue'
 import { useI18n } from 'vue-i18n'
 
 import SkillCard from '@components/SkillCard/index.vue'
+import SectionLabel from '@components/SectionLabel/index.vue'
+import AnimatedLogo from '@components/AnimatedLogo/index.vue'
+import AsciiReveal from '@components/AsciiReveal/index.vue'
 
 import type { IconName } from '@components/Icon/index.vue'
 
+// Which visual sits beside the bio. All three are kept and
+// type-checked; the assertion is what stops TypeScript
+// narrowing the constant to its own literal and calling the
+// other two branches unreachable.
+type Figure = 'ascii' | 'logo' | 'cube'
+const FIGURE = 'ascii' as Figure
+
+const MonogramCube = defineAsyncComponent(() =>
+  import('@components/MonogramCube/index.vue'))
+
+import { SECTIONS } from '@/sections'
+import portrait from '@assets/img/profile_picture.jpg'
 
 const { t } = useI18n()
+
+const headline = computed(() => ({
+  lead: t('about.presentation.title'),
+  accent: t('about.presentation.titleAccent')
+}))
 
 type Skill = {
   icon: IconName
   label: string
-  percentage: number
 }
 
-const skillList: Skill[] = [
-  {
-    icon: 'Vue',
-    label: 'Vue',
-    percentage: 0.8
-  },
-  {
-    icon: 'Nuxtjs',
-    label: 'Nuxt',
-    percentage: 0.7
-  },
-  {
-    icon: 'Node',
-    label: 'Node.js',
-    percentage: 0.8
-  },
-  {
-    icon: 'Typescript',
-    label: 'TypeScript',
-    percentage: 0.65
-  },
-  {
-    icon: 'React',
-    label: 'React',
-    percentage: 0.7
-  },
-  {
-    icon: 'Nextjs',
-    label: 'Next.js',
-    percentage: 0.6
-  },
-  {
-    icon: 'Angular',
-    label: 'Angular',
-    percentage: 0.2
-  },
-  {
-    icon: 'Electron',
-    label: 'Electron.js',
-    percentage: 0.6
-  }
+const primarySkills: Skill[] = [
+  { icon: 'Vue', label: 'Vue' },
+  { icon: 'Nuxtjs', label: 'Nuxt' },
+  { icon: 'React', label: 'React' },
+  { icon: 'Typescript', label: 'TypeScript' }
 ]
 
+const chipSkills = [
+  'Next.js',
+  'Node.js',
+  'Electron',
+  'Angular',
+  'Rust',
+  'Odin'
+]
 </script>
 
 <style lang="scss" scoped>
 @use '@styles/utils/mixins';
 @use '@styles/utils/motion';
+@use '@styles/utils/theming';
 
 .reveal { @include motion.reveal; }
 
 .about {
-  padding-top: 120px;
-  padding-bottom: 120px;
+  padding: 10px 25px;
 
   display: flex;
-  align-items: center;
   flex-direction: column;
 
-  & > .presentation {
+  max-width: 1180px;
+  margin: 0 auto;
+  width: 100%;
+
+  & > .inner {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    gap: 60px;
 
-    & > .heading {
-      font-weight: 500;
-      font-size: 36px;
-      margin-bottom: 34px;
+    // Asymmetric two-column above the tablet breakpoint;
+    // stacked below it
+    @include mixins.min-width(881px) {
+      flex-direction: row;
+      align-items: center;
+      gap: 80px;
+    }
+  }
+
+  & > .inner > .lead {
+    flex: 1 1 auto;
+    min-width: 0;
+
+    & > .headline {
+      margin-top: 26px;
+
+      font-family: var(--brand-font);
+      font-weight: 200;
+      font-size: clamp(38px, 5.2vw, 42px);
+      line-height: 1.05;
+
+      & > .accent { color: var(--color-accent); }
     }
 
     & > .text {
-      text-align: center;
+      margin-top: 32px;
+      max-width: 56ch;
+
       font-weight: 300;
-      font-size: 26px;
-      line-height: 40px;
+      font-size: 19px;
+      line-height: 32px;
+      color: rgba(var(--color-fg-rgb), .78);
 
-      //max-width: 800px;
-      //margin: 0 40px;
-      margin: 0 10%;
-
-      @include mixins.min-width(1280px) {
-        margin: 0 20%;
-      }
+      @include mixins.min-width(635px) { font-size: 21px; }
     }
+  }
 
-    & > .skills-wrap {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
+  & > .inner > .figure .portrait-ascii {
+    filter: contrast(1.25);
+  }
 
-      width: 100%;
-      max-width: 1180px;
-      margin-top: 110px;
-      margin-bottom: 40px;
+  & > .inner > .figure {
+    flex: 0 0 auto;
+    width: min(300px, 70vw);
+    align-self: center;
 
-      @include mixins.min-width(635px) {
-        margin-bottom: 0px;
-      }
+    @include mixins.min-width(881px) {
+      width: 340px;
     }
+  }
 
-    & > .skills-wrap > .heading {
-      font-weight: 500;
-      font-size: 36px;
-      margin-bottom: 34px;
+  & > .skills-wrap {
+    margin-top: 120px;
+
+    & > .heading {
+      font-family: var(--brand-font);
+      font-weight: 200;
+      font-size: clamp(26px, 3vw, 38px);
+      letter-spacing: .04em;
       text-transform: uppercase;
-      margin-bottom: 75px;
-
-      font-size: 48px;
-      font-weight: 500;
+      color: rgba(var(--color-fg-rgb), .85);
     }
 
-    & > .skills-wrap > .skills {
+    & > .skills {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 10px;
-      //width: calc(100% - 80px);
-      width: calc(100% - 30px);
-      //padding: 0 40px;
+      gap: 14px;
+      margin-top: 36px;
 
-      @include mixins.min-width(414px) {
-        gap: 20px;
-      }
+      grid-template-columns: repeat(2, 1fr);
 
       @include mixins.min-width(745px) {
         grid-template-columns: repeat(4, 1fr);
-        grid-template-rows: auto auto;
-        padding: 0 80px;
-        width: 100%;
       }
+    }
+
+    & > .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 16px;
     }
   }
 }

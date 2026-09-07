@@ -94,14 +94,24 @@ export default {
     'Experiência',
     'Portfólio'
   ],
+  nav: {
+    primary: 'Principal',
+    sections: 'Seções'
+  },
   about: {
     presentation: {
-      title: "Oie!",
-      text: `Me chamo Erik, sou um desenvolvedor front-end
-        com 8 anos de experiência especializado no
-        desenvolvimento de aplicações Single-Page (SPA) e
-        Server-Side Rendered (SSR) utilizando os frameworks
-        Vue.js/Nuxt.js & React.js/Next.js`
+      eyebrow: "Sobre",
+      title: "Desenvolvedor front-end. Oito anos construindo",
+      titleAccent: "aplicações web.",
+      role: "Desenvolvedor Front-end Sênior",
+      text: `Sou especializado em aplicações Single-Page
+        (SPA) e Server-Side Rendered (SSR) construídas com
+        Vue.js/Nuxt.js e React.js/Next.js — em plataformas
+        de RH, gestão de documentos e CRM.`
+    },
+
+    skills: {
+      title: "Habilidades"
     },
     experiences: {
       title: "Experiência",
@@ -174,6 +184,7 @@ export default {
     }
   },
   portfolio: {
+    title: "Portfólio",
     projects
   }
 }

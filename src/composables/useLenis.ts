@@ -7,7 +7,7 @@ import {
 
 // Height of the fixed navbar, so section headings don't
 // land underneath it when we scroll to them
-const NAV_OFFSET = -110
+const NAV_OFFSET = 0
 
 let lenis: Lenis | null = null
 
