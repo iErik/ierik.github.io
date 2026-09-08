@@ -6,7 +6,7 @@
           v-reveal
           class="reveal"
           :section="SECTIONS.About"
-          :label="t('about.presentation.eyebrow')"
+          :label="t('pages.about.presentation.eyebrow')"
         />
 
         <h2 v-reveal class="headline reveal">
@@ -15,7 +15,7 @@
         </h2>
 
         <p v-reveal class="text reveal">
-          {{ t('about.presentation.text') }}
+          {{ t('pages.about.presentation.text') }}
         </p>
       </div>
 
@@ -25,11 +25,12 @@
           class="portrait-ascii"
           :color-mode="'image'"
           :src="portrait"
-          :alt="t('about.presentation.role')"
+          :alt="t('pages.about.presentation.role')"
           :columns="120"
-          :contrast="42"
+          :contrast="35"
+          :highlight-rolloff="0.55"
           :focus-y="14"
-          :reveal-options="{ size: 58, softness: 16 }"
+          :reveal-options="{ size: 50, softness: 16 }"
         />
         <MonogramCube v-else-if="FIGURE === 'cube'" />
         <AnimatedLogo v-else />
@@ -38,7 +39,7 @@
 
     <div class="skills-wrap">
       <h3 v-reveal class="heading reveal">
-        {{ t('about.skills.title') }}
+        {{ t('pages.about.skills.title') }}
       </h3>
 
       <div class="skills">
@@ -93,8 +94,8 @@ import portrait from '@assets/img/profile_picture.jpg'
 const { t } = useI18n()
 
 const headline = computed(() => ({
-  lead: t('about.presentation.title'),
-  accent: t('about.presentation.titleAccent')
+  lead: t('pages.about.presentation.title'),
+  accent: t('pages.about.presentation.titleAccent')
 }))
 
 type Skill = {
@@ -179,7 +180,7 @@ const chipSkills = [
   }
 
   & > .inner > .figure .portrait-ascii {
-    filter: contrast(1.25);
+    filter: saturate(1.5);
   }
 
   & > .inner > .figure {
@@ -193,6 +194,7 @@ const chipSkills = [
   }
 
   & > .skills-wrap {
+    display: none;
     margin-top: 120px;
 
     & > .heading {

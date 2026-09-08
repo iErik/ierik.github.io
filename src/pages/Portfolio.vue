@@ -4,11 +4,11 @@
       v-reveal
       class="label reveal"
       :section="SECTIONS.Portfolio"
-      :label="t('portfolio.title')"
+      :label="t('pages.portfolio.eyebrow')"
     />
 
     <h2 v-reveal class="heading reveal">
-      {{ t('portfolio.title') }}
+      {{ t('pages.portfolio.title') }}
     </h2>
 
     <div class="projects">
@@ -39,7 +39,7 @@ const projects = computed(() => {
   const msgs = messages.value[locale.value]
   if (!msgs) return []
 
-  return msgs.portfolio.projects || []
+  return msgs.pages.portfolio.projects || []
 })
 </script>
 
@@ -62,7 +62,7 @@ const projects = computed(() => {
   & > .heading {
     font-family: var(--brand-font);
     font-weight: 100;
-    font-size: clamp(38px, 5.2vw, 76px);
+    font-size: clamp(38px, 5.2vw, 42px);
     letter-spacing: .02em;
     text-transform: uppercase;
     margin-bottom: 60px;

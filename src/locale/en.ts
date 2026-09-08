@@ -91,23 +91,25 @@ export default {
     primary: 'Main',
     sections: 'Sections'
   },
-  about: {
-    presentation: {
-      eyebrow: "About",
-      title: "Front-end engineer. Eight years building",
-      titleAccent: "web applications.",
-      role: "Senior Front-end Engineer",
-      text: `I specialise in Single-Page (SPA) and
-        Server-Side Rendered (SSR) applications built with
-        Vue.js/Nuxt.js and React.js/Next.js — across HR,
-        and CRM platforms.`
+  pages: {
+    about: {
+      presentation: {
+        eyebrow: "About",
+        title: "Front-end engineer. Eight years building",
+        titleAccent: "web applications.",
+        role: "Senior Front-end Engineer",
+        text: `I specialise in Single-Page (SPA) and
+          Server-Side Rendered (SSR) applications built with
+          Vue.js/Nuxt.js and React.js/Next.js — across HR,
+          and CRM platforms.`
+      },
+      skills: {
+        title: "Skills"
+      },
     },
-
-    skills: {
-      title: "Skills"
-    },
-    experiences: {
-      title: "Experience",
+    experience: {
+      eyebrow: "Experience",
+      title: "My professional journey",
       items: [
         {
           title: "Senior Front-end Engineer",
@@ -174,10 +176,11 @@ export default {
           ]
         }
       ]
+    },
+    portfolio: {
+      eyebrow: "Portfolio",
+      title: "My work",
+      projects
     }
-  },
-  portfolio: {
-    title: "Portfolio",
-    projects
   }
 }

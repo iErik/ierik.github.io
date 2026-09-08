@@ -174,7 +174,20 @@ onUnmounted(() => {
   position: relative;
 
   & > .pin {
+    // Must be a full viewport, not less. A stage's rest is
+    // (pinHeight - viewport) once it lands flush, so a
+    // section shorter than the screen would get a negative
+    // rest - it would begin fading out before it had
+    // finished fading in.
     min-height: 100vh;
+
+    // Anything shorter than the pin centres itself on the
+    // screen, since the pin now lands flush with the
+    // viewport top. A taller section (Experience) sizes the
+    // pin itself, so this does nothing to it.
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
   }
 }
 
@@ -189,9 +202,16 @@ onUnmounted(() => {
 
   & > .stage + .stage {
     // Overlap the previous stage's hold so the two share
-    // the same screen space. Cancels the padding above,
-    // leaving total page height unchanged
-    margin-top: calc(var(--fade, 0px) * -1);
+    // the same screen space.
+    //
+    // A viewport, deliberately - not --fade. A stage comes
+    // to rest at (viewport - fade + hold - overlap) down
+    // the screen; with hold and overlap both --fade those
+    // cancel and every section landed 244px down. Matching
+    // the overlap to the viewport zeroes that, so sections
+    // land flush at the top, and it shortens each one's
+    // scroll by the same amount. The fade is untouched.
+    margin-top: -100vh;
   }
 
   & > .stage > .pin {

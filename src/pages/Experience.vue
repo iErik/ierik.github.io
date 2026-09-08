@@ -4,11 +4,11 @@
       v-reveal
       class="label reveal"
       :section="SECTIONS.Experience"
-      :label="t('about.experiences.title')"
+      :label="t('pages.experience.eyebrow')"
     />
 
     <h2 v-reveal class="heading reveal">
-      {{ t('about.experiences.title') }}
+      {{ t('pages.experience.title') }}
     </h2>
 
     <div class="experiences-wrap">
@@ -28,14 +28,12 @@ import { SECTIONS } from '@/sections'
 
 const { t, locale, messages } = useI18n()
 
-// Copy still lives under `about.experiences` in the locale
-// files - only the rendering moved out of About.vue
 const experiences = computed(() => {
   const msgs = messages.value[locale.value]
 
   if (!msgs) return []
 
-  return msgs.about.experiences.items
+  return msgs.pages.experience.items
 })
 </script>
 
@@ -57,8 +55,8 @@ const experiences = computed(() => {
 
   & > .heading {
     font-family: var(--brand-font);
-    font-weight: 100;
-    font-size: clamp(38px, 5.2vw, 76px);
+    font-weight: 200;
+    font-size: clamp(38px, 5.2vw, 42px);
     letter-spacing: .02em;
     text-transform: uppercase;
     padding: 0 25px;

@@ -49,30 +49,34 @@ declare module 'vue-i18n' {
       sections: string
     }
 
-    about: {
-      presentation: {
+    pages: {
+      about: {
+        presentation: {
+          eyebrow: string
+          // Headline is split so the closing phrase can
+          // carry the accent colour
+          title: string
+          titleAccent: string
+          text: string
+          role: string
+        }
+
+        skills: {
+          title: string
+        }
+      }
+
+      experience: {
         eyebrow: string
-        // Headline is split so the closing phrase can
-        // carry the accent colour
-        title: string
-        titleAccent: string
-        text: string
-        role: string
-      }
-
-      skills: {
-        title: string
-      }
-
-      experiences: {
         title: string
         items: ExperienceType[]
       }
-    }
 
-    portfolio: {
-      title: string
-      projects: ProjectType[]
+      portfolio: {
+        eyebrow: string
+        title: string
+        projects: ProjectType[]
+      }
     }
   }
 }

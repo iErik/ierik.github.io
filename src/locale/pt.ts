@@ -9,45 +9,45 @@ const projects: ProjectType[] = [
       repoUrl: "https://github.com/iErik/grimoire",
       tags: ["React", "Redux", "Electron", "WIP"],
       description:
-        `<p>Grimoire é um editor markdown de código aberto
-        desenvolvido primariamente com os frameworks
-        Electron.js e React.js, o aplicativo atualmente está
-        sendo completamente re-escrito.</p><br />
+        `<p>Grimoire é um editor de texto markdown de
+        código aberto desenvolvido primariamente com os
+        frameworks Electron e React.js, o aplicativo está
+        passando por uma reescrita completa e deve dar
+        suporte às plataformas macOS, Windows e Linux.</p>
+        <br />
 
-        <p>O projeto Grimoire foi completamente projetado e
-        desenvolvido por mim com o objetivo de criar uma
-        experiência simples e elegante de compor e organizar
-        documentos em markdown. O aplicativo é desenvolvido
-        completamente com tecnologias Web, fazendo uso da
-        biblioteca React.js para desenvolver elementos
-        de interface funcionais, eficientes e elegantes do
-        forma fácil e rápida.</p><br />
+        <p>O Grimoire foi inteiramente projetado e
+        implementado por mim com o objetivo de oferecer
+        uma forma limpa, simples e elegante de compor e
+        organizar documentos em markdown. O projeto é
+        movido pelo Electron.js, que nos permite construir
+        aplicações desktop nativas feitas inteiramente com
+        tecnologias Web como o React.js, que neste caso é
+        também o framework escolhido para construir toda a
+        camada de interface.</p><br />
 
         <p>
-        O aplicativo faz uso da arquitetura Redux para
-        organizar e gerenciar o estado global da aplicação
-        de forma extremamente leve e eficiente, combinando
-        a arquitetura e filosofia Redux com as ferramentas
-        oferecidas pelo framework Electron.js para gerenciar
-        e manipular o estado de múltiplas janelas do
-        aplicativo abertas simultaneamente, mantendo-as em
+        A aplicação também faz uso da biblioteca Redux
+        para gerenciar o estado da aplicação e da interface
+        de forma eficiente e direta, combinando a filosofia
+        de gerenciamento de estado do Redux com as
+        ferramentas oferecidas pelo framework Electron.js
+        para manter múltiplos processos de renderização em
         sincronia.
         </p><br />
 
         <p>
-        O projeto de design original do aplicativo pode
-        ser encontrado neste ${mkLink(
+        O projeto de design original da aplicação pode ser
+        encontrado neste ${mkLink(
           'repositório do gitlab',
-          'https://gitlab.com/Isidore/grimoire-mockup'
-        )} criado especificamente para isso, onde estão
-        hospedados os arquivos PSD, fontes e outros
-        recursos utilizados durante o processo de design da
-        aplicação. Atualmente todas as especificações de
-        UI/UX da aplicação estão sendo refeitas, e as novas
-        telas de design Figma devem ser disponibilizadas
-        publicamente em breve.
-        </p>
-        `,
+          'https://gitlab.com/Isidore/grimoire-mockup')} que
+        criei especificamente para isso. Lá você encontra o
+        arquivo PSD contendo todo o processo de design
+        original da aplicação. Como mencionado antes, a
+        aplicação está passando por um redesign e uma
+        reescrita completos, e as novas telas de design em
+        Figma devem ficar publicamente disponíveis em breve.
+        </p> `,
     },
     {
       name: "Medley",
@@ -55,33 +55,31 @@ const projects: ProjectType[] = [
       repoUrl: "https://github.com/iErik/Medley",
       tags: ["React", "Redux", "Electron", "WIP"],
       description:
-        `<p>Medley é um cliente desktop de código aberto
-        para a plataforma Revolt ainda em processo de
-        desenvolvimento. A plataforma Revolt é uma
-        plataforma federada e completamente de código
-        aberto de voz sobre IP e comunicação por mensagens
-        de texto em tempo real. A documentação completa
-        de suas APIs backend pode ser encontrada no
-        ${mkLink('site oficial', 'https://revolt.chat')}
-        da plataforma.</p><br />
+        `<p>Medley é o meu próprio cliente desktop de
+        código aberto para a plataforma de mensagens
+        Revolt, ainda em processo de desenvolvimento. Caso
+        você não conheça, o Revolt é uma plataforma de
+        mensagens federada e completamente de código
+        aberto, muito parecida com o Discord, e sua API é
+        inteiramente documentada no site oficial, que você
+        pode conferir
+        ${mkLink('aqui', 'https://revolt.chat')}.
+        Sou entusiasta de projetos que colocam o usuário
+        em primeiro lugar, então decidi iniciar este
+        projeto para fazer o meu próprio cliente de chat do
+        Revolt.</p><br />
 
-        <p>Medley trata-se de um projeto ambicioso com o
-        objetivo de proporcionar uma experiência completa
-        de comunicação por voz e texto em tempo real para
-        o usuário, comparável a aplicações como Discord ou
-        Slack. O aplicativo está sendo desenvolvido com uma
-        stack composta primariamente por React v18, React
-        Router 7 e Redux + Redux Saga para gerenciamento de
-        estado, além de outras bibliotecas de suporte.
-        </p><br />
+        <p>Este projeto tem sido um desafio, mas é algo
+        pelo qual sou apaixonado. Atualmente ele está sendo
+        desenvolvido com uma stack composta por React 18,
+        React Router 7 e Redux + Redux Saga para
+        gerenciamento de estado.</p><br />
 
-        <p>Atualmente é possível visualizar mensagens,
-        servidores, canais de servidores e mensagens diretas
-        através da aplicação, mas há um esforço contínuo
-        para expandir as capacidades da aplicação com o
-        objetivo de proporcionar uma experiência completa.
-        </p>
-        `,
+        <p>Atualmente já é possível navegar por servidores,
+        canais e mensagens diretas dentro do aplicativo,
+        mas há um esforço contínuo para expandir as
+        capacidades da aplicação e oferecer uma experiência
+        completa.</p>`,
     }
 
 ]
@@ -98,23 +96,25 @@ export default {
     primary: 'Principal',
     sections: 'Seções'
   },
-  about: {
-    presentation: {
-      eyebrow: "Sobre",
-      title: "Desenvolvedor front-end. Oito anos construindo",
-      titleAccent: "aplicações web.",
-      role: "Desenvolvedor Front-end Sênior",
-      text: `Sou especializado em aplicações Single-Page
-        (SPA) e Server-Side Rendered (SSR) construídas com
-        Vue.js/Nuxt.js e React.js/Next.js — em plataformas
-        de RH, gestão de documentos e CRM.`
+  pages: {
+    about: {
+      presentation: {
+        eyebrow: "Sobre",
+        title: "Desenvolvedor front-end. Oito anos construindo",
+        titleAccent: "aplicações web.",
+        role: "Desenvolvedor Front-end Sênior",
+        text: `Sou especializado em aplicações Single-Page
+          (SPA) e Server-Side Rendered (SSR) construídas
+          com Vue.js/Nuxt.js e React.js/Next.js — em
+          plataformas de RH e CRM.`
+      },
+      skills: {
+        title: "Habilidades"
+      },
     },
-
-    skills: {
-      title: "Habilidades"
-    },
-    experiences: {
-      title: "Experiência",
+    experience: {
+      eyebrow: "Experiência",
+      title: "Minha trajetória profissional",
       items: [
         {
           title: "Desenvolvedor Front-end Sênior",
@@ -181,10 +181,11 @@ export default {
           ]
         }
       ]
+    },
+    portfolio: {
+      eyebrow: "Portfólio",
+      title: "Meu trabalho",
+      projects
     }
-  },
-  portfolio: {
-    title: "Portfólio",
-    projects
   }
 }
