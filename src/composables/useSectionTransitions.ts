@@ -23,15 +23,11 @@ let fade = 0
 // Offset from a stage's top to the scroll position where
 // that section is fully opaque.
 //
-// A stage's top sits exactly one viewport before the
-// previous section's hold begins, and the incoming section
-// only finishes fading `fade` px after that - so the
-// landing spot is (fade - viewport) from the stage's top,
-// which is negative: the stage is pinned in view well
-// before its own top scrolls past.
-//
-export const getSectionScrollOffset = () =>
-  fade - window.innerHeight
+// Zero: the stage overlap in Landing.vue is one viewport,
+// which is exactly what makes a section come to rest with
+// its top flush against the viewport top. So a section's
+// landing scroll *is* its stage top.
+export const getSectionScrollOffset = () => 0
 
 // False under reduced motion, where the stages are plain
 // stacked blocks and a section's top *is* its landing spot
