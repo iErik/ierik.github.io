@@ -16,12 +16,11 @@ import {
   useTemplateRef
 } from 'vue'
 
-// Port of Originkit's `ascii-reveal` (preset `base`). The
-// upstream React source is vendored unmodified alongside
-// it at src/components/originkit/ - see that folder's
-// README. Only the framework bindings differ; everything
-// below the prop declarations is copied verbatim, apart
-// from the two changes marked LOCAL.
+// Port of Originkit's `ascii-reveal` (preset `base`):
+// https://www.originkit.dev/components/ascii-reveal?preset=base
+// Only the framework bindings differ; everything below the
+// prop declarations is copied verbatim, apart from the two
+// changes marked LOCAL.
 
 import {
   DEFAULTS,

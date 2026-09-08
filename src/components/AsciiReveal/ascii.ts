@@ -1,6 +1,6 @@
 // Pure helpers copied verbatim from Originkit's
-// `ascii-reveal` (preset `base`) - see
-// src/components/originkit/README.md.
+// `ascii-reveal` (preset `base`):
+// https://www.originkit.dev/components/ascii-reveal?preset=base
 //
 // They live in their own module rather than in the SFC
 // because `defineProps`/`withDefaults` are hoisted out of
