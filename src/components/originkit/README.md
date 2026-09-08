@@ -48,4 +48,15 @@ easy to spot when diffing:
    on unmount, repainting every frame regardless of whether it is on screen.
    `Background/index.vue` already runs a permanent loop, so the port stops
    its own via an `IntersectionObserver` plus the `--stage-opacity` check used
-   by `MonogramCube`.
+   by `MonogramCube`. Where hover exists the loop also only runs while the
+   pointer is actually over the canvas.
+3. **`highlightRolloff` prop** (`compressLocalHighlights` in `ascii.ts`).
+   Specular highlights on the face rendered as hard white patches. A *global*
+   tone curve cannot fix that on this image — measured, the bright wall behind
+   the subject has a median of 218 while the face's 99th percentile is 221, so
+   the two overlap and any curve that tames one flattens the other. Instead
+   each cell's excess **over its own neighbourhood** is compressed, which
+   leaves overall tonality alone. Applied to the ink colour as well as the
+   glyph choice; without both, the character thins out while the colour stays
+   just as bright. `0` is an exact identity, so the component still behaves
+   like upstream when the prop is unset.

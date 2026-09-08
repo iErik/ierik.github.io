@@ -26,6 +26,7 @@ import {
 import {
   DEFAULTS,
   contrastAt,
+  compressLocalHighlights,
   placeRect,
   type ColorMode,
   type Fit,
@@ -45,6 +46,8 @@ const props = withDefaults(defineProps<{
   inkColor?: string
   reveal?: boolean
   revealOptions?: RevealOptions
+  // LOCAL: 0 is upstream behaviour untouched
+  highlightRolloff?: number
 }>(), {
   alt: 'ASCII art',
   fit: DEFAULTS.fit,
@@ -56,7 +59,8 @@ const props = withDefaults(defineProps<{
   colorMode: DEFAULTS.colorMode,
   inkColor: DEFAULTS.inkColor,
   reveal: DEFAULTS.reveal,
-  revealOptions: () => DEFAULTS.revealOptions
+  revealOptions: () => DEFAULTS.revealOptions,
+  highlightRolloff: 0
 })
 
 const canvasEl = useTemplateRef<HTMLCanvasElement>('canvasEl')
@@ -192,14 +196,38 @@ function start() {
     octx.font = fontPx.toFixed(2) + 'px ui-monospace, monospace'
     octx.textBaseline = 'top'
 
+    // LOCAL: luminance is gathered up front so each cell
+    // can be measured against its neighbours before the
+    // ramp is picked
+    const rolloff = props.highlightRolloff
+    const lumGrid = new Float32Array(cols * rows)
+
+    for (let i = 0, j = 0; i < lumGrid.length; i++, j += 4) {
+      lumGrid[i] = (0.299 * data[j]
+        + 0.587 * data[j + 1]
+        + 0.114 * data[j + 2]) / 255
+    }
+
+    compressLocalHighlights(lumGrid, cols, rows, rolloff)
+
     const last = chars.length - 1
     for (let r = 0; r < rows; r++) {
       for (let c = 0; c < cols; c++) {
-        const i = (r * cols + c) * 4
+        const cell = r * cols + c
+        const i = cell * 4
         const rr = data[i]
         const gg = data[i + 1]
         const bb = data[i + 2]
-        let lum = (0.299 * rr + 0.587 * gg + 0.114 * bb) / 255
+
+        let lum = lumGrid[cell]
+
+        // LOCAL: the ink has to follow the compressed
+        // luminance too. Leaving the colour at its original
+        // brightness while the glyph thins out keeps the
+        // highlight exactly as bright as before.
+        const raw = (0.299 * rr + 0.587 * gg + 0.114 * bb) / 255
+        const k = rolloff > 0 && raw > 0.004 ? lum / raw : 1
+
         lum = (lum - 0.5) * punch + 0.5
         if (props.invert) lum = 1 - lum
         lum = lum < 0 ? 0 : lum > 1 ? 1 : lum
@@ -207,10 +235,10 @@ function start() {
         if (ch === ' ') continue
         octx.fillStyle =
           props.colorMode === 'image'
-            ? `rgb(${Math.min(255, rr + 30)}, ${Math.min(
+            ? `rgb(${Math.min(255, Math.round(rr * k) + 30)}, ${Math.min(
                 255,
-                gg + 30
-              )}, ${Math.min(255, bb + 30)})`
+                Math.round(gg * k) + 30
+              )}, ${Math.min(255, Math.round(bb * k) + 30)})`
             : props.inkColor
         octx.fillText(ch, c * cellW, r * cellH)
       }
@@ -451,6 +479,7 @@ watch(() => [
   props.colorMode,
   props.inkColor,
   props.reveal,
+  props.highlightRolloff,
   revealSize.value,
   revealSoftness.value
 ], restart)
