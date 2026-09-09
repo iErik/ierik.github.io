@@ -21,7 +21,6 @@
 
       <div v-reveal class="figure reveal">
         <AsciiReveal
-          v-if="FIGURE === 'ascii'"
           class="portrait-ascii"
           :color-mode="'image'"
           :src="portrait"
@@ -32,8 +31,6 @@
           :focus-y="14"
           :reveal-options="{ size: 50, softness: 16 }"
         />
-        <MonogramCube v-else-if="FIGURE === 'cube'" />
-        <AnimatedLogo v-else />
       </div>
     </div>
 
@@ -68,25 +65,14 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, defineAsyncComponent } from 'vue'
+import { computed } from 'vue'
 import { useI18n } from 'vue-i18n'
 
 import SkillCard from '@components/SkillCard/index.vue'
 import SectionLabel from '@components/SectionLabel/index.vue'
-import AnimatedLogo from '@components/AnimatedLogo/index.vue'
 import AsciiReveal from '@components/AsciiReveal/index.vue'
 
 import type { IconName } from '@components/Icon/index.vue'
-
-// Which visual sits beside the bio. All three are kept and
-// type-checked; the assertion is what stops TypeScript
-// narrowing the constant to its own literal and calling the
-// other two branches unreachable.
-type Figure = 'ascii' | 'logo' | 'cube'
-const FIGURE = 'ascii' as Figure
-
-const MonogramCube = defineAsyncComponent(() =>
-  import('@components/MonogramCube/index.vue'))
 
 import { SECTIONS } from '@/sections'
 import portrait from '@assets/img/profile_picture.jpg'

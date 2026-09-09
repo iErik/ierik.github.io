@@ -61,7 +61,7 @@ const projects = computed(() => {
 
   & > .heading {
     font-family: var(--brand-font);
-    font-weight: 100;
+    font-weight: 200;
     font-size: clamp(38px, 5.2vw, 42px);
     letter-spacing: .02em;
     text-transform: uppercase;
