@@ -6,7 +6,7 @@
       class="item"
     >
       <Link class="link" :to="item.route">
-        <p class="label">{{ item.label }}</p>
+        <span class="label">{{ item.label }}</span>
       </Link>
     </div>
   </nav>
@@ -48,11 +48,17 @@ const props = defineProps<{
   }
 
   & > .item {
+    & > .link {
+      display: flex;
+      align-items: center;
+      min-height: 44px;
+    }
+
     & > .link > .label {
-      font-size: 12px;
+      font-size: 14px;
 
       @include mixins.min-width(635px) {
-        font-size: 16px;
+        font-size: 17px;
       }
     }
 

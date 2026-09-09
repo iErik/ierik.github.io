@@ -3,20 +3,34 @@
 
 @font-face {
   font-family: 'Montserrat';
+  font-display: swap;
   font-weight: 100 800;
   font-style: normal;
-  src: url('@assets/fonts/Montserrat-Variable.woff2')
+  src: url('@assets/fonts/Montserrat/Montserrat-Variable.woff2')
     format('woff2 supports variations'),
-    url('@assets/fonts/Montserrat-Variable.woff2')
+    url('@assets/fonts/Montserrat/Montserrat-Variable.woff2')
       format('woff2-variations');
 }
 
 @font-face {
   font-family: 'Montserrat';
+  font-display: swap;
   font-weight: 100 800;
   font-style: italic;
-  src: url('@assets/fonts/Montserrat-Italic-Variable.woff2')
+  src: url('@assets/fonts/Montserrat/Montserrat-Italic-Variable.woff2')
     format('woff2 supports variations'),
-    url('@assets/fonts/Montserrat-Italic-Variable.woff2')
+    url('@assets/fonts/Montserrat/Montserrat-Italic-Variable.woff2')
       format('woff2-variations');
 }
+
+@font-face {
+  font-family: 'Blinker';
+  font-display: swap;
+  font-weight: 100 800;
+  font-style: normal;
+  src: url('@assets/fonts/Blinker/Blinker-Variable.woff2')
+    format('woff2 supports variations'),
+    url('@assets/fonts/Blinker/Blinker-Variable.woff2')
+      format('woff2-variations');
+}
+

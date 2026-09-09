@@ -27,6 +27,13 @@ void main(){
   }
 
   if (sum >= 0.99) {
+    gl_FragColor = vec4(1.0, 1.0, 1.0, 1.0);
+
+    return;
+  }
+
+  /*
+  if (sum >= 0.99) {
     gl_FragColor = vec4(
       mix(
         vec3(x / uResolution.x, y / uResolution.y, 1.0),
@@ -37,6 +44,7 @@ void main(){
 
     return;
   }
+  */
 
   gl_FragColor = vec4(0.0, 0.0, 0.0, 1.0);
 }

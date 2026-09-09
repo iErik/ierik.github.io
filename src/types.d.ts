@@ -5,6 +5,7 @@ import { IconName } from '@components/Icon/index.vue'
 export type ExperienceType = {
   title: string
   company: string
+  context?: string
   start: string
   end: string
   items: string[]

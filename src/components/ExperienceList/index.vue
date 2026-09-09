@@ -7,12 +7,15 @@
     >
       <div class="head">
         <div class="title-wrap">
-          <p class="title">{{ experience.title }}</p>
+          <h3 class="title">{{ experience.title }}</h3>
           <span class="start-end">
-            {{ experience.start }} → {{ experience.end}}
+            {{ experience.start }} → {{ experience.end }}
           </span>
         </div>
         <p class="company">{{ experience.company }}</p>
+        <p v-if="experience.context" class="context">
+          {{ experience.context }}
+        </p>
       </div>
       <ul class="items">
         <li
@@ -28,16 +31,9 @@
 </template>
 
 <script lang="ts" setup>
+import type { ExperienceType } from '@/types'
 
-type ExperienceType = {
-  title: string
-  company: string
-  start: string
-  end: string
-  items: string[]
-}
-
-const props = defineProps<{
+defineProps<{
   experiences: ExperienceType[]
 }>()
 </script>
@@ -107,6 +103,17 @@ const props = defineProps<{
           font-size: 14px;
         }
       }
+
+      & > .context {
+        margin-top: 4px;
+        font-weight: 400;
+        font-size: 13px;
+        color: rgba(var(--color-fg-rgb), .55);
+
+        @include mixins.min-width(635px) {
+          font-size: 14px;
+        }
+      }
     }
 
     & > .items {
@@ -120,7 +127,7 @@ const props = defineProps<{
 
       & > .item > .text {
         font-weight: 500;
-        font-size: 14px;
+        font-size: 15px;
         color: rgba(var(--color-fg-rgb), .7);
       }
     }

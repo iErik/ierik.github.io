@@ -51,8 +51,9 @@ const projects = computed(() => {
 
     justify-content: center;
     align-content: center;
+    align-items: start;
 
-    grid-auto-rows: 600px;
+    grid-auto-rows: min-content;
     grid-template-columns: repeat(
       auto-fit,
       minmax(330px, 470px));

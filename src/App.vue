@@ -177,6 +177,19 @@ const onContentScroll = (os: OverlayScrollbars) => {
       opacity: 0;
       transform: scale(0.95);
     }
+
+    @media (prefers-reduced-motion: reduce) {
+      .route-enter-active,
+      .route-leave-active {
+        transition: none;
+      }
+
+      .route-enter-from,
+      .route-leave-to {
+        opacity: 1;
+        transform: none;
+      }
+    }
   }
 
   & > .scroll-view .locale-wrap {

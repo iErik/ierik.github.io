@@ -71,6 +71,15 @@ const contactLinks: ContactLinks = computed(() => [
     iconOnly: isTablet.value,
     large: isTablet.value && !isMobile.value,
     to: 'https://gitlab.com/Isidore'
+  },
+  {
+    icon: 'Mail',
+    label: 'Email',
+    isLink: true,
+    external: true,
+    iconOnly: isTablet.value,
+    large: isTablet.value && !isMobile.value,
+    to: 'mailto:ericssonico@proton.me'
   }
 ])
 
@@ -89,11 +98,12 @@ const contactLinks: ContactLinks = computed(() => [
   padding-top: 190px;
   width: 100%;
 
-  & > .logo { width: 106px; }
+  & > .logo { width: 106px; filter: blur(0.8px); }
 
   & > .heading {
     @include typography.heading;
 
+    font-family: var(--brand-font);
     font-size: 60px;
     white-space: nowrap;
   }
@@ -120,7 +130,6 @@ const contactLinks: ContactLinks = computed(() => [
 
   @include mixins.min-width (881px) {
     & > .logo { width: 181px; }
-    & > .heading { @include typography.heading; }
     & > .links { gap: 20px; }
   }
 }

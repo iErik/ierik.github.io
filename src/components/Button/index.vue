@@ -60,6 +60,12 @@ const rootAttrs = computed(() => ({
     props.large && '-large'
   ],
 
+  // Without the label rendered there's no accessible
+  // name left for screen readers to announce
+  ...(!iconOnly.value ? null : {
+    'aria-label': props.label
+  }),
+
   style: {
     '--size': props.large ? '80px' : '50px'
   },
