@@ -110,11 +110,7 @@ onUnmounted(destroyLenis)
     position: relative;
     z-index: 2;
 
-    // The rail is fixed to the right edge, so the content
-    // area is the viewport minus the rail. Without this
-    // the page keeps its full width and everything from
-    // ~1420px down runs under the labels.
-    @include mixins.min-width(881px) {
+    @include mixins.min-max-width(881px, 1321px) {
       padding-right: var(--rail-gutter);
     }
   }
