@@ -1,1 +1,4 @@
-Sitemap: https://ierik.github.io/sitemap.txt
+User-agent: *
+Allow: /
+
+Sitemap: https://ierik.dev/sitemap.txt

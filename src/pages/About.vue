@@ -128,9 +128,12 @@ const chipSkills = [
     flex-direction: column;
     gap: 60px;
 
-    // Asymmetric two-column above the tablet breakpoint;
-    // stacked below it
-    @include mixins.min-width(881px) {
+    // Asymmetric two-column, stacked below. Not the 881px
+    // nav breakpoint: the rail reserves --rail-gutter on
+    // the right, and with the portrait fixed at 340px the
+    // text column takes the whole loss, so two columns
+    // only earn their place once there is room for both
+    @include mixins.min-width(1000px) {
       flex-direction: row;
       align-items: center;
       gap: 80px;
@@ -174,7 +177,7 @@ const chipSkills = [
     width: min(300px, 70vw);
     align-self: center;
 
-    @include mixins.min-width(881px) {
+    @include mixins.min-width(1000px) {
       width: 340px;
     }
   }

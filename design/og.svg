@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <radialGradient id="blobA" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#6f7ae8" stop-opacity="0.55"/>
+      <stop offset="55%" stop-color="#5661c9" stop-opacity="0.20"/>
+      <stop offset="100%" stop-color="#4a55bb" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="blobB" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#E36E91" stop-opacity="0.50"/>
+      <stop offset="55%" stop-color="#E36E91" stop-opacity="0.16"/>
+      <stop offset="100%" stop-color="#E36E91" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="blobC" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#4fd6e8" stop-opacity="0.30"/>
+      <stop offset="60%" stop-color="#4fd6e8" stop-opacity="0.08"/>
+      <stop offset="100%" stop-color="#4fd6e8" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="grid" width="60" height="60" patternUnits="userSpaceOnUse">
+      <path d="M 60 0 L 0 0 0 60" fill="none"
+        stroke="#ffffff" stroke-opacity="0.05" stroke-width="1"/>
+    </pattern>
+  </defs>
+
+  <rect width="1200" height="630" fill="#060608"/>
+
+  <circle cx="985" cy="210" r="300" fill="url(#blobA)"/>
+  <circle cx="1105" cy="430" r="250" fill="url(#blobB)"/>
+  <circle cx="880" cy="405" r="190" fill="url(#blobC)"/>
+  <circle cx="150" cy="560" r="240" fill="url(#blobB)"/>
+
+  <rect width="1200" height="630" fill="url(#grid)"/>
+
+  <text x="88" y="168" font-family="Montserrat" font-size="21"
+    font-weight="600" letter-spacing="5.5" fill="#E36E91">IERIK.DEV</text>
+
+  <text x="84" y="300" font-family="Montserrat" font-size="98"
+    font-weight="200" fill="#FFFFFF">Erik Isidore</text>
+
+  <rect x="88" y="346" width="92" height="2" fill="#E36E91"/>
+
+  <text x="88" y="410" font-family="Montserrat" font-size="37"
+    font-weight="300" fill="#FFFFFF" fill-opacity="0.86"
+    >Senior Front-end Engineer</text>
+
+  <text x="88" y="480" font-family="Montserrat" font-size="23"
+    font-weight="400" fill="#FFFFFF" fill-opacity="0.45"
+    >Vue · Nuxt · React · Next · TypeScript</text>
+
+  <text x="88" y="546" font-family="Montserrat" font-size="20"
+    font-weight="400" fill="#FFFFFF" fill-opacity="0.46"
+    >Eight years building web applications</text>
+</svg>

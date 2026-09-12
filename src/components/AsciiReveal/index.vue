@@ -70,6 +70,18 @@ const revealSize = computed(() =>
 const revealSoftness = computed(() =>
   props.revealOptions?.softness ?? DEFAULTS.revealOptions.softness)
 
+// The blur upstream asks for is a gaussian of standard
+// deviation `softness`, so these stops walk its cumulative
+// distribution, from two deviations inside the disc edge
+// to two outside
+const BLOB_FALLOFF: Array<[number, number]> = [
+  [0, 1],
+  [0.25, 0.84],
+  [0.5, 0.5],
+  [0.75, 0.16],
+  [1, 0]
+]
+
 const prefersReducedMotion = () => window
   .matchMedia('(prefers-reduced-motion: reduce)')
   .matches
@@ -318,18 +330,35 @@ function start() {
       coverRect.dh
     )
 
+    // LOCAL: upstream fills hard discs and softens them
+    // with `mctx.filter = blur(...)`. Safari still ships
+    // canvas filters behind a preference that is off by
+    // default, where the assignment is silently ignored
+    // and the reveal comes out as hard circles, so the
+    // falloff is drawn into the mask instead.
     mctx.clearRect(0, 0, mask.width, mask.height)
-    mctx.save()
-    mctx.filter = `blur(${(revealSoftness.value * dpr).toFixed(1)}px)`
-    mctx.fillStyle = '#FFFFFF'
+    const sigma = revealSoftness.value * dpr
     for (let i = 0; i < blobs.length; i++) {
       const t = blobs.length <= 1 ? 0 : i / (blobs.length - 1)
       const radius = revealSize.value * dpr * (1 - t * 0.5)
+      const outer = radius + sigma * 2
+
+      const grad = mctx.createRadialGradient(
+        blobs[i].x,
+        blobs[i].y,
+        Math.max(0, radius - sigma * 2),
+        blobs[i].x,
+        blobs[i].y,
+        outer
+      )
+      for (const [offset, alpha] of BLOB_FALLOFF)
+        grad.addColorStop(offset, `rgba(255, 255, 255, ${alpha})`)
+
+      mctx.fillStyle = grad
       mctx.beginPath()
-      mctx.arc(blobs[i].x, blobs[i].y, radius, 0, Math.PI * 2)
+      mctx.arc(blobs[i].x, blobs[i].y, outer, 0, Math.PI * 2)
       mctx.fill()
     }
-    mctx.restore()
 
     pctx.globalCompositeOperation = 'destination-in'
     pctx.drawImage(mask, 0, 0)

@@ -15,4 +15,11 @@
 
   --color-accent: #E36E91;
   --color-accent-rgb: 227, 110, 145;
+
+  // How far the fixed section rail reaches in from the
+  // right edge: its own offset and padding, plus the
+  // widest label, which sits to the left of the bar and
+  // stays visible for the active section. The page keeps
+  // this much clear so content cannot slide under it.
+  --rail-gutter: 120px;
 }

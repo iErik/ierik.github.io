@@ -58,3 +58,13 @@ button {
   padding: 0;
   margin: 0;
 }
+
+// The rule above drops the focus ring along with the rest
+// of the button chrome, which leaves keyboard focus
+// invisible on the nav pill and the locale switcher. This
+// puts one back for every focusable element, keyboard-only
+// so a click still shows nothing.
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+}

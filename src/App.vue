@@ -90,16 +90,16 @@ onUnmounted(destroyLenis)
     justify-content: center;
     padding-top: 20px;
 
+    top: 0px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+
     // The section rail takes over from here up; the two
     // are never on screen at the same time
     @include mixins.min-width(881px) {
       display: none;
     }
-
-    top: 0px;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 10;
 
     @include mixins.min-width(635px) {
       padding-top: 36px;
@@ -109,6 +109,14 @@ onUnmounted(destroyLenis)
   & > .content {
     position: relative;
     z-index: 2;
+
+    // The rail is fixed to the right edge, so the content
+    // area is the viewport minus the rail. Without this
+    // the page keeps its full width and everything from
+    // ~1420px down runs under the labels.
+    @include mixins.min-width(881px) {
+      padding-right: var(--rail-gutter);
+    }
   }
 
   & > .locale-wrap {

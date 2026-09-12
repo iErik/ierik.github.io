@@ -69,7 +69,7 @@ const getTagClass = (tag: ProjectTag) => {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 @use '@styles/utils/mixins';
 
 .project-card {
@@ -163,7 +163,10 @@ const getTagClass = (tag: ProjectTag) => {
     font-size: 15px;
     padding: 20px;
 
-    .link {
+    // The description is v-html from the locale files, so
+    // its anchors carry no scope attribute and a plain
+    // selector would never reach them
+    :deep(.link) {
       color: var(--color-accent);
     }
   }

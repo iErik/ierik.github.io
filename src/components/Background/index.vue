@@ -120,7 +120,7 @@ function canvasSetup(gl: WebGLRenderingContext) {
     shaderProgram,
     'uResolution')
 
-  const animate = () => {
+  drawFrame = () => {
     const uMeatballs = animateBalls(meatballs)
     const uResolution = new Float32Array([
       window.innerWidth,
@@ -130,14 +130,48 @@ function canvasSetup(gl: WebGLRenderingContext) {
     gl.uniform3fv(uMeatballsHandle, uMeatballs)
     gl.uniform2fv(uResolutionHandle, uResolution)
     gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4)
-
-    requestAnimationFrame(animate);
   }
 
-  requestAnimationFrame(animate)
+  // Under reduced motion the balls are placed once and
+  // left there, the same bargain the rest of the site
+  // makes: the visual stays, the movement goes
+  shouldAnimate() ? startLoop() : drawFrame()
 }
 
 let glContext: WebGLRenderingContext | null = null
+
+let rafId = 0
+let drawFrame: (() => void) | null = null
+
+const prefersReducedMotion = () => window
+  .matchMedia('(prefers-reduced-motion: reduce)')
+  .matches
+
+const shouldAnimate = () =>
+  !document.hidden && !prefersReducedMotion()
+
+const loop = () => {
+  drawFrame?.()
+  rafId = requestAnimationFrame(loop)
+}
+
+const startLoop = () => {
+  if (rafId || !drawFrame || !shouldAnimate()) return
+  rafId = requestAnimationFrame(loop)
+}
+
+const stopLoop = () => {
+  if (!rafId) return
+  cancelAnimationFrame(rafId)
+  rafId = 0
+}
+
+// rAF is already suspended for a backgrounded tab, but the
+// page can be hidden while the loop still gets frames -
+// minimised, or occluded by another window - and there is
+// nothing to draw for in either case
+const onVisibilityChange = () =>
+  document.hidden ? stopLoop() : startLoop()
 
 // The canvas is sized in vw/vh but its drawing buffer is
 // a fixed pixel grid, so without this a resize stretches
@@ -151,6 +185,10 @@ const resizeCanvas = () => {
   canvasEl.height = window.innerHeight
 
   glContext.viewport(0, 0, canvasEl.width, canvasEl.height)
+
+  // With the loop parked nothing else would repaint, and
+  // the resized buffer comes back cleared
+  if (!rafId) drawFrame?.()
 }
 
 onMounted(() => {
@@ -173,12 +211,20 @@ onMounted(() => {
   glContext = gl
   resizeCanvas()
   window.addEventListener('resize', resizeCanvas)
+  document.addEventListener(
+    'visibilitychange', onVisibilityChange)
 
   canvasSetup(gl)
 })
 
 onUnmounted(() => {
+  stopLoop()
+  drawFrame = null
+
   window.removeEventListener('resize', resizeCanvas)
+  document.removeEventListener(
+    'visibilitychange', onVisibilityChange)
+
   glContext = null
 })
 </script>

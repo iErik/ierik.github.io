@@ -1,3 +1,1 @@
-https://ierik.github.io/
-https://ierik.github.io/?/portfolio
-https://ierik.github.io/?/about
+https://ierik.dev/
