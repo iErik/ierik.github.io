@@ -295,9 +295,7 @@ onUnmounted(() => {
 
   background-image: url('/grainy-texture.png');
   background-repeat: repeat;
-  // TODO This gets glitchy if the browser has darkreader
-  // extension, we need to find a way to fix it
-  opacity: .5;
+  opacity: .3;
   filter: blur(0.06px);
   background-blend-mode: overlay;
 }

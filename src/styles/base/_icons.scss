@@ -1,0 +1,27 @@
+// The icon set is monochrome, and the SVGs carry no colour
+// of their own: scripts/strip-icon-fills.mjs takes it out
+// so one variable drives the lot. Figma exported the same
+// artwork white in some files and black in others, which
+// is why the colour cannot live in the files.
+//
+// color as well as fill: a few icons stroke their outlines
+// and those paths say stroke="currentColor". Setting
+// stroke here instead would put a 1px outline on every
+// unstroked shape in the set.
+svg.icon {
+  color: var(--icon-color);
+  fill: var(--icon-color);
+
+  // Opt-in tones, for dimming an icon from the outside.
+  // The project marks don't need them - they were drawn
+  // with their own fill-opacity, which rides along
+  &.-muted {
+    color: var(--icon-color-muted);
+    fill: var(--icon-color-muted);
+  }
+
+  &.-subtle {
+    color: var(--icon-color-subtle);
+    fill: var(--icon-color-subtle);
+  }
+}

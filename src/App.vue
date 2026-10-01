@@ -4,7 +4,7 @@
   </div>
 
   <main class="main">
-    <div class="nav-wrap">
+    <div :class="['nav-wrap', navHidden ? '-hidden' : '']">
       <NavMenu :items="navItems" />
     </div>
 
@@ -21,7 +21,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, onUnmounted } from 'vue'
+import { computed, onMounted, onUnmounted } from 'vue'
 import { useI18n } from 'vue-i18n'
 
 import Background from '@components/Background/index.vue'
@@ -35,13 +35,18 @@ import {
   createLenis,
   destroyLenis
 } from '@composables/useLenis'
+import {
+  navHidden,
+  startNavVisibility,
+  stopNavVisibility
+} from '@composables/useNavVisibility'
 
 
 const { locale, messages } = useI18n()
 
-// Shared by both navigations - the pill menu below 881px
-// and the section rail above it - so their labels cannot
-// drift apart
+// Shared by both navigations - the pill menu below
+// $rail-breakpoint and the section rail above it - so
+// their labels cannot drift apart
 const navItems = computed(() => {
   const msgs = messages.value[locale.value]
   if (!msgs) return []
@@ -72,7 +77,15 @@ const navItems = computed(() => {
 // before their parent, and Landing needs Lenis to already
 // exist when it scrolls to a deep-linked section
 createLenis()
-onUnmounted(destroyLenis)
+
+// Unlike Lenis this one can wait for the DOM: nothing reads
+// navHidden before the first paint
+onMounted(startNavVisibility)
+
+onUnmounted(() => {
+  stopNavVisibility()
+  destroyLenis()
+})
 </script>
 
 <style lang="scss" scoped>
@@ -92,12 +105,35 @@ onUnmounted(destroyLenis)
 
     top: 0px;
     left: 50%;
-    transform: translateX(-50%);
+    transform: translate(-50%, 0);
     z-index: 10;
+
+    // Hides on the way down, returns on the way up. The X
+    // half of the translate is what centres the bar, so
+    // every state has to carry it or it jumps sideways
+    transition:
+      transform 300ms ease,
+      opacity 300ms ease;
+
+    &.-hidden {
+      transform: translate(-50%, calc(-100% - 20px));
+      opacity: 0;
+    }
+
+    // Tabbing into a hidden bar would otherwise strand
+    // focus on a control that is off screen
+    &.-hidden:focus-within {
+      transform: translate(-50%, 0);
+      opacity: 1;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      transition: none;
+    }
 
     // The section rail takes over from here up; the two
     // are never on screen at the same time
-    @include mixins.min-width(881px) {
+    @include mixins.min-width(mixins.$rail-breakpoint) {
       display: none;
     }
 
@@ -106,13 +142,13 @@ onUnmounted(destroyLenis)
     }
   }
 
+  // Nothing is reserved for the rail: it only appears from
+  // $rail-breakpoint up, and by then the widest section
+  // (the 1320px portfolio grid) already clears its labels.
+  // Keeping the page centred beats padding one side
   & > .content {
     position: relative;
     z-index: 2;
-
-    @include mixins.min-max-width(881px, 1321px) {
-      padding-right: var(--rail-gutter);
-    }
   }
 
   & > .locale-wrap {

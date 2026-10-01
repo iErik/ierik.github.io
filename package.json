@@ -11,7 +11,9 @@
     "build": "run-p type-check \"build-only {@}\" --",
     "preview": "vite preview",
     "build-only": "vite build",
-    "type-check": "vue-tsc --build"
+    "type-check": "vue-tsc --build",
+    "covers:optimize": "sh scripts/covers.sh",
+    "icons:recolor": "node scripts/recolor-icons.mjs"
   },
   "dependencies": {
     "lenis": "^1.3.26",
