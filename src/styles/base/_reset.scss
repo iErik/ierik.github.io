@@ -68,3 +68,10 @@ button {
   outline: 2px solid var(--color-accent);
   outline-offset: 3px;
 }
+
+// Except focus targets only script can reach - the skip
+// link focuses a whole section, and ringing a full
+// viewport marks nothing
+[tabindex='-1']:focus-visible {
+  outline: none;
+}

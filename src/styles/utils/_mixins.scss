@@ -21,6 +21,12 @@
   }
 }
 
+// Where the two navigations swap: the pill NavMenu below,
+// the ScrollIndicator rail from here up. Both read this,
+// so they can never drift apart and end up on screen
+// together - or leave the page with neither
+$rail-breakpoint: 1500px;
+
 @mixin min-width($width) {
   @media screen and (min-width: $width) { @content; }
 }
@@ -31,10 +37,6 @@
     (max-width: $max-width) {@content; }
 }
 
-
-@mixin mobile-sm() { }
-
-@mixin mobile() { }
 
 @mixin tablet() {
   @include min-width(881px) { @content; }

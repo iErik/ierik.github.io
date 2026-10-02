@@ -1,173 +1,202 @@
 <template>
-  <div class="project-card">
-    <div class="header">
-      <div class="icn-wrap">
+  <button
+    type="button"
+    class="project-card"
+    aria-haspopup="dialog"
+    :aria-label="project.name"
+    @click="emit('open')"
+  >
+    <span class="header">
+      <span v-if="project.icon" class="icn-wrap">
         <Icon class="icon"
           :name="project.icon"
-          :size="64"
+          :size="36"
         />
-      </div>
-      <div class="meta">
-        <div class="name">
-          <Link class="link" external :to="project.repoUrl">
-            {{ project.name }}
-          </Link>
-          <Icon class="icon" name="Link" :size="16" />
-        </div>
-        <div class="tags">
-          <span
-            v-for="tag in project.tags"
-            :key="tag"
-            :class="getTagClass(tag)"
-          >
-            {{ tag }}
-          </span>
-        </div>
-      </div>
-    </div>
+      </span>
 
-    <article class="description">
-      <p class="text" v-html="project.description" />
-    </article>
+      <span class="meta">
+        <span class="name">{{ project.name }}</span>
 
-    <div class="footer">
+        <ProjectTags
+          class="tags"
+          :kind="project.kind"
+          :tags="project.tags"
+        />
+      </span>
+    </span>
 
-    </div>
-  </div>
+    <span class="cover">
+      <img
+        v-if="cover"
+        class="image"
+        :src="cover.src"
+        :srcset="cover.srcset"
+        sizes="(min-width: 760px) 440px, 100vw"
+        :width="cover.width"
+        :height="cover.height"
+        :alt="cover.alt"
+        loading="lazy"
+        decoding="async"
+      >
+
+      <span class="view" aria-hidden="true">
+        {{ t('pages.portfolio.view') }}
+      </span>
+    </span>
+  </button>
 </template>
 
 <script lang="ts" setup>
-import Link from '@components/Link/index.vue'
-import Icon from '@components/Icon/index.vue'
-import type { ProjectType, ProjectTag } from '@/types'
+import { computed } from 'vue'
+import { useI18n } from 'vue-i18n'
 
-defineProps<{
+import Icon from '@components/Icon/index.vue'
+import ProjectTags from '@components/ProjectTags/index.vue'
+import type { ProjectType } from '@/types'
+
+const props = defineProps<{
   project: ProjectType
 }>()
 
+const emit = defineEmits<{
+  open: []
+}>()
 
-// Keys are the class modifiers in the stylesheet below -
-// a tag missing from here renders with no color
-const TAG_COLORS: Record<string, ProjectTag[]> = {
-  blue: [
-    'React',
-    'Next',
-    'Zustand',
-    'Redux',
-    'Electron'
-  ],
-  green: [ 'Vue', 'Nuxt' ],
-  yellow: [ 'WIP' ]
-}
+const { t } = useI18n()
 
-const getTagClass = (tag: ProjectTag) => {
-  const match = Object
-    .entries(TAG_COLORS)
-    .find(([ , tags ]) => tags.includes(tag))
-
-  return match ? `tag -${match[0]}` : 'tag'
-}
+const cover = computed(() => props.project.screens[0])
 </script>
 
 <style lang="scss" scoped>
 @use '@styles/utils/mixins';
+@use '@styles/utils/motion';
 
+// The whole card is the button, so it has to shed every
+// native button style before it can look like a card
 .project-card {
   display: flex;
   flex-direction: column;
+  width: 100%;
+
+  padding: 0;
+  background: none;
+  font: inherit;
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
 
   border: 2px solid;
   border-radius: 8px;
   border-color: rgba(199, 198, 198, .38);
 
+  overflow: hidden;
+
+  transition: border-color 300ms, box-shadow 300ms;
+
+  &:hover,
+  &:focus-visible {
+    border-color: rgba(199, 198, 198, .7);
+    box-shadow: 0 0 40px -8px rgba(255, 255, 255, .18);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 4px;
+  }
 
   & > .header {
     display: flex;
     align-items: center;
     justify-content: flex-start;
+    gap: 20px;
     border-bottom: 1px solid rgba(199, 198, 198, .39);
 
-    padding: 20px;
-
-    border-top-left-radius: 6px;
-    border-top-right-radius: 6px;
+    padding: 14px 20px;
 
     background-color: rgba(250, 250, 250, .13);
     backdrop-filter: blur(90px);
 
     & > .icn-wrap {
-      @include mixins.icon {
-        fill: var(--color-fg);
-      }
+      display: flex;
     }
-
-    & > .meta { margin-left: 20px; }
 
     & > .meta > .name {
-      display: flex;
-      align-items: center;
-      gap: 6px;
+      display: block;
 
-      & > .link {
-        font-weight: 550;
-        font-size: 16px;
-        text-transform: uppercase;
-        &:hover { text-decoration: underline; }
-      }
+      font-weight: 550;
+      font-size: 13px;
+      text-transform: uppercase;
     }
 
-    & > .meta > .tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-top: 8px;
+    & > .meta > .tags { margin-top: 4px; }
+  }
 
-      & > .tag {
-        display: inline-flex;
+  & > .cover {
+    position: relative;
+    display: block;
 
-        align-items: center;
-        justify-content: center;
+    // One ratio for every card, whatever the source. The
+    // covers are all a window on a coloured backdrop, so
+    // the crop only ever eats backdrop
+    aspect-ratio: 16 / 10;
+    overflow: hidden;
 
-        height: 20px;
-        border-radius: 4px;
-        backdrop-filter: blur(90px);
+    background-color: rgba(250, 250, 250, .05);
 
-        font-size: 10px;
-        text-transform: uppercase;
-        font-weight: 600;
-        color: rgba(var(--color-fg-rgb), .75);
+    & > .image {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
 
-        padding: 0 10px;
+      transition: transform 600ms motion.$reveal-ease;
+    }
 
-        &.-blue {
-          background-color: rgba(137, 142, 230, .37);
-        }
+    & > .view {
+      position: absolute;
+      left: 16px;
+      bottom: 16px;
 
-        &.-green { }
-        &.-yellow { }
-      }
+      display: inline-flex;
+      align-items: center;
+      height: 28px;
+      padding: 0 12px;
+
+      border: 1px solid rgba(199, 198, 198, .38);
+      border-radius: 14px;
+      background-color: rgba(18, 20, 26, .55);
+      backdrop-filter: blur(12px);
+
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+
+      opacity: 0;
+      transform: translateY(6px);
+      transition:
+        opacity 300ms,
+        transform 300ms motion.$reveal-ease;
     }
   }
 
-  & > .description {
-    background: linear-gradient(95deg,
-      rgba(250, 250, 250, .05) 9%,
-      rgba(255, 255, 255, .01) 90%,
-    );
+  &:hover > .cover,
+  &:focus-visible > .cover {
+    & > .image { transform: scale(1.03); }
 
-    backdrop-filter: blur(90px);
+    & > .view {
+      opacity: 1;
+      transform: none;
+    }
+  }
 
-    border-bottom-left-radius: 8px;
-    border-bottom-right-radius: 8px;
+  @media (prefers-reduced-motion: reduce) {
+    & > .cover > .image,
+    & > .cover > .view { transition: none; }
 
-    font-size: 15px;
-    padding: 20px;
-
-    // The description is v-html from the locale files, so
-    // its anchors carry no scope attribute and a plain
-    // selector would never reach them
-    :deep(.link) {
-      color: var(--color-accent);
+    &:hover > .cover > .image,
+    &:focus-visible > .cover > .image {
+      transform: none;
     }
   }
 }

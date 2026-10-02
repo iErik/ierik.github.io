@@ -1,4 +1,6 @@
 :root {
+  color-scheme: dark;
+
   --brand-font: Montserrat, sans-serif;
 
   --base-font: Blinker, sans-serif;
@@ -16,10 +18,14 @@
   --color-accent: #E36E91;
   --color-accent-rgb: 227, 110, 145;
 
-  // How far the fixed section rail reaches in from the
-  // right edge: its own offset and padding, plus the
-  // widest label, which sits to the left of the bar and
-  // stays visible for the active section. The page keeps
-  // this much clear so content cannot slide under it.
-  --rail-gutter: 120px;
+  // Icon paint. The set is one colour at three strengths,
+  // applied by the rules in base/_icons.scss
+  --icon-color: rgba(var(--color-fg-rgb), .64);
+  --icon-color-muted: rgba(var(--color-fg-rgb), .64);
+  --icon-color-subtle: rgba(var(--color-fg-rgb), .51);
+
+  // Two-tone marks (the iErik cube) draw their edges and
+  // inner detail against white faces; this is the black
+  // they were exported with
+  --icon-color-contrast: #000000;
 }
