@@ -24,10 +24,15 @@ const TAG_COLORS: Record<string, ProjectTag[]> = {
     'Zustand',
     'Redux',
   ],
+  lightblue: [ 'Webpack', ],
   green: [ 'Vue', 'Nuxt' ],
-  pink: [ 'Figma', 'Photoshop' ],
+  pink: [ 'Angular', 'Photoshop' ],
+  red: [ 'Figma' ],
   purple: [ 'Electron' ],
-  yellow: [ 'WIP' ]
+  yellow: [ 'Sketch' ],
+  brown: [ 'CoffeeScript' ],
+  gray: [ 'TypeScript' ],
+  silver: [ 'WIP' ]
 }
 
 const getTagClass = (tag: ProjectTag) => {
@@ -53,11 +58,10 @@ const getTagClass = (tag: ProjectTag) => {
 
     height: 20px;
     border-radius: 4px;
-    backdrop-filter: blur(90px);
 
-    font-size: 9px;
+    font-size: 10px;
     text-transform: uppercase;
-    font-weight: 600;
+    font-weight: 670; // six-sevennnn
     color: rgba(var(--color-fg-rgb), .75);
 
     padding: 0 10px;
@@ -66,8 +70,16 @@ const getTagClass = (tag: ProjectTag) => {
       background-color: rgba(137, 142, 230, .37);
     }
 
+    &.-lightblue {
+      background-color: rgba(108, 138, 176, .37);
+    }
+
     &.-pink {
       background-color: rgba(var(--color-accent-rgb), .3);
+    }
+
+    &.-red {
+      background-color: rgba(227, 110, 110, .3);
     }
 
     &.-purple {
@@ -79,7 +91,19 @@ const getTagClass = (tag: ProjectTag) => {
     }
 
     &.-yellow {
-      background-color: rgba(230, 216, 137, .37);
+      background-color: rgba(227, 225, 110, .37);
+    }
+
+    &.-brown {
+      background-color: rgba(156, 130, 92, .37);
+    }
+
+    &.-gray {
+      background-color: rgba(130, 153, 181, 0.37);
+    }
+
+    &.-silver {
+      background-color: rgba(170, 170, 170, 0.37);
     }
   }
 }

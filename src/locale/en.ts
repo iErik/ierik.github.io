@@ -213,7 +213,7 @@ const projects: ProjectType[] = [
       name: "Medley",
       icon: "Medley",
       kind: "build",
-      tags: ["React", "Redux", "Electron", 'TypeScript', "WIP"],
+      tags: ["WIP", "React", "Redux", "Electron", 'TypeScript'],
       screens: [{
         ...screens.medley,
         alt: "Medley's direct messages view, with the server list and conversations sidebar"
