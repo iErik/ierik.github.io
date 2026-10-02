@@ -30,6 +30,7 @@
           :width="screen.width"
           :height="screen.height"
           :alt="screen.alt"
+          loading="lazy"
           decoding="async"
         >
       </figure>
@@ -161,7 +162,9 @@ watch(() => props.project, project => {
 const close = () => dialogEl.value?.close()
 
 // Every way out - Esc, the button, the backdrop - ends in
-// the native close event, so cleanup lives only here
+// the native close event, so cleanup lives only here.
+// It fires after the dialog has closed, so `open` is
+// already false - don't guard on it
 const onClose = () => {
   resumeScroll()
   emit('close')
@@ -186,11 +189,6 @@ onBeforeUnmount(() => {
 $duration: 250ms;
 
 .project-dialog {
-  // _normalize.scss still carries the old dialog polyfill,
-  // position: absolute, and an author style beats the
-  // browser's fixed position for :modal even at zero
-  // specificity. Left absolute, the dialog sits at the top
-  // of the document and focusing it scrolls the page there
   position: fixed;
   inset: 0;
 

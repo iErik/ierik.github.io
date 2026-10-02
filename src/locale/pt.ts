@@ -3,54 +3,122 @@ import type { ProjectType } from '@/types'
 import { screens } from './screens'
 import { mkLink } from './shared'
 
-// A ordem aqui é a ordem na página: builds primeiro
 const projects: ProjectType[] = [
     {
-      name: "Medley",
-      icon: "Medley",
-      kind: "build",
-      tags: ["React", "Redux", "Electron", "WIP"],
+      name: "iErik.github.io",
+      icon: "iErik",
+      kind: "design",
+      tags: ["Vue", "Webpack", "Photoshop", "CoffeeScript"],
       screens: [{
-        ...screens.medley,
-        alt: "Tela de mensagens diretas do Medley, com a lista de servidores e a barra lateral de conversas"
+        ...screens.ierik,
+        alt: "Um design anterior deste portfólio, mostrando a página de um projeto"
       }],
-      links: [{
-        label: "GitHub",
-        to: "https://github.com/iErik/Medley",
-        icon: "Github"
-      }],
+      links: [],
       description:
-        `<p>Medley é o meu próprio cliente desktop de
-        código aberto para a plataforma de mensagens
-        Revolt, ainda em processo de desenvolvimento. Caso
-        você não conheça, o Revolt é uma plataforma de
-        mensagens federada e completamente de código
-        aberto, muito parecida com o Discord, e sua API é
-        inteiramente documentada no site oficial, que você
-        pode conferir
-        ${mkLink('aqui', 'https://revolt.chat')}.
-        Sou entusiasta de projetos que colocam o usuário
-        em primeiro lugar, então decidi iniciar este
-        projeto para fazer o meu próprio cliente de chat do
-        Revolt.</p><br />
+        `<p>Este é o design original da primeira versão
+        do meu portfólio pessoal, construída em 2017 ainda
+        usando Vue.js v1. Foi praticamente o meu primeiro
+        projeto público, e é também o precursor do site que
+        você está vendo agora! :)</p>
+        <br />
 
-        <p>Este projeto tem sido um desafio, mas é algo
-        pelo qual sou apaixonado. Atualmente ele está sendo
-        desenvolvido com uma stack composta por React 18,
-        React Router 7 e Redux + Redux Saga para
-        gerenciamento de estado.</p><br />
+        <p>E este é um projeto do qual ainda me orgulho
+        muito. Gostei particularmente de trabalhar no
+        aspecto de UI/UX dele; acredito que isso foi antes
+        de ferramentas como Figma ou Sketch dominarem o
+        design de UI/UX, e o Photoshop ainda era o app
+        padrão da indústria para projetar interfaces, então
+        tive que aprender sozinho a usá-lo bem.</p>
+        <br />
 
-        <p>Atualmente já é possível navegar por servidores,
-        canais e mensagens diretas dentro do aplicativo,
-        mas há um esforço contínuo para expandir as
-        capacidades da aplicação e oferecer uma experiência
-        completa.</p>`,
+        <p>Um dos desafios que tive ao desenvolver este
+        projeto foi adicionar suporte a vários temas de
+        cores diferentes, numa época em que as variáveis CSS
+        não tinham o amplo suporte que têm hoje. Por isso
+        todas as variáveis de cor foram definidas
+        inteiramente dentro do SASS, o que infelizmente
+        significava que os temas só podiam ser alterados em
+        tempo de build. Mas foi um experimento divertido.
+        </p>
+        <br />
+
+        <p>O código antigo ainda pode ser encontrado ${mkLink(
+          'no GitHub',
+          'https://github.com/iErik/ierik.github.io/tree/old'
+        )}, e o repositório do GitLab com os arquivos de
+        design PSD, fontes e outros assets pode ser
+        encontrado ${mkLink(
+          'aqui',
+          'https://gitlab.com/Isidore/ierik.github-mockup'
+        )}.
+        </p>
+      `,
     },
+
+    {
+      name: "Bulletin",
+      icon: "Bulletin",
+      kind: "design",
+      tags: ["WIP", "Figma"],
+      screens: [{
+        ...screens.bulletin,
+        alt: "Painel do Bulletin acompanhando sono, despesas, humor, hábitos e peso"
+      }],
+      links: [],
+      description:
+        `<p>O Bulletin é a minha tentativa de transformar o
+        método do bullet journal em algo que pareça nativo do
+        meio digital.</p>
+        <br />
+
+        <p>Para quem não conhece, bullet journaling é um
+        sistema de produtividade criado por ${mkLink(
+          'Ryder Carroll',
+          'https://bulletjournal.com'
+        )} em que você organiza tarefas, eventos, metas,
+        brainstorms ou qualquer coisa que você queira
+        acompanhar, utilizando um caderno de anotações. Já
+        tive vários bullet journals que usei para me ajudar
+        a ficar de olho nas minhas finanças, no meu sono e
+        em outros hábitos, e eles têm se mostrado
+        extremamente úteis. A minha única reclamação é que
+        ele é feito no papel, e isso dá um trabalho
+        considerável de manutenção. Todo tracker precisa
+        ser redesenhado a cada mês (ou a cada semana, no
+        caso de alguns), e cada informação precisa ser
+        preenchida à mão. No meio do caminho acontecem erros,
+        coisas são esquecidas, e repetir o mesmo processo
+        manual sem parar estava começando a me desgastar.
+        <em>Não existe automação.</em></p>
+        <br />
+
+        <p>Para alguns, esse é na verdade um aspecto
+        positivo do bullet journal, é algo que te dá
+        liberdade para ser quão criativo quiser. Para mim,
+        porém, a automação é o único ingrediente que falta
+        para o bullet journal ficar perfeito.</p>
+        <br />
+
+        <p>Foi por isso que comecei a trabalhar no Bulletin.
+        A ideia é combinar elementos dos apps de dashboard
+        com o método do bullet journal, dois formatos que
+        combinam melhor do que você imaginaria. Um único
+        painel reúne widgets para acompanhamento de hábitos
+        de sono, despesas, humor, hábitos e mais, e cada um
+        deles abre na sua própria página com informações
+        mais detalhadas.</p>
+        <br />
+
+        <p>Ainda estou resolvendo vários detalhes e fechando
+        algumas lacunas de UI/UX, mas até aqui está indo bem,
+        e estou animado com ele.</p>`,
+    },
+
     {
       name: "Grimoire",
       icon: "Grimoire",
       kind: "build",
-      tags: ["React", "Redux", "Electron", "WIP"],
+      tags: ["React", "Redux", "Electron", 'Photoshop'],
       screens: [{
         ...screens.grimoire,
         alt: "Tela de caderno do Grimoire: a lista de notas ao lado do documento aberto"
@@ -62,34 +130,35 @@ const projects: ProjectType[] = [
       }],
       description:
         `<p>Grimoire é um editor de texto markdown de
-        código aberto desenvolvido primariamente com os
-        frameworks Electron e React.js, o aplicativo está
-        passando por uma reescrita completa e deve dar
-        suporte às plataformas macOS, Windows e Linux.</p>
+        código aberto desenvolvido com os frameworks
+        Electron e React.js, o aplicativo está passando por
+        uma reescrita completa e deve dar suporte às
+        plataformas macOS, Windows e Linux.</p>
         <br />
 
-        <p>O Grimoire foi inteiramente projetado e
+        <p>O Grimoire foi inteiramente pensado e
         implementado por mim com o objetivo de oferecer
         uma forma limpa, simples e elegante de compor e
-        organizar documentos em markdown. O projeto é
-        movido pelo Electron.js, que nos permite construir
-        aplicações desktop nativas feitas inteiramente com
-        tecnologias Web como o React.js, que neste caso é
-        também o framework escolhido para construir toda a
-        camada de interface.</p><br />
+        organizar documentos markdown. O projeto utiliza o
+        framework Electron.js como base, o que me permite
+        construir aplicações desktop nativas feitas
+        inteiramente com tecnologias Web como o React.js, o
+        framework de manipulação do DOM escolhido para
+        construir toda a camada de interface
+        do app.</p>
+        <br />
 
-        <p>
-        A aplicação também faz uso da biblioteca Redux
+        <p>A aplicação também faz uso da biblioteca Redux
         para gerenciar o estado da aplicação e da interface
         de forma eficiente e direta, combinando a filosofia
         de gerenciamento de estado do Redux com as
         ferramentas oferecidas pelo framework Electron.js
         para manter múltiplos processos de renderização em
         sincronia.
-        </p><br />
+        </p>
+        <br />
 
-        <p>
-        O projeto de design original da aplicação pode ser
+        <p>O projeto de design original da aplicação pode ser
         encontrado neste ${mkLink(
           'repositório do gitlab',
           'https://gitlab.com/Isidore/grimoire-mockup')} que
@@ -101,6 +170,95 @@ const projects: ProjectType[] = [
         Figma devem ficar publicamente disponíveis em breve.
         </p> `,
     },
+
+    {
+      name: "Tidder",
+      icon: "Tidder",
+      kind: "design",
+      tags: ['Angular', 'Sketch', 'TypeScript', 'Webpack'],
+      screens: [{
+        ...screens.tidder,
+        alt: "Feed da página inicial do Tidder ao lado de uma discussão aberta"
+      }],
+      links: [],
+      description:
+        `<p>Tidder é um cliente Reddit de código aberto
+        desenvolvido com os frameworks Electron.js e
+        Angular 5. O Tidder foi lançado inicialmente em
+        2017, e agora está sendo completamente reescrito em
+        React.js.
+        </p><br />
+
+        <p>O Tidder nasceu para recriar a experiência de
+        usuário do Reddit de uma forma mais moderna,
+        elegante e simples. Ele começou como uma tentativa
+        de redesign da plataforma e acabou virando um
+        aplicativo desktop multiplataforma. Ele se apoia no
+        que o Angular 5 oferece para consumir a API pública
+        do Reddit, gerar e gerenciar o conteúdo do app,
+        autenticar usuários do Reddit e exibir esse conteúdo
+        de forma dinâmica.</p><br />
+
+        <p>O aplicativo é feito inteiramente com
+        tecnologias Web. O Electron.js torna possível
+        recorrer a bibliotecas e frameworks JavaScript
+        existentes através do Node.js, e construir
+        aplicações multiplataforma em HTML, CSS e
+        JavaScript de forma rápida, fácil e divertida.</p>
+        <br />
+
+        <p>O projeto de design em Sketch está disponível
+        para download no meu ${mkLink(
+          'repositório do GitLab',
+          'https://gitlab.com/Isidore/tidder-mockup'
+        )}, junto com os ícones, fontes e tudo mais que fez
+        parte do processo de design do app.</p><br />`,
+    },
+
+    {
+      name: "Medley",
+      icon: "Medley",
+      kind: "build",
+      tags: ["React", "Redux", "Electron", 'TypeScript', "WIP"],
+      screens: [{
+        ...screens.medley,
+        alt: "Tela de mensagens diretas do Medley, com a lista de servidores e a barra lateral de conversas"
+      }],
+      links: [{
+        label: "GitHub",
+        to: "https://github.com/iErik/Medley",
+        icon: "Github"
+      }],
+      description:
+        `<p>Medley é o meu próprio cliente desktop de
+        código aberto para a plataforma de mensagens Stoat
+        (anteriormente conhecida como "Revolt"), ainda em
+        processo de desenvolvimento. Caso você não conheça,
+        o Stoat é uma alternativa ao Discord completamente
+        federada e de código aberto, e sua API é
+        inteiramente documentada no site oficial, que você
+        pode conferir ${mkLink(
+          'aqui',
+          'https://stoat.chat/'
+        )}. Sou entusiasta de projetos que colocam o usuário
+        em primeiro lugar, então decidi iniciar este projeto
+        para fazer o meu próprio cliente de chat do
+        Stoat.</p><br />
+
+        <p>Este projeto tem sido um desafio, mas é algo
+        pelo qual sou apaixonado. Atualmente ele está sendo
+        desenvolvido com uma stack composta por React 18,
+        React Router 7 e Redux + Redux Saga para
+        gerenciamento de estado.</p>
+        <br />
+
+        <p>Atualmente já é possível navegar por servidores,
+        canais e mensagens diretas dentro do aplicativo,
+        mas há um esforço contínuo para expandir as
+        capacidades da aplicação e oferecer uma experiência
+        completa.</p>`,
+    },
+
     {
       name: "Libellus",
       icon: "Libellus",
@@ -149,129 +307,6 @@ const projects: ProjectType[] = [
         mas pretendo voltar e construir um protótipo
         funcional em breve. Então fica de olho 😜</p>`,
     },
-    {
-      name: "Bulletin",
-      icon: 'Bulletin',
-      kind: "design",
-      tags: ['WIP', 'Figma'],
-      screens: [{
-        ...screens.bulletin,
-        alt: "Painel do Bulletin acompanhando sono, despesas, humor, hábitos e peso"
-      }],
-      links: [],
-      description:
-        `<p>O Bulletin é a minha tentativa de transformar o
-        método do bullet journal em algo que pareça nativo do
-        meio digital.</p><br />
-
-        <p>Para quem não conhece, o bullet journal é um
-        sistema de anotações criado por ${mkLink(
-          'Ryder Carroll',
-          'https://bulletjournal.com'
-        )} para organizar tarefas, eventos, metas,
-        brainstorms ou, na real, qualquer coisa que você
-        queira acompanhar. Uso um há um tempo para ficar de
-        olho nas minhas finanças, no meu sono e em outros
-        hábitos, e ele tem se mostrado extremamente útil. A
-        minha única reclamação é que ele é feito no papel, e
-        isso dá um trabalho considerável de manutenção. Todo
-        tracker precisa ser redesenhado a cada mês (ou a cada
-        semana, no caso de alguns), e cada informação precisa
-        ser preenchida à mão. No meio do caminho acontecem
-        erros, coisas são esquecidas, e repetir o mesmo
-        processo manual sem parar estava começando a me
-        desgastar. <em>Não existe automação.</em></p><br />
-
-        <p>Tem gente que gosta muito justamente desse lado do
-        bullet journal, e existe toda uma comunidade que é
-        bastante criativa com ele; o processo manual está no
-        coração dessa criatividade. Para mim, porém, a
-        automação é o único ingrediente que falta para o
-        bullet journal ficar perfeito (confesso, sou meio
-        preguiçoso).</p><br />
-
-        <p>Foi por isso que comecei a trabalhar no Bulletin
-        (nome definitivo ainda a ser decidido 😅). A ideia é
-        combinar os apps de dashboard com o bullet journal,
-        dois formatos que combinam melhor do que você
-        imaginaria. Um único painel reúne widgets de sono,
-        despesas, humor, hábitos e mais, e cada um deles abre
-        na sua própria página com informações mais
-        detalhadas.</p><br />
-
-        <p>Ainda estou resolvendo vários detalhes e fechando
-        algumas lacunas de UI/UX, mas até aqui está indo bem,
-        e estou animado com ele.</p>`,
-    },
-    // TODO(erik): confirmar tags e links
-    {
-      name: "Tidder",
-      icon: "Tidder",
-      kind: "design",
-      tags: [],
-      screens: [{
-        ...screens.tidder,
-        alt: "Feed da página inicial do Tidder ao lado de uma discussão aberta"
-      }],
-      links: [],
-      description:
-        `<p>Tidder é um cliente Reddit de código aberto
-        desenvolvido com os frameworks Electron.js e
-        Angular 5, o aplicativo atualmente se encontra em
-        fase beta de desenvolvimento e está disponível
-        para download nas plataformas Windows, macOS e
-        Linux.</p><br />
-
-        <p>O projeto Tidder foi criado com a intenção de
-        recriar a experiência de usuário da plataforma
-        Reddit de uma forma mais moderna, elegante e
-        simples. O projeto começou apenas como uma
-        tentativa de redesign da plataforma Reddit e
-        acabou evoluindo para um aplicativo desktop
-        multi-plataforma. O aplicativo se utiliza das
-        ferramentas oferecidas pelo framework Angular 5
-        para consumir a API pública do Reddit, gerar e
-        gerenciar conteúdo para o aplicativo, autenticar
-        usuários do Reddit e exibir conteúdo de forma
-        dinâmica ao usuário.</p><br />
-
-        <p>O aplicativo é totalmente desenvolvido com
-        tecnologias Web, com o uso do framework
-        Electron.js é possível usar bibliotecas e
-        frameworks JavaScript existentes através da
-        plataforma Node.js para criar aplicativos
-        multi-plataforma desenvolvidos com HTML, CSS e
-        JavaScript de forma fácil, rápida, e também
-        divertida.</p><br />
-
-        <p>O projeto Sketch de design do aplicativo está
-        disponível para download no meu repositório do
-        GitLab, lá estarão disponíveis o arquivo de
-        design Sketch do projeto, ícones, fontes e tudo
-        que foi utilizado durante o processo de design do
-        aplicativo.</p><br />
-
-        <p>O projeto Tidder também é em grande parte
-        baseado numa tentativa anterior minha de redesign
-        da plataforma Reddit. Embora essa versão anterior
-        tenha sido descontinuada, tanto o código-fonte
-        quanto o processo de design desse projeto ainda
-        estão disponíveis na minha página do GitLab para
-        aqueles que queiram acompanhar a evolução do
-        projeto.</p>`,
-    },
-    // TODO(erik): idem
-    {
-      name: "iErik.github.io",
-      kind: "design",
-      tags: [],
-      screens: [{
-        ...screens.ierik,
-        alt: "Um design anterior deste portfólio, mostrando a página de um projeto"
-      }],
-      links: [],
-      description: "",
-    }
 ]
 
 

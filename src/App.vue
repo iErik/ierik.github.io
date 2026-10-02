@@ -4,6 +4,12 @@
   </div>
 
   <main class="main">
+    <a
+      :href="`#${activeSection}`"
+      class="skip-link"
+      @click.prevent="skipToContent"
+    >Skip to content</a>
+
     <div :class="['nav-wrap', navHidden ? '-hidden' : '']">
       <NavMenu :items="navItems" />
     </div>
@@ -33,8 +39,10 @@ import ScrollIndicator from
 import { SECTIONS } from '@/sections'
 import {
   createLenis,
-  destroyLenis
+  destroyLenis,
+  scrollToSection
 } from '@composables/useLenis'
+import { activeSection } from '@composables/useActiveSection'
 import {
   navHidden,
   startNavVisibility,
@@ -59,7 +67,7 @@ const navItems = computed(() => {
       section: SECTIONS.Homepage
     },
     {
-      label: localeNav[1] || 'About Me',
+      label: localeNav[1] || 'About me',
       section: SECTIONS.About
     },
     {
@@ -72,6 +80,21 @@ const navItems = computed(() => {
     }
   ]
 })
+
+// Skip to the section on screen, not the first one - a
+// deep link has already scrolled there. Focus moves too,
+// so the next Tab continues inside the content instead
+// of back in the nav; preventScroll leaves the jump to
+// Lenis
+const skipToContent = () => {
+  const id = activeSection.value
+  const el = document.getElementById(id)
+  if (!el) return
+
+  scrollToSection(id)
+  el.setAttribute('tabindex', '-1')
+  el.focus({ preventScroll: true })
+}
 
 // Deliberately in setup, not onMounted: children mount
 // before their parent, and Landing needs Lenis to already
@@ -97,6 +120,26 @@ onUnmounted(() => {
 }
 
 .main {
+  & > .skip-link {
+    position: fixed;
+    top: -100px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 8px 16px;
+    background: var(--color-accent);
+    color: #fff;
+    z-index: 9999;
+    text-decoration: none;
+    font-size: 13px;
+    text-transform: uppercase;
+    border-radius: 0 0 4px 4px;
+    transition: top 200ms;
+
+    &:focus {
+      top: 0;
+    }
+  }
+
   & > .nav-wrap {
     position: fixed;
     display: flex;

@@ -9,7 +9,7 @@ function useIcon(icnName: IconName): Component | null {
   const icon = icons[icnName]
 
   if (!icon) {
-    console.error(`Couldn't find icon "${icnName}"`)
+    if (import.meta.env.DEV) console.error(`Couldn't find icon "${icnName}"`)
     return null
   }
 

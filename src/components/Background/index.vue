@@ -195,15 +195,15 @@ onMounted(() => {
   const canvasEl = canvasRef.value
 
   if (!canvasEl) {
-    console.error(
-      'Error: Background canvas reference doesn\' exist!')
+    if (import.meta.env.DEV) console.error(
+      'Error: Background canvas reference doesn\'t exist!')
     return
   }
 
   const gl = canvasEl.getContext('webgl')
 
   if (!gl) {
-    console.error(
+    if (import.meta.env.DEV) console.error(
       'Error: failed to get Background WebGL Context!')
     return
   }

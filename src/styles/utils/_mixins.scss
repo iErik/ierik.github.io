@@ -38,10 +38,6 @@ $rail-breakpoint: 1500px;
 }
 
 
-@mixin mobile-sm() { }
-
-@mixin mobile() { }
-
 @mixin tablet() {
   @include min-width(881px) { @content; }
 }

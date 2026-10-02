@@ -37,7 +37,7 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, ref } from 'vue'
+import { computed, ref, watch } from 'vue'
 import { useI18n } from 'vue-i18n'
 
 import ProjectCard from '@components/ProjectCard/index.vue'
@@ -64,6 +64,8 @@ const openIndex = ref<number | null>(null)
 const openProject = computed(() => openIndex.value === null
   ? null
   : projects.value[openIndex.value] ?? null)
+
+watch(locale, () => { openIndex.value = null })
 </script>
 
 <style lang="scss" scoped>
