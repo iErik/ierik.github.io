@@ -195,15 +195,15 @@ onMounted(() => {
   const canvasEl = canvasRef.value
 
   if (!canvasEl) {
-    console.error(
-      'Error: Background canvas reference doesn\' exist!')
+    if (import.meta.env.DEV) console.error(
+      'Error: Background canvas reference doesn\'t exist!')
     return
   }
 
   const gl = canvasEl.getContext('webgl')
 
   if (!gl) {
-    console.error(
+    if (import.meta.env.DEV) console.error(
       'Error: failed to get Background WebGL Context!')
     return
   }
@@ -295,9 +295,7 @@ onUnmounted(() => {
 
   background-image: url('/grainy-texture.png');
   background-repeat: repeat;
-  // TODO This gets glitchy if the browser has darkreader
-  // extension, we need to find a way to fix it
-  opacity: .5;
+  opacity: .3;
   filter: blur(0.06px);
   background-blend-mode: overlay;
 }

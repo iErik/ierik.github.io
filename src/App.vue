@@ -4,7 +4,13 @@
   </div>
 
   <main class="main">
-    <div class="nav-wrap">
+    <a
+      :href="`#${activeSection}`"
+      class="skip-link"
+      @click.prevent="skipToContent"
+    >Skip to content</a>
+
+    <div :class="['nav-wrap', navHidden ? '-hidden' : '']">
       <NavMenu :items="navItems" />
     </div>
 
@@ -21,7 +27,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, onUnmounted } from 'vue'
+import { computed, onMounted, onUnmounted } from 'vue'
 import { useI18n } from 'vue-i18n'
 
 import Background from '@components/Background/index.vue'
@@ -33,15 +39,22 @@ import ScrollIndicator from
 import { SECTIONS } from '@/sections'
 import {
   createLenis,
-  destroyLenis
+  destroyLenis,
+  scrollToSection
 } from '@composables/useLenis'
+import { activeSection } from '@composables/useActiveSection'
+import {
+  navHidden,
+  startNavVisibility,
+  stopNavVisibility
+} from '@composables/useNavVisibility'
 
 
 const { locale, messages } = useI18n()
 
-// Shared by both navigations - the pill menu below 881px
-// and the section rail above it - so their labels cannot
-// drift apart
+// Shared by both navigations - the pill menu below
+// $rail-breakpoint and the section rail above it - so
+// their labels cannot drift apart
 const navItems = computed(() => {
   const msgs = messages.value[locale.value]
   if (!msgs) return []
@@ -54,7 +67,7 @@ const navItems = computed(() => {
       section: SECTIONS.Homepage
     },
     {
-      label: localeNav[1] || 'About Me',
+      label: localeNav[1] || 'About me',
       section: SECTIONS.About
     },
     {
@@ -68,11 +81,34 @@ const navItems = computed(() => {
   ]
 })
 
+// Skip to the section on screen, not the first one - a
+// deep link has already scrolled there. Focus moves too,
+// so the next Tab continues inside the content instead
+// of back in the nav; preventScroll leaves the jump to
+// Lenis
+const skipToContent = () => {
+  const id = activeSection.value
+  const el = document.getElementById(id)
+  if (!el) return
+
+  scrollToSection(id)
+  el.setAttribute('tabindex', '-1')
+  el.focus({ preventScroll: true })
+}
+
 // Deliberately in setup, not onMounted: children mount
 // before their parent, and Landing needs Lenis to already
 // exist when it scrolls to a deep-linked section
 createLenis()
-onUnmounted(destroyLenis)
+
+// Unlike Lenis this one can wait for the DOM: nothing reads
+// navHidden before the first paint
+onMounted(startNavVisibility)
+
+onUnmounted(() => {
+  stopNavVisibility()
+  destroyLenis()
+})
 </script>
 
 <style lang="scss" scoped>
@@ -84,6 +120,26 @@ onUnmounted(destroyLenis)
 }
 
 .main {
+  & > .skip-link {
+    position: fixed;
+    top: -100px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 8px 16px;
+    background: var(--color-accent);
+    color: #fff;
+    z-index: 9999;
+    text-decoration: none;
+    font-size: 13px;
+    text-transform: uppercase;
+    border-radius: 0 0 4px 4px;
+    transition: top 200ms;
+
+    &:focus {
+      top: 0;
+    }
+  }
+
   & > .nav-wrap {
     position: fixed;
     display: flex;
@@ -92,12 +148,35 @@ onUnmounted(destroyLenis)
 
     top: 0px;
     left: 50%;
-    transform: translateX(-50%);
+    transform: translate(-50%, 0);
     z-index: 10;
+
+    // Hides on the way down, returns on the way up. The X
+    // half of the translate is what centres the bar, so
+    // every state has to carry it or it jumps sideways
+    transition:
+      transform 300ms ease,
+      opacity 300ms ease;
+
+    &.-hidden {
+      transform: translate(-50%, calc(-100% - 20px));
+      opacity: 0;
+    }
+
+    // Tabbing into a hidden bar would otherwise strand
+    // focus on a control that is off screen
+    &.-hidden:focus-within {
+      transform: translate(-50%, 0);
+      opacity: 1;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      transition: none;
+    }
 
     // The section rail takes over from here up; the two
     // are never on screen at the same time
-    @include mixins.min-width(881px) {
+    @include mixins.min-width(mixins.$rail-breakpoint) {
       display: none;
     }
 
@@ -106,13 +185,13 @@ onUnmounted(destroyLenis)
     }
   }
 
+  // Nothing is reserved for the rail: it only appears from
+  // $rail-breakpoint up, and by then the widest section
+  // (the 1320px portfolio grid) already clears its labels.
+  // Keeping the page centred beats padding one side
   & > .content {
     position: relative;
     z-index: 2;
-
-    @include mixins.min-max-width(881px, 1321px) {
-      padding-right: var(--rail-gutter);
-    }
   }
 
   & > .locale-wrap {

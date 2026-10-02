@@ -12,22 +12,36 @@
     </h2>
 
     <div class="projects">
-      <ProjectCard
+      <!-- The reveal sits on a wrapper, not the card: both
+           set a transition on their root, and on one
+           element whichever stylesheet loads last would
+           silently cancel the other -->
+      <div
         v-for="(project, index) in projects"
         v-reveal="index"
         :key="project.name"
-        :project="project"
-        class="reveal"
-      />
+        class="item reveal"
+      >
+        <ProjectCard
+          :project="project"
+          @open="openIndex = index"
+        />
+      </div>
     </div>
+
+    <ProjectDialog
+      :project="openProject"
+      @close="openIndex = null"
+    />
   </section>
 </template>
 
 <script lang="ts" setup>
-import { computed } from 'vue'
+import { computed, ref, watch } from 'vue'
 import { useI18n } from 'vue-i18n'
 
 import ProjectCard from '@components/ProjectCard/index.vue'
+import ProjectDialog from '@components/ProjectDialog/index.vue'
 import SectionLabel from '@components/SectionLabel/index.vue'
 
 import { SECTIONS } from '@/sections'
@@ -41,6 +55,17 @@ const projects = computed(() => {
 
   return msgs.pages.portfolio.projects || []
 })
+
+// An index, not the project: switching locale with the
+// dialog open then swaps in the translated entry instead
+// of holding on to the old one
+const openIndex = ref<number | null>(null)
+
+const openProject = computed(() => openIndex.value === null
+  ? null
+  : projects.value[openIndex.value] ?? null)
+
+watch(locale, () => { openIndex.value = null })
 </script>
 
 <style lang="scss" scoped>
@@ -68,31 +93,38 @@ const projects = computed(() => {
     margin-bottom: 60px;
   }
 
+  // Flex rather than grid so a short last row is centred
+  // instead of left hanging at the start
   & > .projects {
-    display: grid;
-    padding: 0 30px;
-
-    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
     gap: 30px;
 
-    justify-content: center;
-    align-content: center;
-    align-items: start;
+    width: 100%;
+    max-width: 1320px;
+    padding: 0 30px;
 
-    grid-auto-rows: min-content;
+    & > .item {
+      flex: 0 0 100%;
+      max-width: 470px;
+      min-width: 0;
+    }
 
-    // min() on the track floor: a bare minmax(330px, ...)
-    // cannot shrink below its minimum, so on a 320px
-    // screen the column stayed 330px wide and pushed the
-    // page sideways
-    grid-template-columns: repeat(
-      auto-fit,
-      minmax(min(330px, 100%), 470px));
+    // Bases are fractions of the row, so a card can never
+    // be too wide for its line and wrap early, whatever
+    // the container ends up being
+    @include mixins.min-width(760px) {
+      & > .item {
+        flex-basis: calc((100% - 30px) / 2);
+        max-width: none;
+      }
+    }
 
-    @include mixins.min-width(415px) {
-      grid-template-columns: repeat(
-        auto-fit,
-        minmax(min(370px, 100%), 470px));
+    // Late enough that three columns arrive at their full
+    // ~420px rather than squeezed
+    @include mixins.min-width(1322px) {
+      & > .item { flex-basis: calc((100% - 60px) / 3); }
     }
   }
 }

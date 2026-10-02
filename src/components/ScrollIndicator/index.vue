@@ -85,7 +85,7 @@ $separator: 2px;
 
   // Below this the pill navbar takes over - the two must
   // never be on screen together
-  @include mixins.min-width(881px) {
+  @include mixins.min-width(mixins.$rail-breakpoint) {
     display: flex;
   }
 

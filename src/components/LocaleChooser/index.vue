@@ -4,6 +4,7 @@
       type="button"
       :class="localeClasses('en')"
       :aria-pressed="locale === 'en'"
+      aria-label="Switch to English"
       @click="() => chooseLocale('en')"
     >
       en
@@ -13,6 +14,7 @@
       type="button"
       :class="localeClasses('pt')"
       :aria-pressed="locale === 'pt'"
+      aria-label="Switch to Portuguese"
       @click="() => chooseLocale('pt')"
     >
       pt

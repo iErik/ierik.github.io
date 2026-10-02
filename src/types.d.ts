@@ -20,6 +20,7 @@ export type ExperienceType = {
 
 export type ProjectTag
   = 'React'
+  | 'Angular'
   | 'Vue'
   | 'Next'
   | 'Nuxt'
@@ -27,13 +28,42 @@ export type ProjectTag
   | 'Redux'
   | 'Electron'
   | 'Tauri'
+  | 'Figma'
+  | 'Photoshop'
+  | 'Sketch'
+  | 'TypeScript'
+  | 'CoffeeScript'
+  | 'Webpack'
   | 'WIP'
 
+// A build has code behind it; a design is screens only.
+// Shown on every card so the two are never confused
+export type ProjectKind = 'build' | 'design'
+
+export type ProjectLink = {
+  label: string
+  to: string
+  icon: IconName
+}
+
+export type ProjectScreen = {
+  src: string
+  srcset: string
+  width: number
+  height: number
+  alt: string
+}
+
 export type ProjectType = {
-  name: string,
-  icon: IconName,
-  description: string,
-  repoUrl: string,
+  name: string
+  icon?: IconName
+  kind: ProjectKind
+  // The first screen is the card cover; the dialog adds
+  // a thumbnail strip once there is more than one
+  screens: ProjectScreen[]
+  // An empty string hides the block in the dialog
+  description: string
+  links: ProjectLink[]
   tags: ProjectTag[]
 }
 
@@ -75,6 +105,9 @@ declare module 'vue-i18n' {
       portfolio: {
         eyebrow: string
         title: string
+        kinds: Record<ProjectKind, string>
+        view: string
+        close: string
         projects: ProjectType[]
       }
     }
